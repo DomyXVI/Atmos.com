@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
+:root {
+    --dark-blue: #1d3062;
+    --blurple: #4d4dff;
+}
+
 html {
     height: 100%;
     margin: 0;
@@ -7,4 +15,77 @@ html {
 body {
     margin: 0;
     padding: 0;
+}
+
+/*NAVBAR AND BUTTON BEHAVIOR*/
+
+.button:hover {
+    cursor: pointer;
+}
+
+div.navbar-container {
+    background-color: var(--dark-blue);
+    width: 100%;
+    height: 90px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow:
+        2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
+        6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
+        12.5px 12.5px 10px rgba(0, 0, 0, 0.035);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+div.logo-container {
+    flex-grow: 1;
+}
+
+div.logo-container>img.logo {
+    height: 50px;
+    width: auto;
+    margin-left: 90px;
+}
+
+div.button-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-grow: 9;
+}
+
+div.navbar-container>div {
+    padding-right: 50px;
+}
+
+div.navbar-container>div>button.sign-up {
+    width: 110px;
+    height: 50px;
+    background-color: var(--blurple);
+    color: white;
+    font-weight: 200;
+    border-radius: 5px;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    font-family: 'Fredoka one', cursive;
+    letter-spacing: 0.5px;
+    margin-left: 20px;
+
+}
+
+div.navbar-container>div>button.login {
+    width: 110px;
+    height: 50px;
+    font-size: 18px;
+    background-color: white;
+    color: #313638;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.55px;
+    font-family: 'Fredoka one', cursive;
 }
