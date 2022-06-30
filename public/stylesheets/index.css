@@ -1,7 +1,8 @@
 :root {
     --dark-blue: #1d3062;
     --blurple: #4d4dff;
-    --light-gray: #d3deff;
+    --light-grey: #f4f6f8;
+    --extra-light-blue: #d3deff;
 }
 
 div.main-buttons-container {
@@ -29,7 +30,7 @@ button.login:hover {
     width: 80px;
     border-radius: 15px;
     background-color: var(--dark-blue);
-    color: var(--light-gray);
+    color: var(--extra-light-blue);
     border: none;
     padding: 4px;
     font-size: 20px;
@@ -57,7 +58,7 @@ div.main-research>p {
 }
 
 div.main-research>p>span {
-    color: var(--light-gray);
+    color: var(--extra-light-blue);
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     padding-top: 30px;
@@ -75,7 +76,7 @@ div.main-research>div>input.forecast-input {
     height: 50px;
     border-radius: 15px;
     border: none;
-    background-color: var(--light-gray);
+    background-color: var(--extra-light-blue);
     padding-left: 15px;
 }
 
@@ -156,14 +157,54 @@ p.website-overview-card>span.description {
     text-align: justify;
 }
 
+div.why-card-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+}
 
-.test:hover {
+div.why-card-row>div.why-card {
+    height: 400px;
+    width: 350px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: #ddd 0px 0px 10px;
+}
+
+div.why-card-row>div.why-card:hover {
     transition: ease-in all 0.1s;
     transform: scale(1.05);
 }
 
+div.why-card>div.why-card-logo-container>img.why-card-logo {
+    height: 100px;
+    width: 100px
+}
 
+div.why-card>div.why-card-logo-container {
+    text-align: center;
+    border-radius: 50%;
+    background-color: #d8defa;
+    height: 130px;
+    width: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+div.why-card>p.why-card-description {
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 13px;
+    font-size: 16.5px;
+    font-family: 'Montserrat';
+}
 
 /* ANIMATIONS AND KEYFRAMES CSS */
 
