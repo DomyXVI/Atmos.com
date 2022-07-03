@@ -5,43 +5,10 @@
     --extra-light-blue: #d3deff;
 }
 
-div.main-buttons-container {
+div.main-research-container {
     height: 600px;
     background-color: var(--dark-blue);
     margin: 0;
-}
-
-button.sign-up:hover,
-button.login:hover {
-    transform: scale(1.05);
-}
-
-.logo-container {
-    flex-grow: 1;
-    text-align: center;
-}
-
-.logo {
-    height: 70px;
-    width: auto;
-}
-
-.button-container>button {
-    width: 80px;
-    border-radius: 15px;
-    background-color: var(--dark-blue);
-    color: var(--extra-light-blue);
-    border: none;
-    padding: 4px;
-    font-size: 20px;
-    font-family: sans-serif;
-    cursor: pointer;
-}
-
-
-.button-container>button:hover {
-    color: white;
-    font-size: 25px;
 }
 
 div.main-research {
@@ -71,7 +38,7 @@ div.main-research>div {
     justify-content: center;
 }
 
-div.main-research>div>input.forecast-input {
+div.main-research>div>form>input.forecast-input {
     width: 500px;
     height: 50px;
     border-radius: 15px;
@@ -85,7 +52,7 @@ div.main-research>div>input.forecast-input::placeholder {
     font-family: 'Fredoka One', cursive;
 }
 
-div.main-research>div>button {
+div.main-research>div>form>button.city-forecast-button {
     height: 50px;
     width: 155px;
     padding: 10px;
@@ -157,6 +124,24 @@ p.website-overview-card>span.description {
     text-align: justify;
 }
 
+div.why-card-row-container {
+    height: 800px;
+    background-color: var(--dark-blue);
+    padding-top: 80px;
+}
+
+div.why-card-row-container>p.row-title {
+    text-align: center;
+    font-family: Fredoka one;
+    font-size: 56px;
+    color: white
+}
+
+div.why-card-row-container>p.row-title>span.row-subtitle {
+    font-size: 21px;
+    color: white
+}
+
 div.why-card-row {
     display: flex;
     flex-direction: row;
@@ -166,6 +151,7 @@ div.why-card-row {
 }
 
 div.why-card-row>div.why-card {
+    background-color: #3a5abd;
     height: 400px;
     width: 350px;
     border-radius: 25px;
@@ -173,23 +159,20 @@ div.why-card-row>div.why-card {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: #ddd 0px 0px 10px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
+
 
 div.why-card-row>div.why-card:hover {
     transition: ease-in all 0.1s;
     transform: scale(1.05);
 }
 
-div.why-card>div.why-card-logo-container>img.why-card-logo {
-    height: 100px;
-    width: 100px
-}
 
 div.why-card>div.why-card-logo-container {
     text-align: center;
     border-radius: 50%;
-    background-color: #d8defa;
+    background-color: white;
     height: 130px;
     width: 130px;
     display: flex;
@@ -197,13 +180,36 @@ div.why-card>div.why-card-logo-container {
     align-items: center;
 }
 
+div.why-card>div.why-card-logo-container>img.why-card-logo {
+    height: 100px;
+    width: 100px
+}
+
 div.why-card>p.why-card-description {
+    color: white;
     text-align: center;
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 13px;
     font-size: 16.5px;
     font-family: 'Montserrat';
+}
+
+div.why-card>p.why-card-description>span.why-card-title {
+    font-size: 30px;
+    text-align: center;
+    font-family: Fredoka one;
+}
+
+div.our-fake-partners {
+    width: 100%;
+    background-color: #f4f6f8;
+    height: 120px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 /* ANIMATIONS AND KEYFRAMES CSS */

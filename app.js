@@ -3,12 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -22,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+
 app.use('/users', usersRouter);
 
 
@@ -30,7 +29,7 @@ app.use(function (req, res, next) {
     next(createError(404));
 });
 
-// error handler
+
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
@@ -41,15 +40,14 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-module.exports = app;
+
 console.log("\u001b[1;33mConnection Established" + "\u001b[0m");
 console.log("\u001b[1;32mServer uptime: " + process.uptime() + " sec\u001b[0m");
 
-app.listen(80 || 3000);
+app.listen(5000 || 3000);
 
 function intervalFunc() {
     console.log("\u001b[1;32mServer uptime: " + process.uptime() + " sec\u001b[0m");
-
 }
 
 setInterval(intervalFunc, 10000);
