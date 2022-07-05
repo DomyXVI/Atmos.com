@@ -44,10 +44,10 @@ app.use(function (err, req, res, next) {
 console.log("\u001b[1;33mConnection Established" + "\u001b[0m");
 console.log("\u001b[1;32mServer uptime: " + process.uptime() + " sec\u001b[0m");
 
-app.listen(5000 || 3000);
+app.listen(80 || 3000);
 
 function intervalFunc() {
-    console.log("\u001b[1;32mServer uptime: " + process.uptime() + " sec\u001b[0m");
+    console.log("\u001b[1;32mServer uptime: " + process.uptime() / 60000 + " min\u001b[0m");
 }
 
-setInterval(intervalFunc, 10000);
+setInterval(intervalFunc, 300000);
