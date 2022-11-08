@@ -47,7 +47,18 @@ console.log("\u001b[1;32mServer uptime: " + process.uptime() + " sec\u001b[0m");
 app.listen(80 || 3000);
 
 function intervalFunc() {
-    console.log("\u001b[1;32mServer uptime: " + process.uptime() / 60000 + " min\u001b[0m");
+    console.log("\u001b[1;32mServer uptime: " + msToTime(process.uptime()) + " min\u001b[0m");
+}
+
+function msToTime(ms) {
+    let seconds = (ms / 1000).toFixed(1);
+    let minutes = (ms / (1000 * 60)).toFixed(1);
+    let hours = (ms / (1000 * 60 * 60)).toFixed(1);
+    let days = (ms / (1000 * 60 * 60 * 24)).toFixed(1);
+    if (seconds < 60) return seconds + " Sec";
+    else if (minutes < 60) return minutes + " Min";
+    else if (hours < 24) return hours + " Hrs";
+    else return days + " Days"
 }
 
 setInterval(intervalFunc, 300000);

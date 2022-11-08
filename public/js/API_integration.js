@@ -1,9 +1,5 @@
 const appId = "0da2f458d4701766e5dc42ce3d7f15be";
 
-
-
-
-
 /**
  * It fetches the weather data of a city and logs it to the console
  * @param city - The name of the city you want to get the weather data of.

@@ -3,7 +3,6 @@ var router = express.Router();
 const {
   getWeatherDataOf
 } = require("../public/js/API_integration.js");
-const appId = "0da2f458d4701766e5dc42ce3d7f15be";
 let city;
 /* GET home page. */
 router.get('/', function (req, res, next) {
