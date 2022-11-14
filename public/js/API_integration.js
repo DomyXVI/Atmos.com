@@ -1,4 +1,8 @@
-const appId = "32c0f2091d38267341ab9b3644922e87";
+require('dotenv').config()
+
+
+const appId = process.env.API_KEY;
+
 /**
  * It fetches the weather data of a city and logs it to the console
  * @param city - The name of the city you want to get the weather data of.
