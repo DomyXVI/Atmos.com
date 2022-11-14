@@ -15,7 +15,6 @@ router.get('/', function (req, res, next) {
 router.post('/', async function (req, res, next) {
   let city = req.body.location;
   let weatherData = await getWeatherDataOf(city);
-  console.log(weatherData);
   res.render('weather-card', {
     weatherData: weatherData
   });
