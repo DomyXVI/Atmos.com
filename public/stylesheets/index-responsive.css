@@ -1,0 +1,16 @@
+@media only screen and (max-width: 2000px) {
+    div.overview-card {
+        padding: 50px 100px 0px 200px;
+    }
+    div.overview-card.second {
+        padding: 50px 200px 0px 100px;
+    }
+    div.overview-card>p,
+    img {
+        height: auto;
+        width: 40%;
+    }
+    div.overview-card>p>span {
+        width: 100%
+    }
+}

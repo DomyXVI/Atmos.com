@@ -4,8 +4,10 @@
  */
 
 function activatePlacesSearch() {
-    let input = document.getElementById('search_term');
-    let autocomplete = new google.maps.places.Autocomplete(input, {
-        types: ['(cities)']
-    });
+    console.log("Google activation trigger - this is just a flag.")
+        /* let input = document.getElementById('search_term');
+         let autocomplete = new google.maps.places.Autocomplete(input, {
+             types: ['(cities)']
+         });
+         */
 }

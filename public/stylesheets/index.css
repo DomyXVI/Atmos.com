@@ -86,12 +86,10 @@ div.overview-card {
     align-items: center;
     justify-content: space-between;
     padding: 50px 200px 0px 400px;
-    flex-wrap: wrap;
 }
 
 div.overview-card.second {
     padding: 0 400px 0px 200px;
-    flex-wrap: wrap-reverse;
 }
 
 div.overview-card.second>img.overview-image-mountain {
@@ -162,12 +160,10 @@ div.why-card-row>div.why-card {
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 }
 
-
 div.why-card-row>div.why-card:hover {
     transition: ease-in all 0.1s;
     transform: scale(1.05);
 }
-
 
 div.why-card>div.why-card-logo-container {
     text-align: center;
@@ -212,6 +208,7 @@ div.our-fake-partners {
     justify-content: space-evenly;
 }
 
+
 /* ANIMATIONS AND KEYFRAMES CSS */
 
 .waves {
@@ -249,20 +246,16 @@ div.our-fake-partners {
 }
 
 @keyframes animate {
-
     0%,
     100% {
         transform: translateY(2px)
     }
-
     25% {
         transform: translateX(-1px)
     }
-
     50% {
         transform: translateY(-2px)
     }
-
     75% {
         transform: translateX(1px)
     }
@@ -272,14 +265,10 @@ div.our-fake-partners {
     0% {
         transform: translate3d(-90px, 0, 0);
     }
-
     100% {
         transform: translate3d(85px, 0, 0);
     }
 }
-
-
-
 
 
 /*MEDIA QUERIES*/
@@ -289,11 +278,9 @@ div.our-fake-partners {
         height: 40px;
         min-height: 40px;
     }
-
     .content {
         height: 30vh;
     }
-
     h1 {
         font-size: 24px;
     }

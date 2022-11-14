@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-
 :root {
     --dark-blue: #1d3062;
     --blurple: #4d4dff;
@@ -15,7 +14,19 @@ html {
 body {
     margin: 0;
     padding: 0;
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
 }
+
+
+/*Chrome*/
+
+::-webkit-scrollbar {
+    display: none;
+}
+
 
 /*NAVBAR AND BUTTON BEHAVIOR*/
 
@@ -31,10 +42,7 @@ div.navbar-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    box-shadow:
-        2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02),
-        6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028),
-        12.5px 12.5px 10px rgba(0, 0, 0, 0.035);
+    box-shadow: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02), 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028), 12.5px 12.5px 10px rgba(0, 0, 0, 0.035);
     position: fixed;
     top: 0;
     width: 100%;
@@ -57,12 +65,10 @@ div.navbar-button-container {
     width: 50%;
 }
 
-
 button.sign-up:hover,
 button.login:hover {
     transform: scale(1.05);
 }
-
 
 .navbar-button-container>button.navbar-item {
     width: 90px;
@@ -76,11 +82,9 @@ button.login:hover {
     font-family: 'Fredoka one', cursive;
 }
 
-
 .navbar-button-container>button.navbar-item:hover {
     transform: scale(1.05);
 }
-
 
 div.login-signup-container {
     width: 25%;
@@ -100,7 +104,6 @@ div.login-signup-container>button.sign-up {
     font-family: 'Fredoka one', cursive;
     letter-spacing: 0.5px;
     margin-left: 20px;
-
 }
 
 div.login-signup-container>button.login {
