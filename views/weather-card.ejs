@@ -30,10 +30,10 @@
             <div style="width:100%;z-index: 1;">
                 <p style="font-family:Montserrat;padding-left:20px;padding-top:10px;font-size: 20px;color:white">Weather
                     in
-                    <%= weatherData.location[0].name%>,
-                    <%= weatherData.location[0].country%>.<br>
-                    <span style="font-size: 14px;color:white"> Lat: <%= weatherData.location[0].lat%>,
-                        Lon: <%= weatherData.location[0].lon %></span>
+                    <%= info.location[0].name%>,
+                    <%= info.location[0].country%>.<br>
+                    <span style="font-size: 14px;color:white"> Lat: <%= info.location[0].lat%>,
+                        Lon: <%= info.location[0].lon %></span>
                 </p>
             </div>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
@@ -44,8 +44,8 @@
             <div
                 style="width: 100%;height:100%;display:flex;align-items: center;position: absolute;justify-content: space-between;">
                 <p style="font-family:Montserrat;font-size: 95px;margin:0;padding-left: 20px;">
-                    <%= weatherData.weather_info.current.temp%>c</p>
-                <img src="images/homepage/icons/OWM_icons/<%= weatherData.weather_info.current.weather[0].icon%>.png"
+                    <%= info.weather.current.temp%>c</p>
+                <img src="images/homepage/icons/OWM_icons/<%= info.weather.current.weather[0].icon%>.png"
                     style="height:170px;width:170px;margin-right: 100px;">
                 <!--inserisco le icone in una cartella e le chiamo come quelle passate da openweathermapApi-->
             </div>
@@ -53,34 +53,34 @@
             <div style="margin-top: auto;">
                 <span style="font-size: 16px;color:gray;display: flex;padding-left: 20px;font-family:Montserrat;">Feels
                     like
-                    <%= weatherData.weather_info.current.feels_like%>c<br></span>
+                    <%= info.weather.current.feels_like%>c<br></span>
                 <span
-                    style="font-size: 18px;display: flex;padding-left: 20px;padding-bottom: 60px;font-family:Montserrat;text-transform: capitalize;"><%= weatherData.weather_info.current.weather.description%></span>
+                    style="font-size: 18px;display: flex;padding-left: 20px;padding-bottom: 60px;font-family:Montserrat;text-transform: capitalize;"><%= info.weather.current.weather.description%></span>
             </div>
             <div style="display:flex;justify-content: space-evenly;"><span
                     style="font-size: 13px;display: flex;padding-bottom:15px;font-family:Montserrat;display:flex;align-items: center;">
                     <img style="height:25px;width:25px;padding: 5px;"
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAAxUlEQVRYhe2WQQ7CIBBFn6bpIdReUHssz6A3qG6sd1H3uLXItDRhhkZ5yWzIJPP5AT5Q0MN59QKuQAvUOQR81h3Y5hTggB6oV8oCpmgV53+xA04MXbhYCgBoPAGPtbWCnDTAmaEDXRVojDk8qTiGFqeuT6q6ITxIVsM3ki1aQ59AB+ylnRf+F61DF53/FtduNP+tHp5ecsJKgAMOkgsaLDP//Yaf/g8E899vCv0H5uJm9AbzP4WAmBLz30LAaP5rCSj5H8Ubjv8HcHNmLo0AAAAASUVORK5CYII=">
-                    Wind: <%= weatherData.weather_info.current.wind_speed %> m/s
+                    Wind: <%= info.weather.current.wind_speed %> m/s
                 </span>
 
                 <span
                     style="font-size: 13px;display: flex;padding-bottom:15px;font-family:Montserrat;display:flex;align-items: center;">
                     <img style="height:25px;width:25px;padding: 5px;"
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAABvUlEQVRIie3WvW4TQRQF4I8YW0hAy0MkSsMLgKDhV8IRhEeIIIIIngIR8Qg0SMlbUEBESQFOYZMgEEkDJaIgSCQUe1c74KzNrK2IgiPdYmfmnHPnzp3d5T/+QXSwiHX08S2ij7WY60zbdAHvcTAmttGdhuEMHifCb3AfszgZMYcVvE3WPQpuY5Sm37E0RmwGd2Jtad4IC4npuQze+cT8Rq5pR3WmS7lk3A3uFto5xEXVmY47qzN4jRfJWAu90Lh5GKlOtCzRU+yPMX2OsziRjP8Mbqr1Vxgosp2tmb+KXfyIdb1IIsVczPVzjL8G6XTN/I7q6uwdYiq4B6E1hLpSH8tI8jO+jJjP0bJldKkvK3b9CZdq1pSlHuQYrwVpJYf0Bx6GxrMc0m1V07QamLawGRq3coht1QtkuYHxveC+w/FcclfVtRcyeBeDs4/ruaYlniTmy0aXvaXY6V5wVpuaUlyFVdWd7eEB5nEqYj7GNv3+Wcy6RnW4ho+JcF18wJVpGKZoKz6V64qmKc0GiuvX1aCRmqA0boSJfk8mQa7xK8M7LZ83Jk1mw/gmyo2hpI6q1I17ocSoarycVPxI8Aud7p/0g/fPXAAAAABJRU5ErkJggg==">
-                    Pressure: <%= weatherData.weather_info.current.pressure %> bar
+                    Pressure: <%= info.weather.current.pressure %> bar
                 </span>
                 <span
                     style="font-size: 13px;display: flex;padding-bottom:15px;font-family:Montserrat;display:flex;align-items: center;">
                     <img style="height:25px;width:25px;padding: 5px;"
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAACWElEQVRoge2Yy05UQRCGv4zcZqWYCLyDiYAr42XhRgw7eAtdqFuCMYQY3SIEo0F9EcMSFwor8AG8rDSOUa4hjuOiu2EYzqVPVzfdJH5J7bq6/n/OyampgmJmdJxqbgB/gCZwM7IWZ84Bn4GWjk/A2aiKHHnBoQkTi1EVOXAF9Tp1GmkC1yLqqkQP8JHjJkxs6DPJM02+CRNT0dRZMgD8ptzIJjAYSaMVi5SbMPEsksZSBoFd7I3sAUMnqO8ucMfm4BPsTZiY9a83k4vADurHGy462AP8oLqR70B3GO0H1FFfSlNzHejLOzxeILYsxkI50DzNqPk47/BSidiieBnKAeo12s+ouQ9cykpYczTRAj4EMnFG351X970+c4SGwEgjkJEHFrXvdSZtCoz8CmCiH7uPTwM4b5JqwBdB0a+C3Dwe0iawgH46/i4t4P5E5vxoP2AA1TNs628DF0zyKPDXwUSTkgblwKyDjiOj+BuHC5Y8m+hGNdmqOr7R1pjrwLsKySs6xye3HUyYuNV+UR14TfZ02P46vQpgAgI05hFgHjUpbunYQP11HwlgwLDqaKJFuMbsxE/cjTRqgUTVdFShS1CvK5SRRzqqIGnMktxcXDeUKTVm0YYypcacuaF8XiE/hcbMdfI3lFct74jemH1uKKM25hAbyhNvzP83lCmRzIZS2tnvU7Awy6AXtf5MipQ3lJVIakMpebUmBLmTgtxMJEYuR8r1jmgQ8i1G8kQkg9Cxva0UiZGkNpQSI8uC3LeCXO8kNQhJSWIQ8kH0QcgnsTeU3om1oQTgH85Mdg9T8wlVAAAAAElFTkSuQmCC">
-                    Humidity: <%= weatherData.weather_info.current.humidity %>%
+                    Humidity: <%= info.weather.current.humidity %>%
                 </span>
                 <span
                     style="font-size: 13px;display: flex;padding-bottom:15px;font-family:Montserrat;display:flex;align-items: center;">
                     <img style="height:25px;width:25px;padding: 5px;"
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAAC2ElEQVRoge3XT6hVVRTH8c9TzH+8EgMTnzVLrBAyAw0cJI2ciJMSoZkGhs8SMQyE/rxJAxGNFJtoTksHijMxjRoEITnJP4kQ9hD/kGhBPIX3ug32vr3r5ex397nvigb7C2ty1lm/tdY5Z6+9D4VCoVAoFAqFx51n8VIXcS/E2EfKbLyLH7AXU7rQ6MNn+B6bMKtn1WXQjw9xCw0cjgVNhi+i1k3siDkeGlOxBbdj0gYuYUYPtKfh5xbdPzAYc/aUZTjbkqhpqzvELcLb0RZ1uHdlhf5PWNp11S1MxRBGK5KcmyBuHk5UxJyIvhQ/VsSM4mOTeDsD+K5CuGk7EnH9OB/vuYtjOI4/47Xz0mtg2wT5zmBB3SZW4MYEog28logdiv5fhIfRZGFLg58mYpd3yHk91pbFeox0EGxgbiL+cvSvqvC9EX2/JmLnZuQdwbpOTQzinwyxhjBpqrgX/VWfT3/03UvETsvMPYbNqSY+yBRp2jMJneHor5o2r0TfcCJ2fs0atrcLDNYUSBUKB6L/pAf3mBk4FX0HErHLuqjjvzfTZ3yi1LH3EsUMGN/1LwgLewgX47VbHhwCrWztoo6/tJwsPulC4NtEMfAyrlTEXIm+FGe6qOPLdpHdNQXGhG8+xRN4C7uivRmvpXhV/qBp2mEVh9U+7KkpdMrkD4zN3Kdr5j6ow27/vvC0cwV39qCRj2o28bnMB7gef2eKjmHjJJp4R/4nNYINdRMsMb5L59gezKyhP1N4srn6vwnjuSuewtc1kv0uPLGJfoz6hbcwLF/3mPSRCPkLdQ32Cwe/HO4Lo/QSrsVrA8I/+uuYnqlzXdivjmben8WTwi9p1b9Jr21U2P3n9LKBdhbjG/UmW66N4QhefJgNtPO88Ibu9KCBO9gXNR8Z07EWX+Gq/OKv4lCMzV0zSXqxK7fznLCoF+NpYW0RDne3hQFwUZhwhUKhUCgUCoX/Af8C7sz35ep6WXwAAAAASUVORK5CYII=">
-                    Visibility: <%= weatherData.weather_info.current.visibility/1000 %> km
+                    Visibility: <%= info.weather.current.visibility/1000 %> km
                 </span>
 
                 <span
@@ -88,7 +88,7 @@
                     <img style="height:25px;width:25px;padding: 5px;"
                         src="images/homepage/icons/Weather_Card_icons/up-and-down_2.png">
                     Min - Max:
-                    <%= Math.round(weatherData.weather_info.daily[0].temp.min) %>/<%= Math.round(weatherData.weather_info.daily[0].temp.max) %>c
+                    <%= Math.round(info.weather.daily[0].temp.min) %>/<%= Math.round(info.weather.daily[0].temp.max) %>c
                 </span>
 
 

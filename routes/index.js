@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const {
-  getWeatherDataOf
+  locationInfo,
+  getInfo
 } = require("../public/js/API_integration.js");
-let city;
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   res.render('index', {
@@ -14,9 +15,9 @@ router.get('/', function (req, res, next) {
 
 router.post('/', async function (req, res, next) {
   let city = req.body.location;
-  let weatherData = await getWeatherDataOf(city);
+  let info = await getInfo(city);
   res.render('weather-card', {
-    weatherData: weatherData
+    info: info,
   });
 
 });
