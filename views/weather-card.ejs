@@ -51,7 +51,7 @@
                     like
                     <%= info.weather.current.feels_like%>°<br></span>
                 <span style="font-size: 18px;display: flex;padding-left: 20px;padding-bottom: 60px;font-family:Montserrat;text-transform: capitalize;">
-                    <%= info.weather.current.weather[0].description%>, PoP: <%=info.weather.hourly[0].pop*100 %>%
+                    <%= info.weather.current.weather[0].description%>, PoP: <%=Math.round(info.weather.hourly[0].pop*100) %>%
                 </span>
             </div>
             <div style="display:flex;justify-content: space-evenly;"><span style="font-size: 13px;display: flex;padding-bottom:15px;font-family:Montserrat;display:flex;align-items: center;">
