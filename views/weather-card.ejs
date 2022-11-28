@@ -8,7 +8,6 @@
     <title>Weather Card</title>
     <script type="text/javascript" src="https://livejs.com/live.js"></script>
     <link rel="stylesheet" href="stylesheets/common.css">
-    <link rel="stylesheet" href="stylesheets/open-weather-icons.css">
     <style>
         svg {
             z-index: 0;
@@ -23,8 +22,28 @@
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
+
+    <div class="navbar-container">
+
+        <div class="logo-container">
+            <img class="logo" src="images/homepage/icons/logo.png">
+        </div>
+
+        <div class="navbar-button-container">
+            <button class="navbar-item">Home</button>
+            <button class="navbar-item">Maps</button>
+            <button class="navbar-item">Info</button>
+            <button class="navbar-item">Test</button>
+        </div>
+
+        <div class="login-signup-container">
+            <button class="login">login</button>
+            <button class="sign-up">sign up</button>
+        </div>
+    </div>
+
     <div>
-        <div style="height:400px;width:912px; background-color: white;border-radius: 25px;
+        <div style="height:400px;width:920px; background-color: white;border-radius: 25px;
     margin-top: 150px;margin-left: 150px; box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;position:relative;display:flex;flex-direction: column;">
             <div style="width:100%;z-index: 1;">
                 <p style="font-family:Montserrat;padding-left:20px;padding-top:10px;font-size: 20px;color:white">Weather in
@@ -52,12 +71,12 @@
                     <%= info.weather.daily[3].temp.day %>°</p>
                 <p style="font-family:Montserrat;font-size: 95px;margin:0;padding-left: 20px;display:none;" id="temp-4">
                     <%= info.weather.daily[4].temp.day %>°</p>
-                
+
                 <img src="images/homepage/icons/OWM_icons/<%= info.weather.current.weather[0].icon%>.png" style="height:170px;width:170px;margin-right: 100px;" id="icon-0">
-                <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[1].weather[0].icon%>.png" style="height:170px;width:170px;margin-right: 100px;display:none"id="icon-1">
-                <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[2].weather[0].icon%>.png" style="height:170px;width:170px;margin-right: 100px;display:none"id="icon-2">
-                <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[3].weather[0].icon%>.png" style="height:170px;width:170px;margin-right: 100px;display:none"id="icon-3">
-                <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[4].weather[0].icon%>.png" style="height:170px;width:170px;margin-right: 100px;display:none"id="icon-4">
+                <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[1].weather[0].icon%>.png" style="height:170px;width:170px;margin-right: 100px;display:none" id="icon-1">
+                <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[2].weather[0].icon%>.png" style="height:170px;width:170px;margin-right: 100px;display:none" id="icon-2">
+                <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[3].weather[0].icon%>.png" style="height:170px;width:170px;margin-right: 100px;display:none" id="icon-3">
+                <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[4].weather[0].icon%>.png" style="height:170px;width:170px;margin-right: 100px;display:none" id="icon-4">
 
                 <!--inserisco le icone in una cartella e le chiamo come quelle passate da openweathermapApi-->
             </div>
@@ -74,12 +93,12 @@
 
                 <span style="font-size: 16px;color:gray;display: flex;padding-left: 20px;font-family:Montserrat;display: none;" id="feels-like-3">Feels
                             like
-                <%= info.weather.daily[3].feels_like.day%>°<br></span>  
+                <%= info.weather.daily[3].feels_like.day%>°<br></span>
                 <span style="font-size: 16px;color:gray;display: flex;padding-left: 20px;font-family:Montserrat;display: none;" id="feels-like-4">Feels
                         like
                 <%= info.weather.daily[4].feels_like.day%>°<br></span>
-                
-                
+
+
                 <span style="font-size: 18px;display: flex;padding-left: 20px;padding-bottom: 60px;font-family:Montserrat;text-transform: capitalize;" id="description-0">
                     <%= info.weather.current.weather[0].description %>, PoP: <%=Math.round(info.weather.hourly[0].pop*100) %>%
                 </span>
@@ -132,7 +151,7 @@
                         <p id="humidity-4" style="display:none">Humidity: <%= info.weather.daily[4].humidity %>%</p>
                 </span>
 
-                <span  id="visibility-0" style="font-size: 13px;display: flex;padding-bottom:15px;font-family:Montserrat;display:flex;align-items: center;">
+                <span id="visibility-0" style="font-size: 13px;display: flex;padding-bottom:15px;font-family:Montserrat;display:flex;align-items: center;">
                     <img style="height:25px;width:25px;padding: 5px;"
                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAAC2ElEQVRoge3XT6hVVRTH8c9TzH+8EgMTnzVLrBAyAw0cJI2ciJMSoZkGhs8SMQyE/rxJAxGNFJtoTksHijMxjRoEITnJP4kQ9hD/kGhBPIX3ug32vr3r5ex397nvigb7C2ty1lm/tdY5Z6+9D4VCoVAoFAqFx51n8VIXcS/E2EfKbLyLH7AXU7rQ6MNn+B6bMKtn1WXQjw9xCw0cjgVNhi+i1k3siDkeGlOxBbdj0gYuYUYPtKfh5xbdPzAYc/aUZTjbkqhpqzvELcLb0RZ1uHdlhf5PWNp11S1MxRBGK5KcmyBuHk5UxJyIvhQ/VsSM4mOTeDsD+K5CuGk7EnH9OB/vuYtjOI4/47Xz0mtg2wT5zmBB3SZW4MYEog28logdiv5fhIfRZGFLg58mYpd3yHk91pbFeox0EGxgbiL+cvSvqvC9EX2/JmLnZuQdwbpOTQzinwyxhjBpqrgX/VWfT3/03UvETsvMPYbNqSY+yBRp2jMJneHor5o2r0TfcCJ2fs0atrcLDNYUSBUKB6L/pAf3mBk4FX0HErHLuqjjvzfTZ3yi1LH3EsUMGN/1LwgLewgX47VbHhwCrWztoo6/tJwsPulC4NtEMfAyrlTEXIm+FGe6qOPLdpHdNQXGhG8+xRN4C7uivRmvpXhV/qBp2mEVh9U+7KkpdMrkD4zN3Kdr5j6ow27/vvC0cwV39qCRj2o28bnMB7gef2eKjmHjJJp4R/4nNYINdRMsMb5L59gezKyhP1N4srn6vwnjuSuewtc1kv0uPLGJfoz6hbcwLF/3mPSRCPkLdQ32Cwe/HO4Lo/QSrsVrA8I/+uuYnqlzXdivjmben8WTwi9p1b9Jr21U2P3n9LKBdhbjG/UmW66N4QhefJgNtPO88Ibu9KCBO9gXNR8Z07EWX+Gq/OKv4lCMzV0zSXqxK7fznLCoF+NpYW0RDne3hQFwUZhwhUKhUCgUCoX/Af8C7sz35ep6WXwAAAAASUVORK5CYII=">
                         <p> Visibility: <%= info.weather.current.visibility/1000 %> km</p>
@@ -152,13 +171,13 @@
                                 <p style="display:none" id="min-max-4">Min - Max:
                                     <%= Math.round(info.weather.daily[4].temp.min) %>° / <%= Math.round(info.weather.daily[4].temp.max) %>°</p>
                 </span>
-             </div>
+            </div>
         </div>
 
 
-        <div style="display: flex;flex-direction: row;margin-top: 100px;margin-bottom: 100px;margin-left: 150px;">
+        <div style="display: flex;flex-direction: row;margin-top: 100px;margin-bottom: 100px;margin-left: 150px;cursor: pointer;">
             <div style="box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;display: flex;flex-direction: row;border-radius: 25px;">
-                <div style="width:180px;height:250px;border-radius: 25px 0 0 25px ;background-color: white;margin-right:3px;display: flex;flex-direction: column;align-items: center;" onclick="weatherCardSwitch(0);">
+                <div style="width:180px;height:250px;border-radius: 25px 0 0 25px ;background-color: white;margin-right:5px;display: flex;flex-direction: column;align-items: center;" onclick="weatherCardSwitch(0);">
                     <p style="width:100%;text-align: center;font-family: Montserrat;color:#1d3062;font-size: 18px;"> Today
                     </p>
                     <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[0].weather[0].icon%>.png" style="height:80px;width:80px;">
@@ -176,7 +195,7 @@
                         </p>
                     </div>
                 </div>
-                <div style="width:180px;height:250px;background-color: white;margin-right:3px;display: flex;flex-direction: column;align-items: center;" onclick="weatherCardSwitch(1);">
+                <div style="width:180px;height:250px;background-color: white;margin-right:5px;display: flex;flex-direction: column;align-items: center;" onclick="weatherCardSwitch(1);">
                     <p style="width:100%;text-align: center;font-family: Montserrat;color:#1d3062;font-size: 18px;" id="secondDay">
                     </p>
                     <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[1].weather[0].icon%>.png" style="height:80px;width:80px;">
@@ -194,7 +213,7 @@
                         </p>
                     </div>
                 </div>
-                <div style="width:180px;height:250px;background-color: white;margin-right:3px;display: flex;flex-direction: column;align-items: center;" onclick="weatherCardSwitch(2);">
+                <div style="width:180px;height:250px;background-color: white;margin-right:5px;display: flex;flex-direction: column;align-items: center;" onclick="weatherCardSwitch(2);">
                     <p style="width:100%;text-align: center;font-family: Montserrat;color:#1d3062;font-size: 18px;" id="thirdDay">
                     </p>
                     <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[2].weather[0].icon%>.png" style="height:80px;width:80px;">
@@ -212,7 +231,7 @@
                     </div>
                 </div>
 
-                <div style="width:180px;height:250px;background-color: white;margin-right:3px;display: flex;flex-direction: column;align-items: center;" onclick="weatherCardSwitch(3);">
+                <div style="width:180px;height:250px;background-color: white;margin-right:5px;display: flex;flex-direction: column;align-items: center;" onclick="weatherCardSwitch(3);">
                     <p style="width:100%;text-align: center;font-family: Montserrat;color:#1d3062;font-size: 18px;" id="fourthDay">
                     </p>
                     <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[3].weather[0].icon%>.png" style="height:80px;width:80px;">
@@ -229,7 +248,7 @@
                         </p>
                     </div>
                 </div>
-                <div style="width:180px;height:250px;border-radius: 0 25px 25px 0 ;background-color: white;margin-right:3px;display: flex;flex-direction: column;align-items: center;" onclick="weatherCardSwitch(4);">
+                <div style="width:180px;height:250px;border-radius: 0 25px 25px 0 ;background-color: white;display: flex;flex-direction: column;align-items: center;" onclick="weatherCardSwitch(4);">
                     <p style="width:100%;text-align: center;font-family: Montserrat;color:#1d3062;font-size: 18px;" id="fifthDay">
                     </p>
                     <img src="images/homepage/icons/OWM_icons/<%= info.weather.daily[4].weather[0].icon%>.png" style="height:80px;width:80px;">
@@ -252,9 +271,10 @@
         <br>
         <br>
         <br>
-        
+
         <script type="text/javascript" src="js/date_functions.js"></script>
         <script type="text/javascript" src="js/weather_card_switch.js"></script>
+        <script type="text/javascript" src="js/cookies.js"></script>
 
 </body>
 
