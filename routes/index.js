@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const {
-    locationInfo,
     getInfo
 } = require("../public/js/API_integration.js");
 
@@ -26,7 +25,7 @@ router.post('/', async function(req, res, next) {
     res.cookie("hourly_temps", hourly_temps, { maxAge: 30000 });
 
     res.cookie("timezone", info.weather.timezone_offset, { maxAge: 30000 })
-    res.render('weather-card', {
+    res.render('dashboard', {
         info: info,
     });
 

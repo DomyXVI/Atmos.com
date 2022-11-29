@@ -1,0 +1,202 @@
+.weathercard {
+    height: 400px;
+    width: 920px;
+    background-color: white;
+    border-radius: 25px;
+    margin-top: 150px;
+    margin-left: 150px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+div.weathercard>div>p.weather-in {
+    font-family: Montserrat;
+    padding-left: 20px;
+    padding-top: 10px;
+    font-size: 20px;
+    color: white
+}
+
+div.weathercard>p.weather-in>span {
+    font-size: 14px;
+    color: white
+}
+
+div.weathercard>.temp-icon-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content: space-between;
+}
+
+div.weathercard>.temp-icon-container>p:first-child {
+    font-family: Montserrat;
+    font-size: 95px;
+    margin: 0;
+    padding-left: 20px;
+    display: block;
+}
+
+/* all other paragraphs except first child */
+div.weathercard>.temp-icon-container>p {
+    font-family: Montserrat;
+    font-size: 95px;
+    margin: 0;
+    padding-left: 20px;
+    display: none;
+}
+
+div.weathercard>.temp-icon-container>img.weather-card-default {
+    height: 170px;
+    width: 170px;
+    margin-right: 100px;
+}
+
+div.weathercard>.temp-icon-container>img.weather-card-hidden {
+    height: 170px;
+    width: 170px;
+    margin-right: 100px;
+    display: none
+}
+
+
+div.weathercard>div.weather-stats {
+    margin-top: auto;
+}
+
+div.weathercard>div.weather-stats>span.feels-like-default {
+    font-size: 16px;
+    color: gray;
+    display: flex;
+    padding-left: 20px;
+    font-family: Montserrat;
+}
+
+div.weathercard>div.weather-stats>span.feels-like {
+    font-size: 16px;
+    color: gray;
+    display: flex;
+    padding-left: 20px;
+    font-family: Montserrat;
+    display: none;
+}
+
+div.weathercard>div.weather-stats>span.description-default {
+    font-size: 18px;
+    display: flex;
+    padding-left: 20px;
+    padding-bottom: 60px;
+    font-family: Montserrat;
+    text-transform: capitalize;
+}
+
+div.weathercard>div.weather-stats>span.description {
+    font-size: 18px;
+    display: flex;
+    padding-left: 20px;
+    padding-bottom: 60px;
+    font-family: Montserrat;
+    text-transform: capitalize;
+    display: none;
+}
+
+.daily-weather-stats {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.daily-weather-stats>span.stat-holder {
+    font-size: 13px;
+    display: flex;
+    padding-bottom: 15px;
+    font-family: Montserrat;
+    display: flex;
+    align-items: center;
+}
+
+
+.daily-weather-stats>span.stat-holder>img.stat-icon {
+    height: 25px;
+    width: 25px;
+    padding: 5px;
+}
+
+.daily-overview-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: 150px;
+    cursor: pointer;
+}
+
+
+.daily-overview-container>div:first-child {
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 25px;
+}
+
+div.daily-overview-container>div>div.daily-overview-card {
+    width: 180px;
+    height: 250px;
+    background-color: white;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+div.daily-overview-container>div>div.daily-overview-card>p.day {
+    width: 100%;
+    text-align: center;
+    font-family: Montserrat;
+    color: #1d3062;
+    font-size: 18px
+}
+
+div.daily-overview-card>.daily-overview-card-image {
+    width: 80px;
+    height: 80px;
+}
+
+div.daily-overview-card>.daily-overview-card-stats {
+    width: 100%;
+    text-align: center;
+    font-family: Montserrat;
+    font-size: 14px;
+    margin-top: 30px;
+
+}
+
+div.daily-overview-card>div.daily-description-container {
+    width: 100%;
+    background-color: #0099ff;
+}
+
+div.daily-overview-card>div.daily-description-container>p.daily-description {
+    text-align: center;
+    width: 100%;
+    font-family: Montserrat;
+    color: white;
+}
+
+.chart-container {
+    height: 430px;
+    width: 920px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border-radius: 25px;
+    margin-left: 150px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
