@@ -16,13 +16,16 @@ router.get('/', function(req, res, next) {
 router.post('/', async function(req, res, next) {
     let city = req.body.location;
     let info = await getInfo(city);
-    let hourly_temps = info.weather.hourly;
+
+    let hourly_temps = [...info.weather.hourly];
 
     for (let i = 0; i < info.weather.hourly.length; i++) {
         hourly_temps[i] = info.weather.hourly[i].temp;
     }
+
     res.cookie("hourly_temps", hourly_temps, { maxAge: 30000 });
 
+    res.cookie("timezone", info.weather.timezone_offset, { maxAge: 30000 })
     res.render('weather-card', {
         info: info,
     });

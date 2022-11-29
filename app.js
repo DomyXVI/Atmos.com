@@ -25,7 +25,6 @@ app.use(function(req, res, next) {
     next(createError(404));
 });
 
-
 app.use(function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
@@ -35,7 +34,6 @@ app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error');
 });
-
 
 console.log("\u001b[1;33mConnection Established" + "\u001b[0m");
 console.log("\u001b[1;32mServer uptime: " + process.uptime() + " sec\u001b[0m");

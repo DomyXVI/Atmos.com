@@ -100,7 +100,7 @@
 
 
                 <span style="font-size: 18px;display: flex;padding-left: 20px;padding-bottom: 60px;font-family:Montserrat;text-transform: capitalize;" id="description-0">
-                    <%= info.weather.current.weather[0].description %>, PoP: <%=Math.round(info.weather.hourly[0].pop*100) %>%
+                    <%= info.weather.current.weather[0].description %>, PoP: <%= Math.round(info.weather.hourly[0].pop*100) %>%
                 </span>
 
                 <span style="font-size: 18px;display: flex;padding-left: 20px;padding-bottom: 60px;font-family:Montserrat;text-transform: capitalize;display: none;" id="description-1">
@@ -266,15 +266,91 @@
                     </div>
                 </div>
             </div>
+
+        </div>
+        <div style="height:430px;width:920px;background-color: white;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;border-radius: 25px;margin-left: 150px;cursor: pointer;display:flex;align-items: center;justify-content: center;">
+            <canvas id="myChart"></canvas>
         </div>
         <br>
         <br>
         <br>
         <br>
 
+
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script type="text/javascript" src="js/date_functions.js"></script>
         <script type="text/javascript" src="js/weather_card_switch.js"></script>
         <script type="text/javascript" src="js/cookies.js"></script>
+
+        <script>
+            const parseCookie = str =>
+                str
+                .split(';')
+                .map(v => v.split('='))
+                .reduce((acc, v) => {
+                    acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim());
+                    return acc;
+                }, {});
+
+            let parsedCookies = parseCookie(document.cookie);
+            console.log(parsedCookies.hourly_temps.substring(2, parsedCookies.hourly_temps.length));
+            let values = JSON.parse(parsedCookies.hourly_temps.substring(2, parsedCookies.hourly_temps.length));
+            let hours = getNext48Hours(getLocalTime());
+            console.log(hours);
+            const ctx = document.getElementById('myChart');
+
+
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: hours,
+                    datasets: [{
+                        label: 'Temperature',
+                        data: values,
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            function getNext48Hours(startHour) {
+                let date = new Date();
+                let hours = new Array();
+                for (let i = 0; i <= 48; i++) {
+                    hours[i] = startHour + i;
+                    if (hours[i] >= 24 && hours[i] < 48) {
+                        hours[i] -= 24;
+                        hours[i] = hours[i] + ":00";
+                    } else if (hours[i] >= 48) {
+                        hours[i] -= 48;
+                        hours[i] = hours[i] + ":00";
+                    } else {
+                        hours[i] = hours[i] + ":00";
+                    }
+                }
+                return hours;
+            }
+
+
+            function getLocalTime() {
+                d = new Date();
+                localTime = d.getTime();
+                localOffset = d.getTimezoneOffset() * 60000;
+                utc = localTime + localOffset;
+                var atlanta = utc + (1000 * parsedCookies.timezone)
+                nd = new Date(atlanta).getHours();
+                return nd;
+            }
+        </script>
+
 
 </body>
 
