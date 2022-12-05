@@ -189,8 +189,8 @@ div.daily-overview-card>div.daily-description-container>p.daily-description {
 }
 
 .chart-container {
-    height: 430px;
-    width: 920px;
+    height: 280px;
+    width: 520px;
     background-color: white;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     border-radius: 25px;

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="stylesheets/Index/index.css">
     <link rel="stylesheet" href="stylesheets/Common/common.css">
     <link rel="stylesheet" href="stylesheets/Index/index-responsive.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.js"></script>
+
 </head>
 
 <body>
@@ -39,14 +41,19 @@
                 </span>
             </p>
             <div>
-                <form action="http://localhost/" method="POST">
-                    <input class="forecast-input" placeholder="Rome, IT" id="search_term" name="location">
+                <form action="http://localhost/" method="POST"
+                    style="display: flex;flex-direction: row;align-items: center">
+                    <input class="forecast-input" placeholder="Rome, IT" id="search_term" name="location"
+                        onfocus="this.style.border = 'none'">
                     <button onclick="showBufferingIcon()" class="city-forecast-button">
                         Weather
                         Forecast
                     </button>
+                    <button onclick="geolocateUser()" type="button" id="geolocateUserButton"
+                        class="city-forecast-button" style="width:60px">
+                        <img src="images/homepage/icons/location.png" style="height:25px;width:25px">
+                    </button>
                 </form>
-
                 <img class="buffering-rocket-icon" src="images/homepage/icons/rocket.svg" id="rocket" type="submit">
             </div>
         </div>
