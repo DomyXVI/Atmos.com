@@ -15,12 +15,15 @@ let locationInfo;
 const getInfo = async (city) => {
     const geocodingUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + appId;
     const geoCodingInfo = await fetch(geocodingUrl);
-
     if (geoCodingInfo.ok) {
         locationInfo = await geoCodingInfo.json();
-        data["location"] = locationInfo;
-        return getWeatherData(locationInfo[0].lat, locationInfo[0].lon);
+        if (locationInfo.length < 1) return null;
+        else {
+            data["location"] = locationInfo;
+            return getWeatherData(locationInfo[0].lat, locationInfo[0].lon);
+        }
     }
+    return null;
 }
 
 const getWeatherData = async (lat, lon) => {

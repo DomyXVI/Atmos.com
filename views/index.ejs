@@ -48,13 +48,18 @@
                         Weather
                         Forecast
                     </button>
-                    <button onclick="geolocateUser()" type="button" id="geolocateUserButton"
+                    <button onclick="geolocateUser(), hideStatusMessages()" type="button" id="geolocateUserButton"
                         class="city-forecast-button" style="width:60px">
                         <img src="images/homepage/icons/location.png" style="height:25px;width:25px">
                     </button>
                 </form>
+
                 <img class="buffering-rocket-icon" src="images/homepage/icons/rocket.svg" id="rocket" type="submit">
             </div>
+            <% if(cityNotFound){ %>
+                <p style="font-size: 20px;color:white" id="cityNotFound"> Oops! Lost in space 🚀, try locations from
+                    Earth 🌏 ! </p>
+                <% } %>
         </div>
 
     </div>

@@ -1,8 +1,8 @@
 const NodeCache = require("node-cache");
 
 const myCache = new NodeCache({
-    stdTTL: 0,
-    checkperiod: 0,
+    stdTTL: 1800,
+    checkperiod: 120,
     maxkey: -1
 });
 
