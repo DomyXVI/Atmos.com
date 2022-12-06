@@ -31,7 +31,6 @@ const getWeatherData = async (lat, lon) => {
     } else {
         console.log("\x1b[31mCACHE MISS\x1b[0m -> " + locationInfo[0].name + ", " + locationInfo[0].country);
         const weatherDataUrl = "https://api.openweathermap.org/data/3.0/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + appId + "&units=metric";
-        console.log("\u001b[1;33m" + weatherDataUrl+"\x1b[0m");
         const weatherInfo = await fetch(weatherDataUrl);
         if (weatherInfo.ok) {
             data["weather"] = await weatherInfo.json();
