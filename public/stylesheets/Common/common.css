@@ -106,7 +106,7 @@ div.login-signup-container {
     text-align: right;
 }
 
-div.login-signup-container>button.sign-up {
+div.login-signup-container>form>button.sign-up {
     width: 110px;
     height: 50px;
     background-color: var(--blurple);
@@ -121,7 +121,7 @@ div.login-signup-container>button.sign-up {
     margin-left: 20px;
 }
 
-div.login-signup-container>button.login {
+div.login-signup-container>form>button.login {
     width: 110px;
     height: 50px;
     font-size: 18px;
