@@ -18,7 +18,6 @@ router.get('/', function (req, res, next) {
     });
 });
 
-
 router.post('/', async function (req, res, next) {
     var { email, password } = req.body;
     try {
@@ -27,7 +26,9 @@ router.post('/', async function (req, res, next) {
             email: email,
             password: crypto.encrypt(password),
         };
-        dbUtils.registerUser(user);
+        await dbUtils.registerUser(user);
+        //let foundUser = await dbUtils.findUser(user);
+        //if (crypto.decrypt(foundUser.password) == password) { console.log("FOUND") }
     } catch (e) {
         console.error(e);
         res.redirect("/login?signup_error");

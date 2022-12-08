@@ -19,6 +19,11 @@ const dbUtils = {
 
     registerUser: async function (userDocument) {
         await client.db("Atmos-com").collection("Users").insertOne(userDocument);
+    },
+
+    findUser: async function (user) {
+        var foundUser = await client.db("Atmos-com").collection("Users").findOne(user);
+        return foundUser;
     }
 }
 

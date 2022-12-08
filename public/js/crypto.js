@@ -1,8 +1,8 @@
 require('dotenv').config()
 const cryptojs = require("crypto");
 const algorithm = process.env.ALG;
-const initVector = cryptojs.randomBytes(16);
-const Securitykey = cryptojs.randomBytes(32);
+const initVector = process.env.INIT_VECTOR;
+const Securitykey = process.env.SECRET_KEY;
 
 
 const crypto = {
