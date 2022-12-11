@@ -17,14 +17,31 @@ const dbUtils = {
         });
     },
 
+    //TODO: return different results to redirect in case user has been found, user not found or error
     registerUser: async function (userDocument) {
-        await client.db("Atmos-com").collection("Users").insertOne(userDocument);
+
+        if (!await this.findUser(userDocument)) {
+            await client.db("Atmos-com").collection("Users").insertOne(userDocument).then(() => {
+                console.log("Register succesful: document inserted");
+                return true;
+            }).catch((error) => {
+                console.log(error);
+                return false;
+            });
+        } else {
+            console.log("Register failed: document found");
+        }
+
+        return false;
     },
 
     findUser: async function (user) {
         var foundUser = await client.db("Atmos-com").collection("Users").findOne(user);
         return foundUser;
-    }
+    },
+
+
+
 }
 
 

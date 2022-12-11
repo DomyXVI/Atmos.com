@@ -26,15 +26,16 @@ router.post('/', async function (req, res, next) {
             email: email,
             password: crypto.encrypt(password),
         };
+
         await dbUtils.registerUser(user);
+        res.redirect("/login?signup_ok");
+
         //let foundUser = await dbUtils.findUser(user);
         //if (crypto.decrypt(foundUser.password) == password) { console.log("FOUND") }
     } catch (e) {
         console.error(e);
         res.redirect("/login?signup_error");
     };
-    console.log("Register succesful: document inserted");
-    res.redirect("/login?signup_ok");
 });
 
 
