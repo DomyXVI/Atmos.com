@@ -6,10 +6,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+        [type=email] {
+            background-image: url('images/login/email.png');
+            background-position: calc(100% - 10px) center;
+            background-repeat: no-repeat;
+            background-size: 16px 16px;
+            border: 1px solid;
+        }
+        
+        [type=password] {
+            background-image: url('images/login/lock.png');
+            background-position: calc(100% - 10px) center;
+            background-repeat: no-repeat;
+            background-size: 16px 16px;
+            border: 1px solid;
+        }
+        
+        [type=password]:not(:placeholder-shown) {
+            background-image: none;
+        }
+        
+        [type=email]:not(:placeholder-shown) {
+            background-image: none;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #1d3062;
+            font-family: Montserrat;
+        }
+        
+        .log {
+            background-color: #3056BB;
+            transition: 0.3s;
+        }
+        
+        .log:hover {
+            background-color: #1d3062;
+            transition: 0.3s;
+        }
+        
+        wrapper {
+            width: 100%;
+            display: flex;
+            animation: slide 16s infinite;
+        }
+        
+        @keyframes slide {
+            0% {
+                transform: translateX(0);
+            }
+            25% {
+                transform: translateX(0);
+            }
+            30% {
+                transform: translateX(-100%);
+            }
+            50% {
+                transform: translateX(-100%);
+            }
+            55% {
+                transform: translateX(-200%);
+            }
+            75% {
+                transform: translateX(-200%);
+            }
+            80% {
+                transform: translateX(-300%);
+            }
+            100% {
+                transform: translateX(-300%);
+            }
+        }
+    </style>
+
 </head>
 
 <body>
-    <div>
+    <!--<div>
         <form action="/login" method="POST">
             <label>EMAIL</label>
             <input type="text" name="email"><br>
@@ -19,6 +98,53 @@
             <input type="text" name="repeat_password"><br>
             <button type="submit"> submit </button>
         </form>
+    </div>
+-->
+    <div style="margin-top:30px; margin-bottom:30px; border-radius: 50px;display: flex;flex-direction: row;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;flex-wrap: wrap;
+    ">
+
+        <div style="width:50%;height:750px;background-color: #3056BB;border-radius: 50px 0 0 50px;display: flex;justify-content: center;align-items: center;">
+            <img src="images/homepage/website_overview/notification.svg" style="padding:25px">
+        </div>
+
+        <div style="width:50%;height:750px;border-radius: 0px 50px 50px 0;display: flex;flex-direction: column;align-items: center;background-color: white;">
+            <div style="padding-top: 70px;text-align: center;width:100%;">
+                <div style="width: 100%;display: flex;align-items: center;justify-content: center;">
+                    <div style="border-radius: 50%; height:90px;width:90px;  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);display: flex;align-items: center;justify-content: center;">
+                        <div class="wrapper">
+                            <img src="images/homepage/icons/optimization.png" style="width: 70px;height:70px;">
+                        </div>
+                    </div>
+                </div>
+                <div style="line-height: 10px;">
+
+                    <p style="font-size: 34px; font-family: Montserrat;"> Welcome back!</p>
+                    <p style="font-size: 18px; font-family: Montserrat;color:grey"> Log in to save cities, show stats and more.</p>
+                    <p style="font-size: 18px; font-family: Montserrat;color:grey"> Your data is kept safe.</p>
+                </div>
+                <form action="/login" method="POST">
+                    <div style="display: inline-block">
+                        <input name="email" type="email" style="border-radius: 6px;font-family: Montserrat;background-color: #FAFAFD;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left: 10px;" placeholder="Email"><br>
+                        <input type="password" name="password" style="border-radius: 6px;background-color: #FAFAFD;font-family: Montserrat;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left:10px;" placeholder="Password"><br>
+                        <div style="display: flex;flex-direction: row;justify-content: space-between;margin-top: 5px;">
+                            <p style="color: gray;font-size: 14px;"> Remember me</p>
+                            <p style="color: #3056BB;font-size: 14px;"> Recover Password</p>
+
+                        </div>
+                    </div>
+                    <button class="log" style="width:350px;height:40px;color:white;border-radius:6px;font-size:18px;border:none;margin-top: 50px;font-family: Montserrat;">
+                    Login
+                </button>
+
+                    <button style="width:350px;background-color:#FAFAFD;border: 0.2px solid #E0E4F2;height:40px;color:gray;border-radius:6px;font-size:18px;margin-top: 25px;">
+                    Sign in with Google
+                </button>
+                    <p style="margin-top: 75px;color:gray">Don't have an account? <span style="color: #3056BB;">Sign up now.</span></p>
+                </form>
+            </div>
+        </div>
+
+
     </div>
 </body>
 

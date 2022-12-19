@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="stylesheets/Common/common.css">
     <link rel="stylesheet" href="stylesheets/Index/index-responsive.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNbaCOsry-bPOnTqL3Iy0E0B_sV1BHXUQ
+    &libraries=places&types=locality"></script>
 
 </head>
 
@@ -44,14 +46,13 @@
             </p>
             <div>
                 <form action="/dashboard" method="POST" style="display: flex;flex-direction: row;align-items: center">
-                    <input class="forecast-input" placeholder="Rome, IT" id="search_term" name="location"
-                        onfocus="this.style.border = 'none'">
+                    <input class="forecast-input" placeholder="Rome, IT" id="search_term" name="location" onfocus="this.style.border = 'none'">
+                    <p id="city_name" style="font-size: 35px;"></p>
                     <button onclick="showBufferingIcon()" class="city-forecast-button">
                         Weather
                         Forecast
                     </button>
-                    <button onclick="geolocateUser(), hideStatusMessages()" type="button" id="geolocateUserButton"
-                        class="city-forecast-button" style="width:60px">
+                    <button onclick="geolocateUser(), hideStatusMessages()" type="button" id="geolocateUserButton" class="city-forecast-button" style="width:60px">
                         <img src="images/homepage/icons/location.png" style="height:25px;width:25px">
                     </button>
                 </form>
@@ -59,8 +60,7 @@
                 <img class="buffering-rocket-icon" src="images/homepage/icons/rocket.svg" id="rocket" type="submit">
             </div>
             <% if(cityNotFound){ %>
-                <p style="font-size: 20px;color:white" id="cityNotFound"> Oops! Lost in space 🚀, try locations from
-                    Earth 🌏 ! </p>
+                <p style="font-size: 20px;color:white" id="cityNotFound"> Oops! Lost in space 🚀 - try locations from Earth 🌏! </p>
                 <% } %>
         </div>
 
@@ -127,8 +127,7 @@
 
 
     <div style="margin-top: 80px;">
-        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -159,9 +158,7 @@
                     <img src="images/homepage/icons/fuse-box.png" class="why-card-logo">
                 </div>
                 <p class="why-card-description">
-                    <span class="why-card-title">Powerful</span><br><br> This website's API calls, database fetching and
-                    processes are executed in the most efficient way possible in order to enhance optimization, loading
-                    times, and server response-time.
+                    <span class="why-card-title">Powerful</span><br><br> This website's API calls, database fetching and processes are executed in the most efficient way possible in order to enhance optimization, loading times, and server response-time.
                 </p>
             </div>
             <div class="why-card">
@@ -169,9 +166,7 @@
                     <img src="images/homepage/icons/optimization.png" class="why-card-logo">
                 </div>
                 <p class="why-card-description">
-                    <span class="why-card-title">Totally Optimized</span><br><br> This website's API calls, database
-                    fetching and processes are executed in the most efficient way possible in order to enhance
-                    optimization, loading times, and server response-time.
+                    <span class="why-card-title">Totally Optimized</span><br><br> This website's API calls, database fetching and processes are executed in the most efficient way possible in order to enhance optimization, loading times, and server response-time.
                 </p>
             </div>
             <div class="why-card">
@@ -179,8 +174,7 @@
                     <img src="images/homepage/icons/support.png" class="why-card-logo">
                 </div>
                 <p class="why-card-description">
-                    <span class="why-card-title">Worldwide Support</span><br><br> Having trouble using our website? Fill
-                    in the contact form to send us feedback. Answers are to be expected in a working day. From anywhere.
+                    <span class="why-card-title">Worldwide Support</span><br><br> Having trouble using our website? Fill in the contact form to send us feedback. Answers are to be expected in a working day. From anywhere.
                 </p>
             </div>
         </div>
@@ -191,68 +185,62 @@
 
         <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102302/techCrunch%402x.png">
 
-        <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102302/huffpost%402x.png"
-            style="height:30px">
+        <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102302/huffpost%402x.png" style="height:30px">
         <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102258/Forbes%402x.png">
 
-        <img class="fake-partner"
-            src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102300/globe-and-mail%402x-350x37.png"
-            style="height:30px;">
+        <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102300/globe-and-mail%402x-350x37.png" style="height:30px;">
     </div>
-    <p style="height:300px">
+    <div style="height:500px">
 
-    </p>
-    <div class="footer">
-        <div class="inside-container">
-            <div style="display:flex;flex-direction: row;">
-                <div class="social-container">
-                    <p class="weather-solutions-title">WEATHER SOLUTIONS</p>
-                    <div class="social-icons-container">
-                        <img src="images/homepage/icons/Social_icons/instagram.svg" class="social-icon">
-                        <img src="images/homepage/icons/Social_icons/twitter.svg" class="social-icon">
-                        <img src="images/homepage/icons/Social_icons/linkedin.svg" class="social-icon">
-                        <img src="images/homepage/icons/Social_icons/youtube.svg" style="height:35px;width:35px;">
+    </div>
+    <div class=" footer ">
+        <div class="inside-container ">
+            <div style="display:flex;flex-direction: row; ">
+                <div class="social-container ">
+                    <p class="weather-solutions-title ">WEATHER SOLUTIONS</p>
+                    <div class="social-icons-container ">
+                        <img src="images/homepage/icons/Social_icons/instagram.svg " class="social-icon ">
+                        <img src="images/homepage/icons/Social_icons/twitter.svg " class="social-icon ">
+                        <img src="images/homepage/icons/Social_icons/linkedin.svg " class="social-icon ">
+                        <img src="images/homepage/icons/Social_icons/youtube.svg " style="height:35px;width:35px; ">
 
                     </div>
                 </div>
-                <div style="margin-left:160px;text-align: left;">
-                    <p class="footer-column-title"> Product </p>
-                    <p class="footer-clickable"> Use guide </p>
-                    <p class="footer-clickable"> Status </p>
-                    <p class="footer-clickable"> Technologies </p>
+                <div style="margin-left:160px;text-align: left; ">
+                    <p class="footer-column-title "> Product </p>
+                    <p class="footer-clickable "> Use guide </p>
+                    <p class="footer-clickable "> Status </p>
+                    <p class="footer-clickable "> Technologies </p>
                 </div>
-                <div style="margin-left:120px;text-align: left;">
-                    <p class="footer-column-title"> Company </p>
-                    <p class="footer-clickable"> About </p>
-                    <p class="footer-clickable"> News </p>
-                    <p class="footer-clickable"> Branding </p>
-                    <p class="footer-clickable"> Developers </p>
+                <div style="margin-left:120px;text-align: left; ">
+                    <p class="footer-column-title "> Company </p>
+                    <p class="footer-clickable "> About </p>
+                    <p class="footer-clickable "> News </p>
+                    <p class="footer-clickable "> Branding </p>
+                    <p class="footer-clickable "> Developers </p>
                 </div>
-                <div style="margin-left:120px;text-align: left;">
-                    <p class="footer-column-title"> Policies </p>
-                    <p class="footer-clickable"> Terms </p>
-                    <p class="footer-clickable"> License </p>
-                    <p class="footer-clickable"> Cookies </p>
-                    <p class="footer-clickable"> Guidelines </p>
-                    <p class="footer-clickable"> Privacy </p>
-                    <p class="footer-clickable"> Credits </p>
-                    <p class="footer-clickable"> Moderation </p>
-
-
-
+                <div style="margin-left:120px;text-align: left; ">
+                    <p class="footer-column-title "> Policies </p>
+                    <p class="footer-clickable "> Terms </p>
+                    <p class="footer-clickable "> License </p>
+                    <p class="footer-clickable "> Cookies </p>
+                    <p class="footer-clickable "> Guidelines </p>
+                    <p class="footer-clickable "> Privacy </p>
+                    <p class="footer-clickable "> Credits </p>
+                    <p class="footer-clickable "> Moderation </p>
                 </div>
             </div>
-            <div class="footer-bottom-container">
-                <div class="logo-container">
-                    <img class="logo" src="images/homepage/icons/logo.png" style="height:45px;width:auto;">
+            <div class="footer-bottom-container ">
+                <div class="logo-container ">
+                    <img class="logo " src="images/homepage/icons/logo.png " style="height:45px;width:auto; ">
                 </div>
-                <div class="login-signup-container" style="margin-right: 15px;text-align: right;">
-                    <button class="sign-up">sign up</button>
+                <div class="login-signup-container " style="margin-right: 15px;text-align: right; ">
+                    <button class="sign-up ">sign up</button>
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="js/index_scripts.js"></script>
+    <script type="text/javascript " src="js/index_scripts.js "></script>
 
 </body>
 

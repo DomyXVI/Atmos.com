@@ -5,6 +5,10 @@
     --extra-light-blue: #d3deff;
 }
 
+body {
+    width: 100%;
+}
+
 div.main-research-container {
     height: 600px;
     background-color: var(--dark-blue);
@@ -206,6 +210,7 @@ div.our-fake-partners {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    flex-wrap: wrap;
 }
 
 div.our-fake-partners>img.fake-partner {
@@ -258,7 +263,6 @@ div.social-container>p.weather-solutions-title {
     margin: 0 0 20px 0;
 }
 
-
 div.footer-bottom-container {
     margin-top: 30px;
     width: 100%;
@@ -269,6 +273,7 @@ div.footer-bottom-container {
     justify-content: space-between;
     align-items: center;
 }
+
 
 /* ANIMATIONS AND KEYFRAMES CSS */
 
@@ -307,20 +312,16 @@ div.footer-bottom-container {
 }
 
 @keyframes animate {
-
     0%,
     100% {
         transform: translateY(2px)
     }
-
     25% {
         transform: translateX(-1px)
     }
-
     50% {
         transform: translateY(-2px)
     }
-
     75% {
         transform: translateX(1px)
     }
@@ -330,7 +331,6 @@ div.footer-bottom-container {
     0% {
         transform: translate3d(-90px, 0, 0);
     }
-
     100% {
         transform: translate3d(85px, 0, 0);
     }
@@ -344,11 +344,9 @@ div.footer-bottom-container {
         height: 40px;
         min-height: 40px;
     }
-
     .content {
         height: 30vh;
     }
-
     h1 {
         font-size: 24px;
     }

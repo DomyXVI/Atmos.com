@@ -11,14 +11,14 @@ const client = new MongoClient(uri, {
 });
 
 const dbUtils = {
-    connectToDabase: function () {
+    connectToDabase: function() {
         client.connect().then(() => {
             console.log("Connection to database established...");
         });
     },
 
     //TODO: return different results to redirect in case user has been found, user not found or error
-    registerUser: async function (userDocument) {
+    registerUser: async function(userDocument) {
 
         if (!await this.findUser(userDocument)) {
             await client.db("Atmos-com").collection("Users").insertOne(userDocument).then(() => {
@@ -35,7 +35,7 @@ const dbUtils = {
         return false;
     },
 
-    findUser: async function (user) {
+    findUser: async function(user) {
         var foundUser = await client.db("Atmos-com").collection("Users").findOne(user);
         return foundUser;
     },
