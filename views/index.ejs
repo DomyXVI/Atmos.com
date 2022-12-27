@@ -30,10 +30,10 @@
                 <button class="navbar-item">Test</button>
             </div>
 
-            <div class="login-signup-container">
+            <div class="login-signup-container" id="loginSignupForm">
                 <form action="/login">
-                    <button class="login">login</button>
-                    <button class="sign-up">sign up</button>
+                    <button class="login" value="login">login</button>
+                    <button class="sign-up" value="signup">sign up</button>
                 </form>
             </div>
         </div>
@@ -46,13 +46,15 @@
             </p>
             <div>
                 <form action="/dashboard" method="POST" style="display: flex;flex-direction: row;align-items: center">
-                    <input class="forecast-input" placeholder="Rome, IT" id="search_term" name="location" onfocus="this.style.border = 'none'">
+                    <input class="forecast-input" placeholder="Rome, IT" id="search_term" name="location"
+                        onfocus="this.style.border = 'none'" autocomplete="off">
                     <p id="city_name" style="font-size: 35px;"></p>
                     <button onclick="showBufferingIcon()" class="city-forecast-button">
                         Weather
                         Forecast
                     </button>
-                    <button onclick="geolocateUser(), hideStatusMessages()" type="button" id="geolocateUserButton" class="city-forecast-button" style="width:60px">
+                    <button onclick="geolocateUser(), hideStatusMessages()" type="button" id="geolocateUserButton"
+                        class="city-forecast-button" style="width:60px">
                         <img src="images/homepage/icons/location.png" style="height:25px;width:25px">
                     </button>
                 </form>
@@ -60,7 +62,8 @@
                 <img class="buffering-rocket-icon" src="images/homepage/icons/rocket.svg" id="rocket" type="submit">
             </div>
             <% if(cityNotFound){ %>
-                <p style="font-size: 20px;color:white" id="cityNotFound"> Oops! Lost in space 🚀 - try locations from Earth 🌏! </p>
+                <p style="font-size: 20px;color:white" id="cityNotFound"> Oops! Lost in space 🚀 - try locations from
+                    Earth 🌏! </p>
                 <% } %>
         </div>
 
@@ -127,7 +130,8 @@
 
 
     <div style="margin-top: 80px;">
-        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
             <defs>
                 <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
             </defs>
@@ -158,7 +162,9 @@
                     <img src="images/homepage/icons/fuse-box.png" class="why-card-logo">
                 </div>
                 <p class="why-card-description">
-                    <span class="why-card-title">Powerful</span><br><br> This website's API calls, database fetching and processes are executed in the most efficient way possible in order to enhance optimization, loading times, and server response-time.
+                    <span class="why-card-title">Powerful</span><br><br> This website's API calls, database fetching and
+                    processes are executed in the most efficient way possible in order to enhance optimization, loading
+                    times, and server response-time.
                 </p>
             </div>
             <div class="why-card">
@@ -166,7 +172,9 @@
                     <img src="images/homepage/icons/optimization.png" class="why-card-logo">
                 </div>
                 <p class="why-card-description">
-                    <span class="why-card-title">Totally Optimized</span><br><br> This website's API calls, database fetching and processes are executed in the most efficient way possible in order to enhance optimization, loading times, and server response-time.
+                    <span class="why-card-title">Totally Optimized</span><br><br> This website's API calls, database
+                    fetching and processes are executed in the most efficient way possible in order to enhance
+                    optimization, loading times, and server response-time.
                 </p>
             </div>
             <div class="why-card">
@@ -174,7 +182,8 @@
                     <img src="images/homepage/icons/support.png" class="why-card-logo">
                 </div>
                 <p class="why-card-description">
-                    <span class="why-card-title">Worldwide Support</span><br><br> Having trouble using our website? Fill in the contact form to send us feedback. Answers are to be expected in a working day. From anywhere.
+                    <span class="why-card-title">Worldwide Support</span><br><br> Having trouble using our website? Fill
+                    in the contact form to send us feedback. Answers are to be expected in a working day. From anywhere.
                 </p>
             </div>
         </div>
@@ -185,10 +194,13 @@
 
         <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102302/techCrunch%402x.png">
 
-        <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102302/huffpost%402x.png" style="height:30px">
+        <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102302/huffpost%402x.png"
+            style="height:30px">
         <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102258/Forbes%402x.png">
 
-        <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102300/globe-and-mail%402x-350x37.png" style="height:30px;">
+        <img class="fake-partner"
+            src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102300/globe-and-mail%402x-350x37.png"
+            style="height:30px;">
     </div>
     <div style="height:500px">
 
@@ -241,7 +253,6 @@
         </div>
     </div>
     <script type="text/javascript " src="js/index_scripts.js "></script>
-
 </body>
 
 </html>

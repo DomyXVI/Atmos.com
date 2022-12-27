@@ -94,7 +94,7 @@
         </div>
 
         <div class="login-signup-container">
-            <form id="form">
+            <form action="/login" id="form">
                 <button class="login" id="loginButton">login</button>
                 <button class="sign-up" id="signupButton">sign up</button>
             </form>
@@ -110,12 +110,6 @@
             <img src="images/homepage/website_overview/rocket.svg" style="padding:25px" id="img2" class="hidden">
             <img src="images/homepage/website_overview/umbrella.svg" style="padding:25px" id="img3" class="hidden">
             <img src="images/homepage/website_overview/notification.svg" style="padding:25px" id="img4" class="hidden">
-            <!--<div>
-                <span class="dot active" id="firstDot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>-->
         </div>
 
         <div
@@ -131,10 +125,11 @@
                 </div>
                 <div style="line-height: 10px;">
 
-                    <p style="font-size: 34px; font-family: Montserrat;"> Welcome back!</p>
-                    <p style="font-size: 18px; font-family: Montserrat;color:grey"> Log in to save cities, show stats
-                        and more.</p>
-                    <p style="font-size: 18px; font-family: Montserrat;color:grey"> Your data is kept safe.</p>
+                    <p style="font-size: 34px; font-family: Montserrat;"> Sign up</p>
+                    <p style="font-size: 18px; font-family: Montserrat;color:grey"> Register to save your favourite
+                        cities,</p>
+                    <p style="font-size: 18px; font-family: Montserrat;color:grey"> get weather alerts and more!
+                    </p>
                 </div>
                 <form action="/login" method="POST">
                     <div style="display: inline-block">
@@ -144,23 +139,19 @@
                         <input type="password" name="password"
                             style="border-radius: 6px;background-color: #FAFAFD;font-family: Montserrat;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left:10px;"
                             placeholder="Password"><br>
-                        <div style="display: flex;flex-direction: row;justify-content: space-between;margin-top: 5px;">
-                            <p style="color: gray;font-size: 14px;"> Remember me</p>
-                            <p style="color: #3056BB;font-size: 14px;"> Recover Password</p>
-
-                        </div>
+                        <input type="password" name="password"
+                            style="border-radius: 6px;background-color: #FAFAFD;font-family: Montserrat;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left:10px;"
+                            placeholder="Repeat Password"><br>
                     </div>
                     <button class="log"
                         style="width:350px;height:40px;color:white;border-radius:6px;font-size:18px;border:none;margin-top: 50px;font-family: Montserrat;">
-                        Login
+                        Sign up
                     </button>
 
                     <button
                         style="width:350px;background-color:#FAFAFD;border: 0.2px solid #E0E4F2;height:40px;color:gray;border-radius:6px;font-size:18px;margin-top: 25px;">
-                        Sign in with Google
+                        Sign up with Google
                     </button>
-                    <p style="margin-top: 75px;color:gray">Don't have an account? <span style="color: #3056BB;">Sign up
-                            now.</span></p>
                 </form>
             </div>
         </div>
@@ -191,6 +182,22 @@
             currentImage.classList.add("hidden");
             nextImage.classList.remove("hidden");
         }
+
+        document.getElementById('form').addEventListener('submit', function (event) {
+            // Get the value of the submit button that was clicked
+            var submitButton = event.explicitOriginalTarget.value;
+
+            if (submitButton === 'loginButton') {
+                // Set the form action to the first URL
+                this.action = '/login';
+            } else if (submitButton === 'signupButton') {
+                // Set the form action to the second URL
+                this.action = '/signup';
+            }
+
+            // Submit the form
+            this.submit();
+        });
     </script>
 </body>
 
