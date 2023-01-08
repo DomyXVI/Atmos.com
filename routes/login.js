@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-require('dotenv').config()
 const {
     dbUtils
 } = require("../public/js/database.js");
@@ -20,6 +19,7 @@ router.get('/', function (req, res, next) {
 
 router.post('/', async function (req, res, next) {
     var { email, password } = req.body;
+
     try {
 
         var user = {
@@ -27,14 +27,21 @@ router.post('/', async function (req, res, next) {
             password: crypto.encrypt(password),
         };
 
-        await dbUtils.registerUser(user);
-        res.redirect("/login?signup_ok");
+        let dbUser = await dbUtils.findUser(user);
 
-        //let foundUser = await dbUtils.findUser(user);
-        //if (crypto.decrypt(foundUser.password) == password) { console.log("FOUND") }
+        if (dbUser && crypto.decrypt(dbUser.password) == password) {
+            console.log("login successful");
+            req.session.user = user;
+
+            res.redirect('login?login_successful');
+        } else {
+            console.log("login failed");
+            res.redirect('login?login_failed');
+        }
+
     } catch (e) {
         console.error(e);
-        res.redirect("/login?signup_error");
+        res.redirect("/login?login_error");
     };
 });
 

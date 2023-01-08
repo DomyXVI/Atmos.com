@@ -94,9 +94,9 @@
         </div>
 
         <div class="login-signup-container">
-            <form action="/login" id="form">
-                <button class="login" id="loginButton">login</button>
-                <button class="sign-up" id="signupButton">sign up</button>
+            <form id="form">
+                <button class="login" formaction ="/login" id="loginButton">login</button>
+                <button class="sign-up" formaction ="/signup" id="signupButton">sign up</button>
             </form>
         </div>
     </div>
@@ -131,7 +131,7 @@
                     <p style="font-size: 18px; font-family: Montserrat;color:grey"> get weather alerts and more!
                     </p>
                 </div>
-                <form action="/login" method="POST">
+                <form action="/signup" method="POST">
                     <div style="display: inline-block">
                         <input name="email" type="email"
                             style="border-radius: 6px;font-family: Montserrat;background-color: #FAFAFD;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left: 10px;"
@@ -139,7 +139,7 @@
                         <input type="password" name="password"
                             style="border-radius: 6px;background-color: #FAFAFD;font-family: Montserrat;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left:10px;"
                             placeholder="Password"><br>
-                        <input type="password" name="password"
+                        <input type="password" name="pswCheck"
                             style="border-radius: 6px;background-color: #FAFAFD;font-family: Montserrat;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left:10px;"
                             placeholder="Repeat Password"><br>
                     </div>
@@ -182,22 +182,6 @@
             currentImage.classList.add("hidden");
             nextImage.classList.remove("hidden");
         }
-
-        document.getElementById('form').addEventListener('submit', function (event) {
-            // Get the value of the submit button that was clicked
-            var submitButton = event.explicitOriginalTarget.value;
-
-            if (submitButton === 'loginButton') {
-                // Set the form action to the first URL
-                this.action = '/login';
-            } else if (submitButton === 'signupButton') {
-                // Set the form action to the second URL
-                this.action = '/signup';
-            }
-
-            // Submit the form
-            this.submit();
-        });
     </script>
 </body>
 

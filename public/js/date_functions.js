@@ -10,7 +10,6 @@ document.getElementById("thirdDay").innerHTML = days[1];
 document.getElementById("fourthDay").innerHTML = days[2];
 document.getElementById("fifthDay").innerHTML = days[3];
 
-
 function getNext24Hours(startHour) {
     let hours = new Array();
     for (let i = 0; i <= 24; i++) {
@@ -18,7 +17,7 @@ function getNext24Hours(startHour) {
         if (hours[i] > 24) {
             hours[i] -= 24;
             hours[i] = hours[i] + ":00";
-        }else {
+        } else {
             hours[i] = hours[i] + ":00";
         }
     }

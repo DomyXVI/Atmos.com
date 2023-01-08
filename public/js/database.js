@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const { MongoClient, ObjectID } = require("mongodb");
+const { MongoClient } = require("mongodb");
 const DB_USER = process.env.DB_USER;
 const DB_PSW = process.env.DB_PSW;
 
@@ -39,6 +39,21 @@ const dbUtils = {
         var foundUser = await client.db("Atmos-com").collection("Users").findOne(user);
         return foundUser;
     },
+
+    findQuery: async function (key, value) {
+        var foundUser = await client.db("Atmos-com").collection("Users").findOne({ [key]: value });
+        return foundUser;
+    },
+
+    updateUser: async function (user, element, value) {
+        await client.db("Atmos-com").collection("Users").updateOne(
+            user,
+            {
+                $set: { [element]: value }
+            }
+
+        );
+    }
 
 }
 

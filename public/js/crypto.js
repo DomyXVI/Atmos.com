@@ -8,8 +8,8 @@ const Securitykey = process.env.SECRET_KEY;
 const crypto = {
 
     encrypt: function (text) {
+        text = text.toString();
         const cipher = cryptojs.createCipheriv(algorithm, Securitykey, initVector);
-
         let encryptedData = cipher.update(text, "utf-8", "hex");
         encryptedData += cipher.final("hex");
         return encryptedData;
@@ -17,11 +17,13 @@ const crypto = {
 
     decrypt: function (text) {
         const decipher = cryptojs.createDecipheriv(algorithm, Securitykey, initVector);
-
         let decryptedData = decipher.update(text, "hex", "utf-8");
-
         decryptedData += decipher.final("utf8");
         return decryptedData;
+    },
+
+    getToken: function (length) {
+        return cryptojs.randomBytes(length).toString('hex');
     }
 };
 

@@ -1,11 +1,15 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require('express-session');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var indexRouter = require('./routes/index');
 var dashboardRouter = require('./routes/dashboard');
 var loginRouter = require('./routes/login');
 var signupRouter = require('./routes/signup');
+var testRouter = require('./routes/test');
+
+require('dotenv').config()
 
 var app = express();
 
@@ -18,6 +22,18 @@ app.use(express.urlencoded({
     extended: false
 }));
 
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: true,
+        maxAge: 3_600_000
+    }
+}));
+
+
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -25,11 +41,13 @@ app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
+app.use('/test', testRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     next(createError(404));
 });
+
 
 app.use(function (err, req, res, next) {
     // set locals, only providing error in development
@@ -44,7 +62,7 @@ app.use(function (err, req, res, next) {
 console.log("\u001b[1;33mConnection Established" + "\u001b[0m");
 console.log("\u001b[1;32mServer uptime: " + process.uptime() + " sec\u001b[0m");
 
-app.listen(5000);
+app.listen(process.env.PORT || 3000);
 
 function intervalFunc() {
     console.log("\u001b[1;32mServer uptime: " + msToTime(process.uptime()) + " min\u001b[0m");
