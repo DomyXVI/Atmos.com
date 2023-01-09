@@ -9,6 +9,11 @@ const {
     crypto
 } = require("../public/js/crypto.js");
 
+const {
+    mailer
+} = require("../public/js/email_sender.js");
+
+
 dbUtils.connectToDabase();
 
 /* GET home page. */
@@ -19,6 +24,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', async function (req, res, next) {
+
     var { email, password } = req.body;
     try {
 
@@ -33,6 +39,9 @@ router.post('/', async function (req, res, next) {
         if (! await dbUtils.findQuery("email", user.email)) {
 
             await dbUtils.registerUser(user);
+
+            mailer.sendActivationMailTo(user.email, user.token);
+
             res.render('signup', {
                 signup: 'ok',
             });

@@ -20,7 +20,8 @@ function geolocateUser() {
         var GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + '%2C' + position.coords.longitude + '&language=en&key=AIzaSyBNbaCOsry-bPOnTqL3Iy0E0B_sV1BHXUQ';
         let search_term = document.getElementById("search_term");
         $.getJSON(GEOCODING).done(function (location) {
-            search_term.value = location.results[0].address_components[3].short_name + ", " + location.results[0].address_components[6].short_name;
+            console.log(location.results[0]);
+            search_term.value = location.results[0].address_components[1].short_name + ", " + location.results[0].address_components[5].short_name;
             blinkBorder('#059862', search_term);
         })
 

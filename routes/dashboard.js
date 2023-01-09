@@ -4,6 +4,10 @@ const {
     getInfo
 } = require("../public/js/API_integration.js");
 
+router.get('/', async function (req, res, next) {
+    res.redirect('/');
+});
+
 router.post('/', async function (req, res, next) {
     let city = req.body.location;
     let info = await getInfo(city);

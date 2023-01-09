@@ -9,10 +9,12 @@ router.get('/confirm', async function (req, res) {
     let user = await dbUtils.findQuery("token", token);
     if (user && user.emailConfirmed != true && user.tokenExpiration > Date.now()) {
         await dbUtils.updateUser(user, "emailConfirmed", true);
-        res.send(user.emailConfirmed);
+        console.log("email activated");
+        res.redirect("/");
     } else {
-        res.send("token expired or unexistent")
+        console.log("token expired or unexistent");
+        res.redirect("/");
     }
 });
-//http://localhost:5000/test/confirm?token=b094f7cf0e16eaa1a94ec74424be0a88
+//http://localhost:5000/activate/confirm?token=b094f7cf0e16eaa1a94ec74424be0a88
 module.exports = router;

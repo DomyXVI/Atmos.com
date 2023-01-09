@@ -7,7 +7,7 @@ var indexRouter = require('./routes/index');
 var dashboardRouter = require('./routes/dashboard');
 var loginRouter = require('./routes/login');
 var signupRouter = require('./routes/signup');
-var testRouter = require('./routes/test');
+var emailActivationRouter = require('./routes/email_activation');
 
 require('dotenv').config()
 
@@ -41,7 +41,7 @@ app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
-app.use('/test', testRouter);
+app.use('/activate', emailActivationRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
