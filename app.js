@@ -8,7 +8,6 @@ var dashboardRouter = require('./routes/dashboard');
 var loginRouter = require('./routes/login');
 var signupRouter = require('./routes/signup');
 var emailActivationRouter = require('./routes/email_activation');
-let rateLimit = require('express-rate-limiter');
 
 require('dotenv').config()
 
@@ -33,14 +32,6 @@ app.use(session({
         maxAge: 3_600_000
     }
 }));
-
-const apiLimiter = rateLimit({
-    windowMs: 1 * 60 * 1000, // 15 minutes
-    max: 50, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-    message: "too many request"
-})
-
-app.set('trust proxy', 1);
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
