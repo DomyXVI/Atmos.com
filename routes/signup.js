@@ -1,5 +1,5 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 const {
     dbUtils
@@ -20,6 +20,7 @@ dbUtils.connectToDabase();
 router.get('/', function (req, res, next) {
     res.render('signup', {
         title: 'Signup',
+        success: null
     });
 });
 
@@ -33,22 +34,35 @@ router.post('/', async function (req, res, next) {
             password: crypto.encrypt(password),
             token: crypto.getToken(16),
             emailConfirmed: false,
-            tokenExpiration: Date.now() + 1000 * 16 * 10
+            tokenExpiration: Date.now() + 10 * 60 * 1000
         }
 
-        if (! await dbUtils.findQuery("email", user.email)) {
+        /* Checking if the email is already in the database. If it is, it will render the signup page
+        with the success variable set to failed. If it is not, it will register the user, send an
+        email, and render the signup page with the success variable set to ok. */
+        let userPresent = await dbUtils.findQuery("email", user.email);
+
+        if (!userPresent) {
 
             await dbUtils.registerUser(user);
 
             mailer.sendActivationMailTo(user.email, user.token);
 
+            setTimeout(async () => {
+                await dbUtils.deleteIf("Users", { email: user.email, emailConfirmed: false });
+            }, 10 * 60 * 1000);
+
             res.render('signup', {
-                signup: 'ok',
+                success: "ok",
             });
 
+        } else if (userPresent) {
+            res.render('signup', {
+                success: "failed",
+            });
         } else {
             res.render('signup', {
-                signup: 'failed',
+                success: "error",
             });
         }
     } catch (e) {

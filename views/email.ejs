@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Atmos Activation Mail</title>
+    <link rel="stylesheet" href="stylesheets/Common/common.css">
+
+</head>
+
+<body style="display:flex;align-items:center ;justify-content: center;">
+    <div
+        style="border-radius:25px;height:500px;width:500px;background-color:#1d3062;margin-top:150px;text-align: center;">
+        <p style="color:white;font-size: 25px;font-family: Arial;text-align: center;"> Your Atmos.com Verification Email
+        </p>
+        <form method="POST" action="http://localhost:5000/activate/confirm?token=<%= token %>" target="_self">
+            <button style="color:#4d4dff;font-size:20px;border-radius: 5px;height:50px;width:150px;cursor:pointer">
+                Verify</button>
+        </form>
+    </div>
+</body>
+
+</html>

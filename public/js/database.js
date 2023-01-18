@@ -53,6 +53,10 @@ const dbUtils = {
             }
 
         );
+    },
+
+    deleteIf: async function (collection, condition) {
+        await client.db("Atmos-com").collection(collection).deleteOne(condition);
     }
 
 }

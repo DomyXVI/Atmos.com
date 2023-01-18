@@ -29,13 +29,15 @@ router.post('/', async function (req, res, next) {
 
         let dbUser = await dbUtils.findUser(user);
 
-        if (dbUser && crypto.decrypt(dbUser.password) == password) {
+        if (credentialsOk(dbUser, password) && dbUser.emailConfirmed) {
             console.log("login successful");
             req.session.user = user;
-
-            res.redirect('login?login_successful');
+            res.redirect('/');
+        } else if (credentialsOk(dbUser, password) && !dbUser.emailConfirmed && dbUser.tokenExpiration > Date.now()) {
+            console.log("please activate your email");
+            res.redirect('login?login_failed');
         } else {
-            console.log("login failed");
+            console.log("account not found, subscribe again and check your email for the activation code.");
             res.redirect('login?login_failed');
         }
 
@@ -45,5 +47,8 @@ router.post('/', async function (req, res, next) {
     };
 });
 
+function credentialsOk(dbUser, password) {
+    return (dbUser && crypto.decrypt(dbUser.password) == password);
+}
 
 module.exports = router;
