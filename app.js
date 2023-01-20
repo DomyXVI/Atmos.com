@@ -8,6 +8,9 @@ var dashboardRouter = require('./routes/dashboard');
 var loginRouter = require('./routes/login');
 var signupRouter = require('./routes/signup');
 var emailActivationRouter = require('./routes/email_activation');
+var passwordRecoveryRouter = require('./routes/password_recovery');
+var passwordResetRouter = require('./routes/reset_password');
+var recoverRouter = require('./routes/recover');
 
 require('dotenv').config()
 
@@ -30,19 +33,21 @@ app.use(session({
     cookie: {
         secure: true,
         maxAge: 3_600_000
-    }
+    },
 }));
 
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use(apiLimiter);
 app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
 app.use('/activate', emailActivationRouter);
+app.use('/password-recovery', passwordRecoveryRouter);
+app.use('/password-reset/', passwordResetRouter);
+app.use('/recover/', recoverRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

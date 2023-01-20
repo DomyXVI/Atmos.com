@@ -19,12 +19,12 @@ function geolocateUser() {
 
         var GEOCODING = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + '%2C' + position.coords.longitude + '&language=en&key=AIzaSyBNbaCOsry-bPOnTqL3Iy0E0B_sV1BHXUQ';
         let search_term = document.getElementById("search_term");
-        $.getJSON(GEOCODING).done(function (location) {
-            console.log(location.results[0]);
-            search_term.value = location.results[0].address_components[1].short_name + ", " + location.results[0].address_components[5].short_name;
+
+        fetch(GEOCODING).then(response => response.json()).then(location => {
+            console.log(location);
+            search_term.value = location.results[7].address_components[1].short_name + ", " + location.results[7].address_components[4].short_name;
             blinkBorder('#059862', search_term);
         })
-
     }
 
     function error(err) {
@@ -52,29 +52,33 @@ function initAutocomplete() {
         types: ['(cities)'],
     }
 
-    var input = document.getElementById('search_term');
-    var autocomplete = new google.maps.places.Autocomplete(input, options);
+    try {
+        var input = document.getElementById('search_term');
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+        autocomplete.addListener('place_changed', function () {
+            var place = autocomplete.getPlace();
+            if (!place.place_id) {
+                return;
+            }
+
+            let formattedAddress = place.formatted_address.replace(/[0-9]/g, '').replace(/ \,/g, ',');
+            let addressComponents = formattedAddress.split(/\s*,\s*/);
+            let country = addressComponents[addressComponents.length - 1]
+            let city = addressComponents[0];
+
+            if (addressComponents.length > 0 && country != "USA") {
+                console.log(city + ", " + country);
+                document.getElementById('search_term').value = city + ", " + country;
+            }
+            else {
+                document.getElementById('search_term').value = formattedAddress;
+            }
+        });
+    } catch (e) {
+        console.log("Google Places Autocomplete - ON");
+    }
 
 
-    autocomplete.addListener('place_changed', function () {
-        var place = autocomplete.getPlace();
-        if (!place.place_id) {
-            return;
-        }
-
-        let formattedAddress = place.formatted_address.replace(/[0-9]/g, '').replace(/ \,/g, ',');
-        let addressComponents = formattedAddress.split(/\s*,\s*/);
-        let country = addressComponents[addressComponents.length - 1]
-        let city = addressComponents[0];
-
-        if (addressComponents.length > 0 && country != "USA") {
-            console.log(city + ", " + country);
-            document.getElementById('search_term').value = city + ", " + country;
-        }
-        else {
-            document.getElementById('search_term').value = formattedAddress;
-        }
-    });
 }
 
 window.onload = initAutocomplete();

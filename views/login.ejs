@@ -138,22 +138,27 @@
                         and more.</p>
                     <p style="font-size: 18px; font-family: Montserrat;color:grey"> Your data is kept safe.</p>
                 </div>
-                <form action="/login" method="POST">
+                <form method="POST">
                     <div style="display: inline-block">
-                        <input name="email" type="email"
+                        <input name="email" type="email" id="email"
                             style="border-radius: 6px;font-family: Montserrat;background-color: #FAFAFD;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left: 10px;"
-                            placeholder="Email" required><br>
-                        <input type="password" name="password"
+                            placeholder="Email"><br>
+                        <input type="password" name="password" id="password"
                             style="border-radius: 6px;background-color: #FAFAFD;font-family: Montserrat;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left:10px;"
-                            placeholder="Password" required><br>
+                            placeholder="Password"><br>
                         <div style="display: flex;flex-direction: row;justify-content: space-between;margin-top: 5px;">
                             <p style="color: gray;font-size: 14px;"> Remember me</p>
-                            <p style="color: #3056BB;font-size: 14px;"> Recover Password</p>
 
+                            <button formaction="/password-recovery"
+                                style="color: #3056BB;font-size: 14px;background-color: white;border: none;font-family: Montserrat;"
+                                onclick="makeEmailRequired()">
+                                Recover Password
+                            </button>
                         </div>
                     </div>
-                    <button class="log"
-                        style="width:350px;height:40px;color:white;border-radius:6px;font-size:18px;border:none;margin-top: 50px;font-family: Montserrat;">
+                    <button class="log" formaction="/login"
+                        style="width:350px;height:40px;color:white;border-radius:6px;font-size:18px;border:none;margin-top: 50px;font-family: Montserrat;"
+                        onclick="makeFormRequired()">
                         Login
                     </button>
 
@@ -161,8 +166,9 @@
                         style="width:350px;background-color:#FAFAFD;border: 0.2px solid #E0E4F2;height:40px;color:gray;border-radius:6px;font-size:18px;margin-top: 25px;">
                         Sign in with Google
                     </button>
-                    <p style="margin-top: 75px;color:gray">Don't have an account? <span style="color: #3056BB;">Sign up
-                            now.</span></p>
+                    <p style="margin-top: 75px;color:gray">Don't have an account? <a href="/signup"><span
+                                style="color: #3056BB;">Sign up
+                                now.</span></p></a>
                 </form>
             </div>
         </div>
@@ -192,6 +198,16 @@
 
             currentImage.classList.add("hidden");
             nextImage.classList.remove("hidden");
+        }
+
+        function makeEmailRequired() {
+            document.getElementById("email").required = true;
+            document.getElementById("password").required = false;
+        }
+        function makeFormRequired() {
+            document.getElementById("email").required = true;
+            document.getElementById("password").required = true;
+
         }
     </script>
 </body>

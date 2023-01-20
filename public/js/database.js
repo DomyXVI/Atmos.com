@@ -55,6 +55,10 @@ const dbUtils = {
         );
     },
 
+    removeExpirationToken: async function (user) {
+        await client.db("Atmos-com").collection("Users").updateOne(user, { $unset: { passwordResetToken: "", passwordResetTokenExpiration: "" } });
+    },
+
     deleteIf: async function (collection, condition) {
         await client.db("Atmos-com").collection(collection).deleteOne(condition);
     }

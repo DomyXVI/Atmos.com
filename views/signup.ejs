@@ -62,6 +62,15 @@
             display: block;
         }
 
+        input:focus {
+            outline: none;
+        }
+
+        .button-disabled {
+            background-color: #717171;
+            border: #3056BB;
+        }
+
         .dot {
             height: 15px;
             width: 15px;
@@ -103,7 +112,7 @@
         </div>
     </div>
 
-    <div style="margin-top:130px; border-radius: 50px;display: flex;flex-direction: row;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;flex-wrap: wrap;
+    <div style="margin-top:130px; width:1100px;border-radius: 50px;display: flex;flex-direction: row;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;flex-wrap: wrap;
     ">
 
         <div
@@ -133,39 +142,42 @@
                     <p style="font-size: 18px; font-family: Montserrat;color:grey"> get weather alerts and more!
                     </p>
                 </div>
-                <form action="/signup" method="POST">
+                <form action="/signup" method="POST" id="signUpForm">
                     <div style="display: inline-block">
-                        <input name="email" type="email"
+                        <input name="email" type="email" id="email"
                             style="border-radius: 6px;font-family: Montserrat;background-color: #FAFAFD;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left: 10px;"
-                            placeholder="Email"><br>
-                        <input type="password" name="password"
+                            placeholder="Email" onkeyup="checkEmail(this.value)"><br>
+                        <input type="password" name="password" id="password"
                             style="border-radius: 6px;background-color: #FAFAFD;font-family: Montserrat;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left:10px;"
-                            placeholder="Password"><br>
-                        <input type="password" name="pswCheck"
-                            style="border-radius: 6px;background-color: #FAFAFD;font-family: Montserrat;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left:10px;"
-                            placeholder="Repeat Password"><br>
+                            placeholder="Password"
+                            onkeyup="checkPassword(this.value), isEqualTo(document.getElementById('repeatPassword').value)"><br>
+                        <div style="display: flex;flex-direction: row;position: absolute;">
+                            <p style="display:none;font-size: 11px;margin-top: 3px;margin-left:1px;padding: 0;color:red"
+                                id="pswStatus">
+                                Password is weak. Please improve it. </p>
+                        </div>
                     </div>
-                    <button class="log"
-                        style="width:350px;height:40px;color:white;border-radius:6px;font-size:18px;border:none;margin-top: 50px;font-family: Montserrat;">
-                        Sign up
-                    </button>
-
-                    <button
-                        style="width:350px;background-color:#FAFAFD;border: 0.2px solid #E0E4F2;height:40px;color:gray;border-radius:6px;font-size:18px;margin-top: 25px;">
-                        Sign up with Google
-                    </button>
-                    <% if (success=="ok" ){ %>
-                        <p style="margin-top: 30px;color: green;"> Within 10 minutes, activate your account by clicking
-                            the link you received in your email. </p>
-                        <% }else if (success=="failed" ){ %>
-                            <p style="margin-top: 30px;color: orange;"> You have an account already. Please login or
-                                activate your email. </p>
-                            <%}else if (success=="error" ){%>
-                                <p style="margin-top: 30px;color: red;"> Something went wrong. Please try again. </p>
-                                <% }%>
-                </form>
+                    <input type="password" name="pswCheck" id="repeatPassword"
+                        style="border-radius: 6px;background-color: #FAFAFD;font-family: Montserrat;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left:10px;"
+                        placeholder="Repeat Password" onkeyup="isEqualTo(this.value)"><br>
             </div>
+            <button class="log" id="signUpButton"
+                style="width:350px;height:40px;color:white;border-radius:6px;font-size:18px;border:none;margin-top: 50px;font-family: Montserrat;">
+                Sign up
+            </button>
+
+            <% if (success=="ok" ){ %>
+                <p style="margin-top: 30px;color: green;"> Within 10 minutes, activate your account by clicking
+                    the link you received in your email. </p>
+                <% }else if (success=="failed" ){ %>
+                    <p style="margin-top: 30px;color: orange;"> You have an account already. Please login or
+                        activate your email. </p>
+                    <%}else if (success=="error" ){%>
+                        <p style="margin-top: 30px;color: red;"> Something went wrong. Please try again. </p>
+                        <% }%>
+                            </form>
         </div>
+    </div>
 
 
     </div>
@@ -193,7 +205,11 @@
             currentImage.classList.add("hidden");
             nextImage.classList.remove("hidden");
         }
+
+
     </script>
+    <script src="js/password_checker.js"></script>
+
 </body>
 
 </html>

@@ -37,9 +37,7 @@ router.post('/', async function (req, res, next) {
             tokenExpiration: Date.now() + 10 * 60 * 1000
         }
 
-        /* Checking if the email is already in the database. If it is, it will render the signup page
-        with the success variable set to failed. If it is not, it will register the user, send an
-        email, and render the signup page with the success variable set to ok. */
+
         let userPresent = await dbUtils.findQuery("email", user.email);
 
         if (!userPresent) {
