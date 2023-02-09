@@ -11,6 +11,10 @@
     flex-direction: column;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 div.weathercard>div>p.weather-in {
     font-family: Montserrat;
     padding-left: 20px;
