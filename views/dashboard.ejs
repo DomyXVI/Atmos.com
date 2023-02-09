@@ -583,7 +583,7 @@
 
                     const div = document.createElement("div");
                     div.style = "display:flex; background-color: white;height:200px;min-width:420px;border-radius: 25px;font-family: Montserrat;flex-direction: column";
-
+                    div.onclick = searchCity(this);
                     const cityDiv = document.createElement("div");
                     cityDiv.style = "display:flex;flex-direction:row; align-items: baseline;justify-content: space-between;"
 
@@ -687,6 +687,12 @@
                     div.appendChild(infoDiv);
                     container.appendChild(div);
 
+                }
+
+                function searchCity(card) {
+                    let city = card.querySelector("#card-place").innerHTML;
+                    document.getElementById("searchBox").value = city;
+                    document.getElementById("searchForm").submit();
                 }
 
             </script>
