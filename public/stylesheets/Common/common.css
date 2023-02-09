@@ -83,7 +83,7 @@ button.login:hover {
     transform: scale(1.05);
 }
 
-.navbar-button-container>button.navbar-item {
+.navbar-button-container>a>button.navbar-item {
     width: 90px;
     border-radius: 15px;
     background-color: var(--blurple);

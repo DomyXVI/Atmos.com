@@ -6,7 +6,12 @@ const {
 const { dbUtils } = require('../public/js/database.js');
 
 router.get('/', async function (req, res, next) {
-    res.redirect('/');
+    res.render('dashboard', {
+        info: null,
+        user: req.session.user,
+        infoArray: null,
+        empty: true
+    });
 });
 
 router.post('/', async function (req, res, next) {
@@ -40,7 +45,8 @@ router.post('/', async function (req, res, next) {
         res.render('dashboard', {
             info: info,
             user: req.session.user,
-            infoArray: infoArray
+            infoArray: infoArray,
+            empty: false
         });
 
     } else if (info == null) {

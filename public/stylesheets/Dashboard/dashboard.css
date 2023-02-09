@@ -11,8 +11,24 @@
     flex-direction: column;
 }
 
+*,
+html {
+    scroll-behavior: smooth !important;
+}
+
 body {
     overflow-x: hidden;
+    background-color: #1d3062;
+}
+
+svg {
+    z-index: 0;
+    border-radius: 25px;
+    position: absolute;
+}
+
+#delete-button:hover {
+    transform: scale(1.2);
 }
 
 div.weathercard>div>p.weather-in {

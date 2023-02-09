@@ -11,22 +11,6 @@
     <link rel="stylesheet" href="stylesheets/Common/common.css">
     <link rel="stylesheet" href="stylesheets/Dashboard/dashboard.css">
     <link rel="stylesheet" href="stylesheets/Dashboard/slider.css">
-
-    <style>
-        svg {
-            z-index: 0;
-            border-radius: 25px;
-            position: absolute;
-        }
-
-        body {
-            background-color: #1d3062;
-        }
-
-        #delete-button:hover {
-            transform: scale(1.2);
-        }
-    </style>
 </head>
 
 <body ondragstart="return false;" ondrop="return false;">
@@ -39,10 +23,10 @@
         </div>
 
         <div class="navbar-button-container">
-            <button class="navbar-item">Home</button>
-            <button class="navbar-item">Maps</button>
-            <button class="navbar-item">Info</button>
-            <button class="navbar-item">Test</button>
+            <a href="/"><button class="navbar-item">Home</button></a>
+            <a href="#forecast"><button class="navbar-item">Forecast</button></a>
+            <a href="#maps"><button class="navbar-item">Maps</button></a>
+            <a href="#graphs"><button class="navbar-item">Graphs</button></a>
         </div>
         <% if (!user) { %>
             <div class="login-signup-container">
@@ -71,667 +55,641 @@
             <button type="submit" class="search-button">Forecast</button>
         </form>
     </div>
-    <div>
-        <div class="weathercard">
-            <div class="weather-first-section">
-                <p class="weather-in" id="weather-in">
-                    Weather in <span id="place">
-                        <%= info.location[0].name%>, <%= info.location[0].country%>
-                    </span>
-
-                    <br>
-
-                    <span style="font-size: 14px;color:white"> Lat: <%= info.location[0].lat%>, Lon: <%=
-                                info.location[0].lon %></span>
-
-                </p>
-                <% if (info.weather.alerts) { %>
-                    <img alt="warning" src="images/dashboard/Weather_Card_icons/warning.png" id="alert-img"
-                        class="alert-logo">
-                    <% } %>
-                        <% if (user){ %>
-                            <div class="user-city-search">
-                                <input type="hidden" value="<%= info.location[0].name%>, <%= info.location[0].country%>"
-                                    name="city" />
-
-                                <button id="save-button" onclick="showCity()" class="save-city-btn"> Save City </button>
-                            </div>
-                            <%}%>
-
-
-
-            </div>
-            <svg xmlns=" http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <path fill="#0099ff" fill-opacity="1"
-                    d="M0,128L30,149.3C60,171,120,213,180,213.3C240,213,300,171,360,154.7C420,139,480,149,540,165.3C600,181,660,203,720,197.3C780,192,840,160,900,154.7C960,149,1020,171,1080,192C1140,213,1200,235,1260,250.7C1320,267,1380,277,1410,282.7L1440,288L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z">
-                </path>
-            </svg>
-            <div class="temp-icon-container">
-                <p id="temp-0">
-                    <%= info.weather.current.temp%>°
-                </p>
-                <p id="temp-1">
-                    <%= info.weather.daily[1].temp.day %>°
-                </p>
-                <p id="temp-2">
-                    <%= info.weather.daily[2].temp.day %>°
-                </p>
-                <p id="temp-3">
-                    <%= info.weather.daily[3].temp.day %>°
-                </p>
-                <p id="temp-4">
-                    <%= info.weather.daily[4].temp.day %>°
-                </p>
-
-                <img alt="weather icon" src="images/dashboard/OWM_icons/<%= info.weather.current.weather[0].icon%>.png"
-                    class="weather-card-default" id="icon-0">
-                <img alt="weather icon" src="images/dashboard/OWM_icons/<%= info.weather.daily[1].weather[0].icon%>.png"
-                    class="weather-card-hidden" id="icon-1">
-                <img alt="weather icon" src="images/dashboard/OWM_icons/<%= info.weather.daily[2].weather[0].icon%>.png"
-                    class="weather-card-hidden" id="icon-2">
-                <img alt="weather icon" src="images/dashboard/OWM_icons/<%= info.weather.daily[3].weather[0].icon%>.png"
-                    class="weather-card-hidden" id="icon-3">
-                <img alt="weather icon" src="images/dashboard/OWM_icons/<%= info.weather.daily[4].weather[0].icon%>.png"
-                    class="weather-card-hidden" id="icon-4">
-
-            </div>
-
-            <div class="weather-stats">
-                <span class="feels-like-default" id="feels-like-0">Feels
-                    like
-                    <%= info.weather.current.feels_like%>°<br>
-                </span>
-                <span class="feels-like" id="feels-like-1">Feels
-                    like
-                    <%= info.weather.daily[1].feels_like.day%>°<br>
-                </span>
-                <span class="feels-like" id="feels-like-2">Feels
-                    like <%= info.weather.daily[2].feels_like.day%>°<br></span>
-
-                <span class="feels-like" id="feels-like-3">Feels
-                    like
-                    <%= info.weather.daily[3].feels_like.day%>°<br>
-                </span>
-                <span class="feels-like" id="feels-like-4">Feels
-                    like
-                    <%= info.weather.daily[4].feels_like.day%>°<br>
-                </span>
-
-
-                <span class="description-default" id="description-0">
-                    <%= info.weather.current.weather[0].description %>, PoP: <span id="pop-0">
-                            <%= Math.round(info.weather.hourly[0].pop*100) %>%
+    <%if(!empty){%>
+        <div>
+            <div class="weathercard" id="forecast" style="scroll-margin: 150px;
+        ">
+                <div class="weather-first-section">
+                    <p class="weather-in" id="weather-in">
+                        Weather in <span id="place">
+                            <%= info.location[0].name%>, <%= info.location[0].country%>
                         </span>
-                </span>
 
-                <span class="description" id="description-1">
-                    <%= info.weather.daily[1].weather[0].description %>, PoP:
-                        <%=Math.round(info.weather.daily[1].pop*100) %>%
-                </span>
+                        <br>
 
-                <span class="description" id="description-2">
-                    <%= info.weather.daily[2].weather[0].description %>, PoP:
-                        <%=Math.round(info.weather.daily[2].pop*100) %>%
-                </span>
+                        <span style="font-size: 14px;color:white"> Lat: <%= info.location[0].lat%>, Lon: <%=
+                                    info.location[0].lon %></span>
 
-                <span class="description" id="description-3">
-                    <%= info.weather.daily[3].weather[0].description %>, PoP:
-                        <%=Math.round(info.weather.daily[3].pop*100)%>%
-                </span>
+                    </p>
+                    <% if (info.weather.alerts) { %>
+                        <img alt="warning" src="images/dashboard/Weather_Card_icons/warning.png" id="alert-img"
+                            class="alert-logo">
+                        <% } %>
+                            <% if (user){ %>
+                                <div class="user-city-search">
+                                    <input type="hidden"
+                                        value="<%= info.location[0].name%>, <%= info.location[0].country%>"
+                                        name="city" />
 
-                <span class="description" id="description-4">
-                    <%= info.weather.daily[4].weather[0].description %>, PoP:
-                        <%=Math.round(info.weather.daily[4].pop*100)%>%
-                </span>
-            </div>
+                                    <button id="save-button" onclick="showCity()" class="save-city-btn"> Save City
+                                    </button>
+                                </div>
+                                <%}%>
 
 
-            <div class="daily-weather-stats">
-                <span class="stat-holder">
-                    <img alt="statistics icon" class="stat-icon"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAAxUlEQVRYhe2WQQ7CIBBFn6bpIdReUHssz6A3qG6sd1H3uLXItDRhhkZ5yWzIJPP5AT5Q0MN59QKuQAvUOQR81h3Y5hTggB6oV8oCpmgV53+xA04MXbhYCgBoPAGPtbWCnDTAmaEDXRVojDk8qTiGFqeuT6q6ITxIVsM3ki1aQ59AB+ylnRf+F61DF53/FtduNP+tHp5ecsJKgAMOkgsaLDP//Yaf/g8E899vCv0H5uJm9AbzP4WAmBLz30LAaP5rCSj5H8Ubjv8HcHNmLo0AAAAASUVORK5CYII=">
-                    <p id="wind-0">Wind: <%= info.weather.current.wind_speed %> m/s</p>
-                    <p id="wind-1" style="display:none">Wind: <%= info.weather.daily[1].wind_speed %> m/s</p>
-                    <p id="wind-2" style="display:none">Wind: <%= info.weather.daily[2].wind_speed %> m/s</p>
-                    <p id="wind-3" style="display:none">Wind: <%= info.weather.daily[3].wind_speed %> m/s</p>
-                    <p id="wind-4" style="display:none">Wind: <%= info.weather.daily[4].wind_speed %> m/s</p>
-                </span>
 
-                <span class="stat-holder">
-                    <img alt="statistics icon" class="stat-icon"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAABvUlEQVRIie3WvW4TQRQF4I8YW0hAy0MkSsMLgKDhV8IRhEeIIIIIngIR8Qg0SMlbUEBESQFOYZMgEEkDJaIgSCQUe1c74KzNrK2IgiPdYmfmnHPnzp3d5T/+QXSwiHX08S2ij7WY60zbdAHvcTAmttGdhuEMHifCb3AfszgZMYcVvE3WPQpuY5Sm37E0RmwGd2Jtad4IC4npuQze+cT8Rq5pR3WmS7lk3A3uFto5xEXVmY47qzN4jRfJWAu90Lh5GKlOtCzRU+yPMX2OsziRjP8Mbqr1Vxgosp2tmb+KXfyIdb1IIsVczPVzjL8G6XTN/I7q6uwdYiq4B6E1hLpSH8tI8jO+jJjP0bJldKkvK3b9CZdq1pSlHuQYrwVpJYf0Bx6GxrMc0m1V07QamLawGRq3coht1QtkuYHxveC+w/FcclfVtRcyeBeDs4/ruaYlniTmy0aXvaXY6V5wVpuaUlyFVdWd7eEB5nEqYj7GNv3+Wcy6RnW4ho+JcF18wJVpGKZoKz6V64qmKc0GiuvX1aCRmqA0boSJfk8mQa7xK8M7LZ83Jk1mw/gmyo2hpI6q1I17ocSoarycVPxI8Aud7p/0g/fPXAAAAABJRU5ErkJggg==">
-                    <p id="pressure-0">Pressure: <%= info.weather.current.pressure %> bar</p>
-                    <p id="pressure-1" style="display:none">Pressure: <%= info.weather.daily[1].pressure %> bar
-                    </p>
-                    <p id="pressure-2" style="display:none">Pressure: <%= info.weather.daily[2].pressure %> bar
-                    </p>
-                    <p id="pressure-3" style="display:none">Pressure: <%= info.weather.daily[3].pressure %> bar
-                    </p>
-                    <p id="pressure-4" style="display:none">Pressure: <%= info.weather.daily[4].pressure %> bar
-                    </p>
-                </span>
-
-                <span class="stat-holder">
-                    <img alt="statistics icon" class="stat-icon"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAACWElEQVRoge2Yy05UQRCGv4zcZqWYCLyDiYAr42XhRgw7eAtdqFuCMYQY3SIEo0F9EcMSFwor8AG8rDSOUa4hjuOiu2EYzqVPVzfdJH5J7bq6/n/OyampgmJmdJxqbgB/gCZwM7IWZ84Bn4GWjk/A2aiKHHnBoQkTi1EVOXAF9Tp1GmkC1yLqqkQP8JHjJkxs6DPJM02+CRNT0dRZMgD8ptzIJjAYSaMVi5SbMPEsksZSBoFd7I3sAUMnqO8ucMfm4BPsTZiY9a83k4vADurHGy462AP8oLqR70B3GO0H1FFfSlNzHejLOzxeILYsxkI50DzNqPk47/BSidiieBnKAeo12s+ouQ9cykpYczTRAj4EMnFG351X970+c4SGwEgjkJEHFrXvdSZtCoz8CmCiH7uPTwM4b5JqwBdB0a+C3Dwe0iawgH46/i4t4P5E5vxoP2AA1TNs628DF0zyKPDXwUSTkgblwKyDjiOj+BuHC5Y8m+hGNdmqOr7R1pjrwLsKySs6xye3HUyYuNV+UR14TfZ02P46vQpgAgI05hFgHjUpbunYQP11HwlgwLDqaKJFuMbsxE/cjTRqgUTVdFShS1CvK5SRRzqqIGnMktxcXDeUKTVm0YYypcacuaF8XiE/hcbMdfI3lFct74jemH1uKKM25hAbyhNvzP83lCmRzIZS2tnvU7Awy6AXtf5MipQ3lJVIakMpebUmBLmTgtxMJEYuR8r1jmgQ8i1G8kQkg9Cxva0UiZGkNpQSI8uC3LeCXO8kNQhJSWIQ8kH0QcgnsTeU3om1oQTgH85Mdg9T8wlVAAAAAElFTkSuQmCC">
-                    <p id="humidity-0">Humidity: <%= info.weather.current.humidity %>%</p>
-                    <p id="humidity-1" style="display:none">Humidity: <%= info.weather.daily[1].humidity %>%</p>
-                    <p id="humidity-2" style="display:none">Humidity: <%= info.weather.daily[2].humidity %>%</p>
-                    <p id="humidity-3" style="display:none">Humidity: <%= info.weather.daily[3].humidity %>%</p>
-                    <p id="humidity-4" style="display:none">Humidity: <%= info.weather.daily[4].humidity %>%</p>
-                </span>
-
-                <span id="visibility-0" class="stat-holder">
-                    <img alt="statistics icon" class="stat-icon"
-                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAAC2ElEQVRoge3XT6hVVRTH8c9TzH+8EgMTnzVLrBAyAw0cJI2ciJMSoZkGhs8SMQyE/rxJAxGNFJtoTksHijMxjRoEITnJP4kQ9hD/kGhBPIX3ug32vr3r5ex397nvigb7C2ty1lm/tdY5Z6+9D4VCoVAoFAqFx51n8VIXcS/E2EfKbLyLH7AXU7rQ6MNn+B6bMKtn1WXQjw9xCw0cjgVNhi+i1k3siDkeGlOxBbdj0gYuYUYPtKfh5xbdPzAYc/aUZTjbkqhpqzvELcLb0RZ1uHdlhf5PWNp11S1MxRBGK5KcmyBuHk5UxJyIvhQ/VsSM4mOTeDsD+K5CuGk7EnH9OB/vuYtjOI4/47Xz0mtg2wT5zmBB3SZW4MYEog28logdiv5fhIfRZGFLg58mYpd3yHk91pbFeox0EGxgbiL+cvSvqvC9EX2/JmLnZuQdwbpOTQzinwyxhjBpqrgX/VWfT3/03UvETsvMPYbNqSY+yBRp2jMJneHor5o2r0TfcCJ2fs0atrcLDNYUSBUKB6L/pAf3mBk4FX0HErHLuqjjvzfTZ3yi1LH3EsUMGN/1LwgLewgX47VbHhwCrWztoo6/tJwsPulC4NtEMfAyrlTEXIm+FGe6qOPLdpHdNQXGhG8+xRN4C7uivRmvpXhV/qBp2mEVh9U+7KkpdMrkD4zN3Kdr5j6ow27/vvC0cwV39qCRj2o28bnMB7gef2eKjmHjJJp4R/4nNYINdRMsMb5L59gezKyhP1N4srn6vwnjuSuewtc1kv0uPLGJfoz6hbcwLF/3mPSRCPkLdQ32Cwe/HO4Lo/QSrsVrA8I/+uuYnqlzXdivjmben8WTwi9p1b9Jr21U2P3n9LKBdhbjG/UmW66N4QhefJgNtPO88Ibu9KCBO9gXNR8Z07EWX+Gq/OKv4lCMzV0zSXqxK7fznLCoF+NpYW0RDne3hQFwUZhwhUKhUCgUCoX/Af8C7sz35ep6WXwAAAAASUVORK5CYII=">
-                    <p> Visibility: <%= info.weather.current.visibility/1000 %> km</p>
-                </span>
-
-                <span class="stat-holder">
-                    <img alt="statistics icon" class="stat-icon"
-                        src="images/dashboard/Weather_Card_icons/up-and-down_2.png">
-                    <p id="min-max-0">Min - Max:
-                        <span id="min-0">
-                            <%= Math.round(info.weather.daily[0].temp.min) %>°
-                        </span>
-                        /
-                        <span id="max-0">
-                            <%= Math.round(info.weather.daily[0].temp.max) %>°
-                        </span>
-                    </p>
-                    <p style="display:none" id="min-max-1">Min - Max:
-                        <%= Math.round(info.weather.daily[1].temp.min) %>° / <%=
-                                Math.round(info.weather.daily[1].temp.max) %>°
-                    </p>
-                    <p style="display:none" id="min-max-2">Min - Max:
-                        <%= Math.round(info.weather.daily[2].temp.min) %>° / <%=
-                                Math.round(info.weather.daily[2].temp.max) %>°
-                    </p>
-                    <p style="display:none" id="min-max-3">Min - Max:
-                        <%= Math.round(info.weather.daily[3].temp.min) %>° / <%=
-                                Math.round(info.weather.daily[3].temp.max) %>°
-                    </p>
-                    <p style="display:none" id="min-max-4">Min - Max:
-                        <%= Math.round(info.weather.daily[4].temp.min) %>° / <%=
-                                Math.round(info.weather.daily[4].temp.max) %>°
-                    </p>
-                </span>
-            </div>
-        </div>
-
-        <div class="daily-overview-container">
-            <div>
-                <div class="daily-overview-card" style="border-radius: 25px 0 0 25px" onclick="weatherCardSwitch(0);">
-                    <p class="day">
-                        Today
-                    </p>
-                    <img alt="weather icon"
-                        src="images/dashboard/OWM_icons/<%= info.weather.daily[0].weather[0].icon%>.png"
-                        class="daily-overview-card-image">
-                    <p class="daily-overview-card-stats">
-                        <img alt="down icon" src="images/dashboard/Weather_Card_icons/down.png"
-                            style="width:15px;height:15px" id="min-img">
-                        <%= Math.round(info.weather.daily[0].temp.min) %>°
-                            <img alt="max icon" src="images/dashboard/Weather_Card_icons/up.png"
-                                class="weather-stats-icon" id="max-img">
-                            <%= Math.round(info.weather.daily[0].temp.max) %>°
-                                <img alt="min icon" src="images/dashboard/Weather_Card_icons/drop.png"
-                                    class="weather-stats-icon" id="drop-img">
-                                <%=Math.round(info.weather.daily[0].pop*100) %>%
-                    </p>
-                    <div class="daily-description-container" style="border-radius: 0 0 0 25px;">
-                        <p class="daily-description">
-                            <%= info.weather.daily[0].weather[0].description %>
-                        </p>
-                    </div>
                 </div>
-
-
-                <div class="daily-overview-card" onclick="weatherCardSwitch(1);">
-                    <p class="day" id="secondDay">
+                <svg xmlns=" http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                    <path fill="#0099ff" fill-opacity="1"
+                        d="M0,128L30,149.3C60,171,120,213,180,213.3C240,213,300,171,360,154.7C420,139,480,149,540,165.3C600,181,660,203,720,197.3C780,192,840,160,900,154.7C960,149,1020,171,1080,192C1140,213,1200,235,1260,250.7C1320,267,1380,277,1410,282.7L1440,288L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z">
+                    </path>
+                </svg>
+                <div class="temp-icon-container">
+                    <p id="temp-0">
+                        <%= info.weather.current.temp%>°
                     </p>
+                    <p id="temp-1">
+                        <%= info.weather.daily[1].temp.day %>°
+                    </p>
+                    <p id="temp-2">
+                        <%= info.weather.daily[2].temp.day %>°
+                    </p>
+                    <p id="temp-3">
+                        <%= info.weather.daily[3].temp.day %>°
+                    </p>
+                    <p id="temp-4">
+                        <%= info.weather.daily[4].temp.day %>°
+                    </p>
+
+                    <img alt="weather icon"
+                        src="images/dashboard/OWM_icons/<%= info.weather.current.weather[0].icon%>.png"
+                        class="weather-card-default" id="icon-0">
                     <img alt="weather icon"
                         src="images/dashboard/OWM_icons/<%= info.weather.daily[1].weather[0].icon%>.png"
-                        class="daily-overview-card-image">
-                    <p class="daily-overview-card-stats">
-                        <img alt="down icon" src="images/dashboard/Weather_Card_icons/down.png"
-                            style="width:15px;height:15px">
-                        <%= Math.round(info.weather.daily[1].temp.min) %>° <img alt="up icon"
-                                src="images/dashboard/Weather_Card_icons/up.png" class="weather-stats-icon">
-                            <%= Math.round(info.weather.daily[1].temp.max) %>°
-                                <img alt="drop icon" src="images/dashboard/Weather_Card_icons/drop.png"
-                                    class="weather-stats-icon">
-                                <%=Math.round(info.weather.daily[1].pop*100) %>%
+                        class="weather-card-hidden" id="icon-1">
+                    <img alt="weather icon"
+                        src="images/dashboard/OWM_icons/<%= info.weather.daily[2].weather[0].icon%>.png"
+                        class="weather-card-hidden" id="icon-2">
+                    <img alt="weather icon"
+                        src="images/dashboard/OWM_icons/<%= info.weather.daily[3].weather[0].icon%>.png"
+                        class="weather-card-hidden" id="icon-3">
+                    <img alt="weather icon"
+                        src="images/dashboard/OWM_icons/<%= info.weather.daily[4].weather[0].icon%>.png"
+                        class="weather-card-hidden" id="icon-4">
 
-                    </p>
-                    <div class="daily-description-container">
-                        <p class="daily-description">
-                            <%= info.weather.daily[1].weather[0].description %>
-                        </p>
-                    </div>
-                </div>
-                <div class="daily-overview-card" onclick="weatherCardSwitch(2);">
-                    <p class="day" id="thirdDay">
-                    </p>
-                    <img src="images/dashboard/OWM_icons/<%= info.weather.daily[2].weather[0].icon%>.png"
-                        class="daily-overview-card-image">
-                    <p class="daily-overview-card-stats">
-                        <img src="images/dashboard/Weather_Card_icons/down.png" style="width:15px;height:15px">
-                        <%= Math.round(info.weather.daily[2].temp.min) %>° <img
-                                src="images/dashboard/Weather_Card_icons/up.png" class="weather-stats-icon">
-                            <%= Math.round(info.weather.daily[2].temp.max) %>°
-                                <img src="images/dashboard/Weather_Card_icons/drop.png" class="weather-stats-icon">
-                                <%=Math.round(info.weather.daily[2].pop*100) %>%
-                    </p>
-                    <div class="daily-description-container">
-                        <p class="daily-description">
-                            <%= info.weather.daily[2].weather[0].description %>
-                        </p>
-                    </div>
                 </div>
 
-                <div class="daily-overview-card" onclick="weatherCardSwitch(3);">
-                    <p class="day" id="fourthDay">
-                    </p>
-                    <img src="images/dashboard/OWM_icons/<%= info.weather.daily[3].weather[0].icon%>.png"
-                        class="daily-overview-card-image">
-                    <p class="daily-overview-card-stats">
-                        <img src="images/dashboard/Weather_Card_icons/down.png" style="width:15px;height:15px">
-                        <%= Math.round(info.weather.daily[3].temp.min) %>° <img
-                                src="images/dashboard/Weather_Card_icons/up.png" class="weather-stats-icon">
-                            <%= Math.round(info.weather.daily[0].temp.max) %>°
-                                <img src="images/dashboard/Weather_Card_icons/drop.png" class="weather-stats-icon">
-                                <%=Math.round(info.weather.daily[3].pop*100) %>%
-                    </p>
-                    <div class="daily-description-container">
-                        <p class="daily-description">
-                            <%= info.weather.daily[3].weather[0].description %>
-                        </p>
-                    </div>
+                <div class="weather-stats">
+                    <span class="feels-like-default" id="feels-like-0">Feels
+                        like
+                        <%= info.weather.current.feels_like%>°<br>
+                    </span>
+                    <span class="feels-like" id="feels-like-1">Feels
+                        like
+                        <%= info.weather.daily[1].feels_like.day%>°<br>
+                    </span>
+                    <span class="feels-like" id="feels-like-2">Feels
+                        like <%= info.weather.daily[2].feels_like.day%>°<br></span>
+
+                    <span class="feels-like" id="feels-like-3">Feels
+                        like
+                        <%= info.weather.daily[3].feels_like.day%>°<br>
+                    </span>
+                    <span class="feels-like" id="feels-like-4">Feels
+                        like
+                        <%= info.weather.daily[4].feels_like.day%>°<br>
+                    </span>
+
+
+                    <span class="description-default" id="description-0">
+                        <%= info.weather.current.weather[0].description %>, PoP: <span id="pop-0">
+                                <%= Math.round(info.weather.hourly[0].pop*100) %>%
+                            </span>
+                    </span>
+
+                    <span class="description" id="description-1">
+                        <%= info.weather.daily[1].weather[0].description %>, PoP:
+                            <%=Math.round(info.weather.daily[1].pop*100) %>%
+                    </span>
+
+                    <span class="description" id="description-2">
+                        <%= info.weather.daily[2].weather[0].description %>, PoP:
+                            <%=Math.round(info.weather.daily[2].pop*100) %>%
+                    </span>
+
+                    <span class="description" id="description-3">
+                        <%= info.weather.daily[3].weather[0].description %>, PoP:
+                            <%=Math.round(info.weather.daily[3].pop*100)%>%
+                    </span>
+
+                    <span class="description" id="description-4">
+                        <%= info.weather.daily[4].weather[0].description %>, PoP:
+                            <%=Math.round(info.weather.daily[4].pop*100)%>%
+                    </span>
                 </div>
-                <div class="daily-overview-card" style="border-radius: 0 25px 25px 0" onclick="weatherCardSwitch(4);">
-                    <p class="day" id="fifthDay">
-                    </p>
-                    <img src="images/dashboard/OWM_icons/<%= info.weather.daily[4].weather[0].icon%>.png"
-                        class="daily-overview-card-image">
-                    <p class="daily-overview-card-stats">
-                        <img src="images/dashboard/Weather_Card_icons/down.png" style="width:15px;height:15px">
-                        <%= Math.round(info.weather.daily[4].temp.min) %>° <img
-                                src="images/dashboard/Weather_Card_icons/up.png" class="weather-stats-icon">
-                            <%= Math.round(info.weather.daily[4].temp.max) %>°
-                                <img src="images/dashboard/Weather_Card_icons/drop.png" class="weather-stats-icon">
-                                <%= Math.round(info.weather.daily[4].pop*100) %>%
-                    </p>
-                    <div class="daily-description-container" style="border-radius: 0 0 25px 0;">
-                        <p class="daily-description">
-                            <%= info.weather.daily[4].weather[0].description %>
+
+
+                <div class="daily-weather-stats">
+                    <span class="stat-holder">
+                        <img alt="statistics icon" class="stat-icon"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABmJLR0QA/wD/AP+gvaeTAAAAxUlEQVRYhe2WQQ7CIBBFn6bpIdReUHssz6A3qG6sd1H3uLXItDRhhkZ5yWzIJPP5AT5Q0MN59QKuQAvUOQR81h3Y5hTggB6oV8oCpmgV53+xA04MXbhYCgBoPAGPtbWCnDTAmaEDXRVojDk8qTiGFqeuT6q6ITxIVsM3ki1aQ59AB+ylnRf+F61DF53/FtduNP+tHp5ecsJKgAMOkgsaLDP//Yaf/g8E899vCv0H5uJm9AbzP4WAmBLz30LAaP5rCSj5H8Ubjv8HcHNmLo0AAAAASUVORK5CYII=">
+                        <p id="wind-0">Wind: <%= info.weather.current.wind_speed %> m/s</p>
+                        <p id="wind-1" style="display:none">Wind: <%= info.weather.daily[1].wind_speed %> m/s</p>
+                        <p id="wind-2" style="display:none">Wind: <%= info.weather.daily[2].wind_speed %> m/s</p>
+                        <p id="wind-3" style="display:none">Wind: <%= info.weather.daily[3].wind_speed %> m/s</p>
+                        <p id="wind-4" style="display:none">Wind: <%= info.weather.daily[4].wind_speed %> m/s</p>
+                    </span>
+
+                    <span class="stat-holder">
+                        <img alt="statistics icon" class="stat-icon"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAABmJLR0QA/wD/AP+gvaeTAAABvUlEQVRIie3WvW4TQRQF4I8YW0hAy0MkSsMLgKDhV8IRhEeIIIIIngIR8Qg0SMlbUEBESQFOYZMgEEkDJaIgSCQUe1c74KzNrK2IgiPdYmfmnHPnzp3d5T/+QXSwiHX08S2ij7WY60zbdAHvcTAmttGdhuEMHifCb3AfszgZMYcVvE3WPQpuY5Sm37E0RmwGd2Jtad4IC4npuQze+cT8Rq5pR3WmS7lk3A3uFto5xEXVmY47qzN4jRfJWAu90Lh5GKlOtCzRU+yPMX2OsziRjP8Mbqr1Vxgosp2tmb+KXfyIdb1IIsVczPVzjL8G6XTN/I7q6uwdYiq4B6E1hLpSH8tI8jO+jJjP0bJldKkvK3b9CZdq1pSlHuQYrwVpJYf0Bx6GxrMc0m1V07QamLawGRq3coht1QtkuYHxveC+w/FcclfVtRcyeBeDs4/ruaYlniTmy0aXvaXY6V5wVpuaUlyFVdWd7eEB5nEqYj7GNv3+Wcy6RnW4ho+JcF18wJVpGKZoKz6V64qmKc0GiuvX1aCRmqA0boSJfk8mQa7xK8M7LZ83Jk1mw/gmyo2hpI6q1I17ocSoarycVPxI8Aud7p/0g/fPXAAAAABJRU5ErkJggg==">
+                        <p id="pressure-0">Pressure: <%= info.weather.current.pressure %> bar</p>
+                        <p id="pressure-1" style="display:none">Pressure: <%= info.weather.daily[1].pressure %> bar
                         </p>
-                    </div>
+                        <p id="pressure-2" style="display:none">Pressure: <%= info.weather.daily[2].pressure %> bar
+                        </p>
+                        <p id="pressure-3" style="display:none">Pressure: <%= info.weather.daily[3].pressure %> bar
+                        </p>
+                        <p id="pressure-4" style="display:none">Pressure: <%= info.weather.daily[4].pressure %> bar
+                        </p>
+                    </span>
+
+                    <span class="stat-holder">
+                        <img alt="statistics icon" class="stat-icon"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAACWElEQVRoge2Yy05UQRCGv4zcZqWYCLyDiYAr42XhRgw7eAtdqFuCMYQY3SIEo0F9EcMSFwor8AG8rDSOUa4hjuOiu2EYzqVPVzfdJH5J7bq6/n/OyampgmJmdJxqbgB/gCZwM7IWZ84Bn4GWjk/A2aiKHHnBoQkTi1EVOXAF9Tp1GmkC1yLqqkQP8JHjJkxs6DPJM02+CRNT0dRZMgD8ptzIJjAYSaMVi5SbMPEsksZSBoFd7I3sAUMnqO8ucMfm4BPsTZiY9a83k4vADurHGy462AP8oLqR70B3GO0H1FFfSlNzHejLOzxeILYsxkI50DzNqPk47/BSidiieBnKAeo12s+ouQ9cykpYczTRAj4EMnFG351X970+c4SGwEgjkJEHFrXvdSZtCoz8CmCiH7uPTwM4b5JqwBdB0a+C3Dwe0iawgH46/i4t4P5E5vxoP2AA1TNs628DF0zyKPDXwUSTkgblwKyDjiOj+BuHC5Y8m+hGNdmqOr7R1pjrwLsKySs6xye3HUyYuNV+UR14TfZ02P46vQpgAgI05hFgHjUpbunYQP11HwlgwLDqaKJFuMbsxE/cjTRqgUTVdFShS1CvK5SRRzqqIGnMktxcXDeUKTVm0YYypcacuaF8XiE/hcbMdfI3lFct74jemH1uKKM25hAbyhNvzP83lCmRzIZS2tnvU7Awy6AXtf5MipQ3lJVIakMpebUmBLmTgtxMJEYuR8r1jmgQ8i1G8kQkg9Cxva0UiZGkNpQSI8uC3LeCXO8kNQhJSWIQ8kH0QcgnsTeU3om1oQTgH85Mdg9T8wlVAAAAAElFTkSuQmCC">
+                        <p id="humidity-0">Humidity: <%= info.weather.current.humidity %>%</p>
+                        <p id="humidity-1" style="display:none">Humidity: <%= info.weather.daily[1].humidity %>%</p>
+                        <p id="humidity-2" style="display:none">Humidity: <%= info.weather.daily[2].humidity %>%</p>
+                        <p id="humidity-3" style="display:none">Humidity: <%= info.weather.daily[3].humidity %>%</p>
+                        <p id="humidity-4" style="display:none">Humidity: <%= info.weather.daily[4].humidity %>%</p>
+                    </span>
+
+                    <span id="visibility-0" class="stat-holder">
+                        <img alt="statistics icon" class="stat-icon"
+                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAAC2ElEQVRoge3XT6hVVRTH8c9TzH+8EgMTnzVLrBAyAw0cJI2ciJMSoZkGhs8SMQyE/rxJAxGNFJtoTksHijMxjRoEITnJP4kQ9hD/kGhBPIX3ug32vr3r5ex397nvigb7C2ty1lm/tdY5Z6+9D4VCoVAoFAqFx51n8VIXcS/E2EfKbLyLH7AXU7rQ6MNn+B6bMKtn1WXQjw9xCw0cjgVNhi+i1k3siDkeGlOxBbdj0gYuYUYPtKfh5xbdPzAYc/aUZTjbkqhpqzvELcLb0RZ1uHdlhf5PWNp11S1MxRBGK5KcmyBuHk5UxJyIvhQ/VsSM4mOTeDsD+K5CuGk7EnH9OB/vuYtjOI4/47Xz0mtg2wT5zmBB3SZW4MYEog28logdiv5fhIfRZGFLg58mYpd3yHk91pbFeox0EGxgbiL+cvSvqvC9EX2/JmLnZuQdwbpOTQzinwyxhjBpqrgX/VWfT3/03UvETsvMPYbNqSY+yBRp2jMJneHor5o2r0TfcCJ2fs0atrcLDNYUSBUKB6L/pAf3mBk4FX0HErHLuqjjvzfTZ3yi1LH3EsUMGN/1LwgLewgX47VbHhwCrWztoo6/tJwsPulC4NtEMfAyrlTEXIm+FGe6qOPLdpHdNQXGhG8+xRN4C7uivRmvpXhV/qBp2mEVh9U+7KkpdMrkD4zN3Kdr5j6ow27/vvC0cwV39qCRj2o28bnMB7gef2eKjmHjJJp4R/4nNYINdRMsMb5L59gezKyhP1N4srn6vwnjuSuewtc1kv0uPLGJfoz6hbcwLF/3mPSRCPkLdQ32Cwe/HO4Lo/QSrsVrA8I/+uuYnqlzXdivjmben8WTwi9p1b9Jr21U2P3n9LKBdhbjG/UmW66N4QhefJgNtPO88Ibu9KCBO9gXNR8Z07EWX+Gq/OKv4lCMzV0zSXqxK7fznLCoF+NpYW0RDne3hQFwUZhwhUKhUCgUCoX/Af8C7sz35ep6WXwAAAAASUVORK5CYII=">
+                        <p> Visibility: <%= info.weather.current.visibility/1000 %> km</p>
+                    </span>
+
+                    <span class="stat-holder">
+                        <img alt="statistics icon" class="stat-icon"
+                            src="images/dashboard/Weather_Card_icons/up-and-down_2.png">
+                        <p id="min-max-0">Min - Max:
+                            <span id="min-0">
+                                <%= Math.round(info.weather.daily[0].temp.min) %>°
+                            </span>
+                            /
+                            <span id="max-0">
+                                <%= Math.round(info.weather.daily[0].temp.max) %>°
+                            </span>
+                        </p>
+                        <p style="display:none" id="min-max-1">Min - Max:
+                            <%= Math.round(info.weather.daily[1].temp.min) %>° / <%=
+                                    Math.round(info.weather.daily[1].temp.max) %>°
+                        </p>
+                        <p style="display:none" id="min-max-2">Min - Max:
+                            <%= Math.round(info.weather.daily[2].temp.min) %>° / <%=
+                                    Math.round(info.weather.daily[2].temp.max) %>°
+                        </p>
+                        <p style="display:none" id="min-max-3">Min - Max:
+                            <%= Math.round(info.weather.daily[3].temp.min) %>° / <%=
+                                    Math.round(info.weather.daily[3].temp.max) %>°
+                        </p>
+                        <p style="display:none" id="min-max-4">Min - Max:
+                            <%= Math.round(info.weather.daily[4].temp.min) %>° / <%=
+                                    Math.round(info.weather.daily[4].temp.max) %>°
+                        </p>
+                    </span>
                 </div>
             </div>
 
-        </div>
-        <div class="map-container">
-            <div class="map-wrapper">
-                <iframe width="520" height="280" class="leftLiveMaps" style="border-radius:25px"
-                    src="https://embed.windy.com/embed2.html?lat=<%= info.location[0].lat %>&lon=<%= info.location[0].lon %>&detailLat=<%= info.location[0].lat %>&detailLon=<%= info.location[0].lon %>&zoom=11&level=surface&overlay=rain&product=ecmwf&menu=&message=true&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1"
-                    frameborder="0"></iframe>
-
-
-                <iframe width="520" height="280" class="rightLiveMaps" style="border-radius:25px"
-                    src="https://embed.windy.com/embed2.html?lat=<%= info.location[0].lat %>&lon=<%= info.location[0].lon %>&detailLat=<%= info.location[0].lat %>&detailLon=<%= info.location[0].lon %>&zoom=9.35&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1"
-                    frameborder="0"></iframe>
-            </div>
-        </div>
-        <div class="chart-wrapper">
-            <div class="chart-container">
-                <canvas id="temp_chart"></canvas>
-            </div>
-
-            <div class="chart-container">
-                <canvas id="pop_chart"></canvas>
-            </div>
-        </div>
-
-        <% if (user) { %>
-            <div class="saved-cities-container" id="savedCitiesCardContainer">
-                <% infoArray.forEach(city=> { %>
-                    <div class="card" id="card-container" class="card-container" onclick="searchCity(this)">
-                        <div class="first-section">
-                            <p class="location-info-container">
-                                <span id="card-place">
-                                    <%=city.location[0].name %>, <%=city.location[0].country %>
-                                </span>
+            <div class="daily-overview-container">
+                <div>
+                    <div class="daily-overview-card" style="border-radius: 25px 0 0 25px"
+                        onclick="weatherCardSwitch(0);">
+                        <p class="day">
+                            Today
+                        </p>
+                        <img alt="weather icon"
+                            src="images/dashboard/OWM_icons/<%= info.weather.daily[0].weather[0].icon%>.png"
+                            class="daily-overview-card-image">
+                        <p class="daily-overview-card-stats">
+                            <img alt="down icon" src="images/dashboard/Weather_Card_icons/down.png"
+                                style="width:15px;height:15px" id="min-img">
+                            <%= Math.round(info.weather.daily[0].temp.min) %>°
+                                <img alt="max icon" src="images/dashboard/Weather_Card_icons/up.png"
+                                    class="weather-stats-icon" id="max-img">
+                                <%= Math.round(info.weather.daily[0].temp.max) %>°
+                                    <img alt="min icon" src="images/dashboard/Weather_Card_icons/drop.png"
+                                        class="weather-stats-icon" id="drop-img">
+                                    <%=Math.round(info.weather.daily[0].pop*100) %>%
+                        </p>
+                        <div class="daily-description-container" style="border-radius: 0 0 0 25px;">
+                            <p class="daily-description">
+                                <%= info.weather.daily[0].weather[0].description %>
                             </p>
-                            <% if (city.weather.alerts) { %>
-                                <div class="alarm-icon-container">
-                                    <img src="images/dashboard/Weather_Card_icons/alarm.png" class="alarm">
+                        </div>
+                    </div>
+
+
+                    <div class="daily-overview-card" onclick="weatherCardSwitch(1);">
+                        <p class="day" id="secondDay">
+                        </p>
+                        <img alt="weather icon"
+                            src="images/dashboard/OWM_icons/<%= info.weather.daily[1].weather[0].icon%>.png"
+                            class="daily-overview-card-image">
+                        <p class="daily-overview-card-stats">
+                            <img alt="down icon" src="images/dashboard/Weather_Card_icons/down.png"
+                                style="width:15px;height:15px">
+                            <%= Math.round(info.weather.daily[1].temp.min) %>° <img alt="up icon"
+                                    src="images/dashboard/Weather_Card_icons/up.png" class="weather-stats-icon">
+                                <%= Math.round(info.weather.daily[1].temp.max) %>°
+                                    <img alt="drop icon" src="images/dashboard/Weather_Card_icons/drop.png"
+                                        class="weather-stats-icon">
+                                    <%=Math.round(info.weather.daily[1].pop*100) %>%
+
+                        </p>
+                        <div class="daily-description-container">
+                            <p class="daily-description">
+                                <%= info.weather.daily[1].weather[0].description %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="daily-overview-card" onclick="weatherCardSwitch(2);">
+                        <p class="day" id="thirdDay">
+                        </p>
+                        <img src="images/dashboard/OWM_icons/<%= info.weather.daily[2].weather[0].icon%>.png"
+                            class="daily-overview-card-image">
+                        <p class="daily-overview-card-stats">
+                            <img src="images/dashboard/Weather_Card_icons/down.png" style="width:15px;height:15px">
+                            <%= Math.round(info.weather.daily[2].temp.min) %>° <img
+                                    src="images/dashboard/Weather_Card_icons/up.png" class="weather-stats-icon">
+                                <%= Math.round(info.weather.daily[2].temp.max) %>°
+                                    <img src="images/dashboard/Weather_Card_icons/drop.png" class="weather-stats-icon">
+                                    <%=Math.round(info.weather.daily[2].pop*100) %>%
+                        </p>
+                        <div class="daily-description-container">
+                            <p class="daily-description">
+                                <%= info.weather.daily[2].weather[0].description %>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="daily-overview-card" onclick="weatherCardSwitch(3);">
+                        <p class="day" id="fourthDay">
+                        </p>
+                        <img src="images/dashboard/OWM_icons/<%= info.weather.daily[3].weather[0].icon%>.png"
+                            class="daily-overview-card-image">
+                        <p class="daily-overview-card-stats">
+                            <img src="images/dashboard/Weather_Card_icons/down.png" style="width:15px;height:15px">
+                            <%= Math.round(info.weather.daily[3].temp.min) %>° <img
+                                    src="images/dashboard/Weather_Card_icons/up.png" class="weather-stats-icon">
+                                <%= Math.round(info.weather.daily[0].temp.max) %>°
+                                    <img src="images/dashboard/Weather_Card_icons/drop.png" class="weather-stats-icon">
+                                    <%=Math.round(info.weather.daily[3].pop*100) %>%
+                        </p>
+                        <div class="daily-description-container">
+                            <p class="daily-description">
+                                <%= info.weather.daily[3].weather[0].description %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="daily-overview-card" style="border-radius: 0 25px 25px 0"
+                        onclick="weatherCardSwitch(4);">
+                        <p class="day" id="fifthDay">
+                        </p>
+                        <img src="images/dashboard/OWM_icons/<%= info.weather.daily[4].weather[0].icon%>.png"
+                            class="daily-overview-card-image">
+                        <p class="daily-overview-card-stats">
+                            <img src="images/dashboard/Weather_Card_icons/down.png" style="width:15px;height:15px">
+                            <%= Math.round(info.weather.daily[4].temp.min) %>° <img
+                                    src="images/dashboard/Weather_Card_icons/up.png" class="weather-stats-icon">
+                                <%= Math.round(info.weather.daily[4].temp.max) %>°
+                                    <img src="images/dashboard/Weather_Card_icons/drop.png" class="weather-stats-icon">
+                                    <%= Math.round(info.weather.daily[4].pop*100) %>%
+                        </p>
+                        <div class="daily-description-container" style="border-radius: 0 0 25px 0;">
+                            <p class="daily-description">
+                                <%= info.weather.daily[4].weather[0].description %>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="map-container" id="maps" style="scroll-margin: 150px;
+        ">
+                <div class="map-wrapper">
+                    <iframe width="520" height="280" class="leftLiveMaps" style="border-radius:25px"
+                        src="https://embed.windy.com/embed2.html?lat=<%= info.location[0].lat %>&lon=<%= info.location[0].lon %>&detailLat=<%= info.location[0].lat %>&detailLon=<%= info.location[0].lon %>&zoom=11&level=surface&overlay=rain&product=ecmwf&menu=&message=true&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1"
+                        frameborder="0"></iframe>
+
+
+                    <iframe width="520" height="280" class="rightLiveMaps" style="border-radius:25px"
+                        src="https://embed.windy.com/embed2.html?lat=<%= info.location[0].lat %>&lon=<%= info.location[0].lon %>&detailLat=<%= info.location[0].lat %>&detailLon=<%= info.location[0].lon %>&zoom=9.35&level=surface&overlay=wind&product=ecmwf&menu=&message=true&marker=true&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1"
+                        frameborder="0"></iframe>
+                </div>
+            </div>
+            <div class="chart-wrapper" id="graphs" style="scroll-margin: 150px;
+        ">
+                <div class="chart-container">
+                    <canvas id="temp_chart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <canvas id="pop_chart"></canvas>
+                </div>
+            </div>
+
+            <% if (user) { %>
+                <div class="saved-cities-container" id="savedCitiesCardContainer">
+                    <% infoArray.forEach(city=> { %>
+                        <div class="card" id="card-container" class="card-container" onclick="searchCity(this)">
+                            <div class="first-section">
+                                <p class="location-info-container">
+                                    <span id="card-place">
+                                        <%=city.location[0].name %>, <%=city.location[0].country %>
+                                    </span>
+                                </p>
+                                <% if (city.weather.alerts) { %>
+                                    <div class="alarm-icon-container">
+                                        <img src="images/dashboard/Weather_Card_icons/alarm.png" class="alarm">
+                                    </div>
+                                    <% } %>
+                                        <img src="images/dashboard/Weather_Card_icons/cancel.png"
+                                            class="delete-button-img" id="delete-button"
+                                            onclick="this.parentNode.parentNode.style = 'display:none', deleteCity(this.parentNode.parentNode)">
+                            </div>
+                            <div class="temp-icon-container">
+                                <p class="temp">
+                                    <%= city.weather.current.temp%>°
+                                </p>
+
+                                <img src="images/dashboard/OWM_icons/<%= city.weather.current.weather[0].icon%>.png"
+                                    class="weather-card-default" id="icon-0"
+                                    style="height:80px;width:80px;margin-right: 30px;">
+                            </div>
+                            <div class="stats-container">
+                                <div class="stats" style="margin-left: 20px;">
+                                    <img src="images/dashboard/Weather_Card_icons/down.png"
+                                        style="width:15px;height:15px;">
+                                    <p style="margin-left:5px">
+                                        <%= Math.round(city.weather.daily[0].temp.min) %>°
+                                    </p>
                                 </div>
-                                <% } %>
-                                    <img src="images/dashboard/Weather_Card_icons/cancel.png" class="delete-button-img"
-                                        id="delete-button"
-                                        onclick="this.parentNode.parentNode.style = 'display:none', deleteCity(this.parentNode.parentNode)">
-                        </div>
-                        <div class="temp-icon-container">
-                            <p class="temp">
-                                <%= city.weather.current.temp%>°
-                            </p>
 
-                            <img src="images/dashboard/OWM_icons/<%= city.weather.current.weather[0].icon%>.png"
-                                class="weather-card-default" id="icon-0"
-                                style="height:80px;width:80px;margin-right: 30px;">
-                        </div>
-                        <div class="stats-container">
-                            <div class="stats" style="margin-left: 20px;">
-                                <img src="images/dashboard/Weather_Card_icons/down.png" style="width:15px;height:15px;">
-                                <p style="margin-left:5px">
-                                    <%= Math.round(city.weather.daily[0].temp.min) %>°
-                                </p>
+                                <div class="stats">
+                                    <img src="images/dashboard/Weather_Card_icons/up.png"
+                                        style="width:15px;height:15px;">
+                                    <p style="margin-left:5px">
+                                        <%= Math.round(city.weather.daily[0].temp.max) %>°
+                                    </p>
+                                </div>
+
+                                <div class="stats">
+                                    <img src="images/dashboard/Weather_Card_icons/drop.png"
+                                        style="width:15px;height:15px;">
+                                    <p style="margin-left:5px">
+                                        <%= Math.round(city.weather.hourly[0].pop*100)%>%
+                                    </p>
+                                </div>
+
                             </div>
-
-                            <div class="stats">
-                                <img src="images/dashboard/Weather_Card_icons/up.png" style="width:15px;height:15px;">
-                                <p style="margin-left:5px">
-                                    <%= Math.round(city.weather.daily[0].temp.max) %>°
-                                </p>
-                            </div>
-
-                            <div class="stats">
-                                <img src="images/dashboard/Weather_Card_icons/drop.png" style="width:15px;height:15px;">
-                                <p style="margin-left:5px">
-                                    <%= Math.round(city.weather.hourly[0].pop*100)%>%
-                                </p>
-                            </div>
-
                         </div>
-                    </div>
-                    <% }) %>
-            </div>
-
-            <% } %>
-
-                <% if (info.weather.alerts) { %>
-                    <div class="alert-container">
-                        <p class="title">
-                            <%=info.weather.alerts[0].sender_name %> - ALERT
-                        </p>
-                        <p class="conditions-description" ;>
-                            <span style="color:orange">CONDITIONS:</span>
-                            <%=info.weather.alerts[0].event %>
-                        </p>
-                        <p class="conditions-description">
-                            <span style="color:orange">DESCRIPTION:</span>: <%=info.weather.alerts[0].description %>
-                        </p>
-                    </div>
-
-                    <% } %>
-    </div>
-    <div>
-        <div class="footer" style="border-top:1px solid grey;margin-top:150px">
-            <div class="inside-container ">
-                <div style="display:flex;flex-direction: row; ">
-                    <div class="social-container ">
-                        <p class="weather-solutions-title ">WEATHER SOLUTIONS</p>
-                        <div class="social-icons-container ">
-                            <img src="images/homepage/icons/Social_icons/instagram.svg " class="social-icon ">
-                            <img src="images/homepage/icons/Social_icons/twitter.svg " class="social-icon ">
-                            <img src="images/homepage/icons/Social_icons/linkedin.svg " class="social-icon ">
-                            <img src="images/homepage/icons/Social_icons/youtube.svg " style="height:35px;width:35px; ">
-
-                        </div>
-                    </div>
-                    <div style="margin-left:160px;text-align: left; ">
-                        <p class="footer-column-title "> Product </p>
-                        <p class="footer-clickable "> Use guide </p>
-                        <p class="footer-clickable "> Status </p>
-                        <p class="footer-clickable "> Technologies </p>
-                    </div>
-                    <div style="margin-left:120px;text-align: left; ">
-                        <p class="footer-column-title "> Company </p>
-                        <p class="footer-clickable "> About </p>
-                        <p class="footer-clickable "> News </p>
-                        <p class="footer-clickable "> Branding </p>
-                        <p class="footer-clickable "> Developers </p>
-                    </div>
-                    <div style="margin-left:120px;text-align: left; ">
-                        <p class="footer-column-title "> Policies </p>
-                        <p class="footer-clickable "> Terms </p>
-                        <p class="footer-clickable "> License </p>
-                        <p class="footer-clickable "> Cookies </p>
-                        <p class="footer-clickable "> Guidelines </p>
-                        <p class="footer-clickable "> Privacy </p>
-                        <p class="footer-clickable "> Credits </p>
-                        <p class="footer-clickable "> Moderation </p>
-                    </div>
+                        <% }) %>
                 </div>
-                <div class="footer-bottom-container ">
-                    <div class="logo-container ">
-                        <img class="logo " src="images/homepage/icons/logo.png " style="height:45px;width:auto; ">
-                    </div>
-                    <%if(user){%>
-                        <form method="POST">
-                            <div class="login-signup-container " style="margin-right: 15px;text-align: right; ">
-                                <button formaction="/logout" class="sign-up">Log out</button>
+
+                <% } %>
+
+                    <% if (info.weather.alerts) { %>
+                        <div class="alert-container">
+                            <p class="title">
+                                <%=info.weather.alerts[0].sender_name %> - ALERT
+                            </p>
+                            <p class="conditions-description" ;>
+                                <span style="color:orange">CONDITIONS:</span>
+                                <%=info.weather.alerts[0].event %>
+                            </p>
+                            <p class="conditions-description">
+                                <span style="color:orange">DESCRIPTION:</span>: <%=info.weather.alerts[0].description %>
+                            </p>
+                        </div>
+
+                        <% } %>
+        </div>
+        <div>
+            <div class="footer" style="border-top:1px solid grey;margin-top:150px">
+                <div class="inside-container ">
+                    <div style="display:flex;flex-direction: row; ">
+                        <div class="social-container ">
+                            <p class="weather-solutions-title ">WEATHER SOLUTIONS</p>
+                            <div class="social-icons-container ">
+                                <img src="images/homepage/icons/Social_icons/instagram.svg " class="social-icon ">
+                                <img src="images/homepage/icons/Social_icons/twitter.svg " class="social-icon ">
+                                <img src="images/homepage/icons/Social_icons/linkedin.svg " class="social-icon ">
+                                <img src="images/homepage/icons/Social_icons/youtube.svg "
+                                    style="height:35px;width:35px; ">
+
                             </div>
-                        </form>
-                        <%}%>
+                        </div>
+                        <div style="margin-left:160px;text-align: left; ">
+                            <p class="footer-column-title "> Product </p>
+                            <p class="footer-clickable "> Use guide </p>
+                            <p class="footer-clickable "> Status </p>
+                            <p class="footer-clickable "> Technologies </p>
+                        </div>
+                        <div style="margin-left:120px;text-align: left; ">
+                            <p class="footer-column-title "> Company </p>
+                            <p class="footer-clickable "> About </p>
+                            <p class="footer-clickable "> News </p>
+                            <p class="footer-clickable "> Branding </p>
+                            <p class="footer-clickable "> Developers </p>
+                        </div>
+                        <div style="margin-left:120px;text-align: left; ">
+                            <p class="footer-column-title "> Policies </p>
+                            <p class="footer-clickable "> Terms </p>
+                            <p class="footer-clickable "> License </p>
+                            <p class="footer-clickable "> Cookies </p>
+                            <p class="footer-clickable "> Guidelines </p>
+                            <p class="footer-clickable "> Privacy </p>
+                            <p class="footer-clickable "> Credits </p>
+                            <p class="footer-clickable "> Moderation </p>
+                        </div>
+                    </div>
+                    <div class="footer-bottom-container ">
+                        <div class="logo-container ">
+                            <img class="logo " src="images/homepage/icons/logo.png " style="height:45px;width:auto; ">
+                        </div>
+                        <%if(user){%>
+                            <form method="POST">
+                                <div class="login-signup-container " style="margin-right: 15px;text-align: right; ">
+                                    <button formaction="/logout" class="sign-up">Log out</button>
+                                </div>
+                            </form>
+                            <%}%>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <script src="js/date_functions.js"></script>
-    <script src="js/cookies.js"></script>
-    <script src="js/weather_card_switch.js"></script>
-    <script src="js/chart.js"></script>
-    <script>
+        <%}%>
+            <script src="js/date_functions.js"></script>
+            <script src="js/cookies.js"></script>
+            <script src="js/weather_card_switch.js"></script>
+            <script src="js/chart.js"></script>
+            <script>
 
-        let saveCityButton = document.getElementById("save-button");
-        let deleteCityButton = document.getElementById("delete-button");
-
-
-        if (saveCityButton) {
-            saveCityButton.addEventListener('click', function () {
-                saveCity();
-                saveCityButton.disabled = true;
-                saveCityButton.style = "display:none";
-
-            });
-
-            function saveCity() {
-                let city = document.getElementById("place").innerHTML;
-                fetch("/save-city", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ city: city.trim() }),
-                })
-            }
-        }
+                let saveCityButton = document.getElementById("save-button");
+                let deleteCityButton = document.getElementById("delete-button");
 
 
-        for (let i = 0; i < document.getElementsByClassName("delete-button-img").length; i++) {
-            document.getElementsByClassName("delete-button-img")[i].addEventListener("click", function (event) {
-                event.stopPropagation();
-            });
-        }
+                if (saveCityButton) {
+                    saveCityButton.addEventListener('click', function () {
+                        saveCity();
+                        saveCityButton.disabled = true;
+                        saveCityButton.style = "display:none";
+
+                    });
+
+                    function saveCity() {
+                        let city = document.getElementById("place").innerHTML;
+                        fetch("/save-city", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ city: city.trim() }),
+                        })
+                    }
+                }
 
 
-        function deleteCity(card) {
-            console.log(card);
-            let city = card.querySelector("#card-place").innerHTML;
-            fetch("/delete-city", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ city: city.trim() }),
-            })
-            card.style = "display:none;";
-        }
-
-        function showCity() {
-            let container = document.getElementById("savedCitiesCardContainer");
-            let cityAndCountry = document.getElementById("place").innerHTML;
-            let temp = document.getElementById("temp-0").innerHTML;
-            let icon = document.getElementById("icon-0").src;
-            let min = document.getElementById("min-0").innerHTML;
-            let max = document.getElementById("max-0").innerHTML;
-            let pop = document.getElementById("pop-0").innerHTML;
-            let max_img = document.getElementById("max-img").src;
-            let min_img = document.getElementById("min-img").src;
-            let drop_img = document.getElementById("drop-img").src;
-            let delete_img = "images/dashboard/Weather_Card_icons/cancel.png";
-
-            const div = document.createElement("div");
-            div.style = "display:flex; background-color: white;height:200px;min-width:420px;border-radius: 25px;font-family: Montserrat;flex-direction: column";
-
-            const cityDiv = document.createElement("div");
-            cityDiv.style = "display:flex;flex-direction:row; align-items: baseline;justify-content: space-between;"
-
-            const p = document.createElement("p");
-            p.style = "margin-left:20px;font-size:20px;line-height:20px";
-
-            const span0 = document.createElement("span");
-            span0.innerHTML = cityAndCountry;
-            span0.id = "card-place";
-            p.appendChild(span0);
+                for (let i = 0; i < document.getElementsByClassName("delete-button-img").length; i++) {
+                    document.getElementsByClassName("delete-button-img")[i].addEventListener("click", function (event) {
+                        event.stopPropagation();
+                    });
+                }
 
 
-            const img0 = document.createElement("img");
-            img0.src = delete_img;
-            img0.id = "delete-button";
-            img0.classList.add("delete-button-img");
-            cityDiv.append(p);
+                function deleteCity(card) {
+                    console.log(card);
+                    let city = card.querySelector("#card-place").innerHTML;
+                    fetch("/delete-city", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ city: city.trim() }),
+                    })
+                    card.style = "display:none;";
+                }
 
-            if (document.getElementById("alert-img")) {
-                const alertDiv = document.createElement("div");
-                alertDiv.style = "display: flex;align-items: baseline;margin-right: auto;padding: 0;";
-                let divIcon = document.createElement("img");
-                divIcon.src = "images/dashboard/Weather_Card_icons/alarm.png";
-                divIcon.style = "width:22px;height:22px;margin-left: 10px;padding: 0;margin-right:auto";
-                alertDiv.appendChild(divIcon);
-                cityDiv.appendChild(alertDiv);
-            }
+                function showCity() {
+                    let container = document.getElementById("savedCitiesCardContainer");
+                    let cityAndCountry = document.getElementById("place").innerHTML;
+                    let temp = document.getElementById("temp-0").innerHTML;
+                    let icon = document.getElementById("icon-0").src;
+                    let min = document.getElementById("min-0").innerHTML;
+                    let max = document.getElementById("max-0").innerHTML;
+                    let pop = document.getElementById("pop-0").innerHTML;
+                    let max_img = document.getElementById("max-img").src;
+                    let min_img = document.getElementById("min-img").src;
+                    let drop_img = document.getElementById("drop-img").src;
+                    let delete_img = "images/dashboard/Weather_Card_icons/cancel.png";
 
-            cityDiv.append(img0);
-            div.appendChild(cityDiv);
+                    const div = document.createElement("div");
+                    div.style = "display:flex; background-color: white;height:200px;min-width:420px;border-radius: 25px;font-family: Montserrat;flex-direction: column";
 
-            img0.onclick = function () {
-                deleteCity(img0.parentNode.parentNode);
-                saveCityButton.disabled = false;
-                saveCityButton.style = "display:block"
-            };
+                    const cityDiv = document.createElement("div");
+                    cityDiv.style = "display:flex;flex-direction:row; align-items: baseline;justify-content: space-between;"
 
-            const temperatureDiv = document.createElement("div");
-            temperatureDiv.style = "display:flex;flex-direction:row;align-items: center;justify-content: space-between;";
+                    const p = document.createElement("p");
+                    p.style = "margin-left:20px;font-size:20px;line-height:20px";
 
-            const temperatureP = document.createElement("p");
-            temperatureP.style = "margin-left: 20px;font-size: 45px;line-height: 0px;";
-            temperatureP.innerHTML = temp;
-
-
-            const img1 = document.createElement("img");
-            img1.src = icon;
-            img1.className = ("weather-card-default");
-            img1.style = "height:80px;width:80px;margin-right: 30px;";
-
-            temperatureDiv.appendChild(temperatureP);
-            temperatureDiv.appendChild(img1);
-
-            div.appendChild(temperatureDiv);
-
-            const infoDiv = document.createElement("div");
-            infoDiv.style = "display:flex;flex-direction:row;justify-content:space-evenly;";
-
-            const minTempDiv = document.createElement("div");
-            minTempDiv.style = "display: flex;flex-direction: row;align-items: center;margin-left: 20px;margin-right: auto;";
-            const img2 = document.createElement("img");
-            img2.src = min_img;
-            img2.style = "width:15px;height:15px;";
-
-            const minTempP = document.createElement("p");
-            minTempP.style = "margin-left:5px";
-            minTempP.innerHTML = min;
-
-            minTempDiv.appendChild(img2);
-            minTempDiv.appendChild(minTempP);
-            infoDiv.appendChild(minTempDiv);
-
-            const maxTempDiv = document.createElement("div");
-            maxTempDiv.style = "display: flex;flex-direction: row;align-items: center;margin-right: auto;";
-            const img3 = document.createElement("img");
-            img3.src = max_img;
-            img3.style = "width:15px;height:15px;";
-
-            const maxTempP = document.createElement("p");
-            maxTempP.style = "margin-left:5px";
-            maxTempP.innerHTML = max;
-
-            maxTempDiv.appendChild(img3);
-            maxTempDiv.appendChild(maxTempP);
-            infoDiv.appendChild(maxTempDiv);
+                    const span0 = document.createElement("span");
+                    span0.innerHTML = cityAndCountry;
+                    span0.id = "card-place";
+                    p.appendChild(span0);
 
 
-            const popDiv = document.createElement("div");
-            popDiv.style = "display: flex;flex-direction: row;align-items: center;margin-right: auto;";
-            const img4 = document.createElement("img");
-            img4.src = drop_img;
-            img4.style = "width:15px;height:15px;";
+                    const img0 = document.createElement("img");
+                    img0.src = delete_img;
+                    img0.id = "delete-button";
+                    img0.classList.add("delete-button-img");
+                    cityDiv.append(p);
 
-            const popP = document.createElement("p");
-            popP.style = "margin-left:5px";
-            popP.innerHTML = pop;
-
-            popDiv.appendChild(img4);
-            popDiv.appendChild(popP);
-            infoDiv.appendChild(popDiv);
-            div.appendChild(infoDiv);
-            container.appendChild(div);
-
-        }
-
-    </script>
-    <script>
-        function searchCity(card) {
-            let city = card.querySelector("#card-place").innerHTML;
-            document.getElementById("searchBox").value = city;
-            document.getElementById("searchForm").submit();
-        }
-
-        function initAutocomplete() {
-            var options = {
-                types: ['(cities)'],
-            }
-
-            try {
-                var input = document.getElementById('searchBox');
-                var autocomplete = new google.maps.places.Autocomplete(input, options);
-                autocomplete.addListener('place_changed', function () {
-                    var place = autocomplete.getPlace();
-                    if (!place.place_id) {
-                        return;
+                    if (document.getElementById("alert-img")) {
+                        const alertDiv = document.createElement("div");
+                        alertDiv.style = "display: flex;align-items: baseline;margin-right: auto;padding: 0;";
+                        let divIcon = document.createElement("img");
+                        divIcon.src = "images/dashboard/Weather_Card_icons/alarm.png";
+                        divIcon.style = "width:22px;height:22px;margin-left: 10px;padding: 0;margin-right:auto";
+                        alertDiv.appendChild(divIcon);
+                        cityDiv.appendChild(alertDiv);
                     }
 
-                    let formattedAddress = place.formatted_address.replace(/[0-9]/g, '').replace(/ \,/g, ',');
-                    let addressComponents = formattedAddress.split(/\s*,\s*/);
-                    let country = addressComponents[addressComponents.length - 1]
-                    let city = addressComponents[0];
+                    cityDiv.append(img0);
+                    div.appendChild(cityDiv);
 
-                    if (addressComponents.length > 0 && country != "USA") {
-                        console.log(city + ", " + country);
-                        document.getElementById('search_term').value = city + ", " + country;
-                    }
-                    else {
-                        document.getElementById('search_term').value = formattedAddress;
-                    }
-                });
-            } catch (e) {
-                console.log("Google Places Autocomplete - ON");
-            }
+                    img0.onclick = function () {
+                        deleteCity(img0.parentNode.parentNode);
+                        saveCityButton.disabled = false;
+                        saveCityButton.style = "display:block"
+                    };
 
-        }
-        window.onload = initAutocomplete();
-    </script>
+                    const temperatureDiv = document.createElement("div");
+                    temperatureDiv.style = "display:flex;flex-direction:row;align-items: center;justify-content: space-between;";
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNbaCOsry-bPOnTqL3Iy0E0B_sV1BHXUQ
-&libraries=places&types=locality&language=en&callback=initAutocomplete"></script>
+                    const temperatureP = document.createElement("p");
+                    temperatureP.style = "margin-left: 20px;font-size: 45px;line-height: 0px;";
+                    temperatureP.innerHTML = temp;
+
+
+                    const img1 = document.createElement("img");
+                    img1.src = icon;
+                    img1.className = ("weather-card-default");
+                    img1.style = "height:80px;width:80px;margin-right: 30px;";
+
+                    temperatureDiv.appendChild(temperatureP);
+                    temperatureDiv.appendChild(img1);
+
+                    div.appendChild(temperatureDiv);
+
+                    const infoDiv = document.createElement("div");
+                    infoDiv.style = "display:flex;flex-direction:row;justify-content:space-evenly;";
+
+                    const minTempDiv = document.createElement("div");
+                    minTempDiv.style = "display: flex;flex-direction: row;align-items: center;margin-left: 20px;margin-right: auto;";
+                    const img2 = document.createElement("img");
+                    img2.src = min_img;
+                    img2.style = "width:15px;height:15px;";
+
+                    const minTempP = document.createElement("p");
+                    minTempP.style = "margin-left:5px";
+                    minTempP.innerHTML = min;
+
+                    minTempDiv.appendChild(img2);
+                    minTempDiv.appendChild(minTempP);
+                    infoDiv.appendChild(minTempDiv);
+
+                    const maxTempDiv = document.createElement("div");
+                    maxTempDiv.style = "display: flex;flex-direction: row;align-items: center;margin-right: auto;";
+                    const img3 = document.createElement("img");
+                    img3.src = max_img;
+                    img3.style = "width:15px;height:15px;";
+
+                    const maxTempP = document.createElement("p");
+                    maxTempP.style = "margin-left:5px";
+                    maxTempP.innerHTML = max;
+
+                    maxTempDiv.appendChild(img3);
+                    maxTempDiv.appendChild(maxTempP);
+                    infoDiv.appendChild(maxTempDiv);
+
+
+                    const popDiv = document.createElement("div");
+                    popDiv.style = "display: flex;flex-direction: row;align-items: center;margin-right: auto;";
+                    const img4 = document.createElement("img");
+                    img4.src = drop_img;
+                    img4.style = "width:15px;height:15px;";
+
+                    const popP = document.createElement("p");
+                    popP.style = "margin-left:5px";
+                    popP.innerHTML = pop;
+
+                    popDiv.appendChild(img4);
+                    popDiv.appendChild(popP);
+                    infoDiv.appendChild(popDiv);
+                    div.appendChild(infoDiv);
+                    container.appendChild(div);
+
+                }
+
+            </script>
 </body>
 
 </html>
