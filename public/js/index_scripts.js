@@ -22,7 +22,7 @@ function geolocateUser() {
 
         fetch(GEOCODING).then(response => response.json()).then(location => {
             console.log(location);
-            search_term.value = location.results[7].address_components[1].short_name + ", " + location.results[7].address_components[4].short_name;
+            search_term.value = location.results[3].address_components[1].short_name + ", " + location.results[3].address_components[5].short_name;
             blinkBorder('#059862', search_term);
         })
     }
