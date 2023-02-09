@@ -6,7 +6,8 @@ router.get('/', function (req, res, next) {
     let query = req.query;
     res.render('index', {
         title: 'Homepage',
-        cityNotFound: query.cityNotFound
+        cityNotFound: query.cityNotFound,
+        user: req.session.user
     });
 });
 

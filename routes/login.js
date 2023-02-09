@@ -14,6 +14,8 @@ dbUtils.connectToDabase();
 router.get('/', function (req, res, next) {
     res.render('login', {
         title: 'Login',
+        found: null,
+        activated: null
     });
 });
 
@@ -27,18 +29,28 @@ router.post('/', async function (req, res, next) {
             password: crypto.encrypt(password),
         };
 
+        console.log(user);
+
         let dbUser = await dbUtils.findUser(user);
 
         if (credentialsOk(dbUser, password) && dbUser.emailConfirmed) {
             console.log("login successful");
-            req.session.user = user;
+            req.session.user = dbUser;
+            console.log(req.session.user);
             res.redirect('/');
         } else if (credentialsOk(dbUser, password) && !dbUser.emailConfirmed && dbUser.tokenExpiration > Date.now()) {
-            console.log("please activate your email");
-            res.redirect('login?login_failed');
+            res.render('login', {
+                success: "failed",
+                activated: false,
+                found: true
+            });
         } else {
             console.log("account not found, subscribe again and check your email for the activation code.");
-            res.redirect('login?login_failed');
+            res.render('login', {
+                success: "failed",
+                activated: false,
+                found: false
+            });
         }
 
     } catch (e) {

@@ -7,8 +7,8 @@ let transporter = nodemailer.createTransport({
     service: "Gmail",
     secure: true, // secure:true for port 465, secure:false for port 587
     auth: {
-        user: 'domenico.marabello16@gmail.com',
-        pass: 'xazzwsqoxhaaymso'
+        user: 'atmosweather.eu@gmail.com',
+        pass: process.env.EMAIL_APP_PASSWORD
     }
 });
 
@@ -18,7 +18,7 @@ const mailer = {
         let htmlVersion = await ejs.renderFile(path.join(__dirname, '../../views/email.ejs'), { token: token })
 
         await transporter.sendMail({
-            from: 'domenico.marabello16@gmail.com', // sender address
+            from: 'atmosweather.eu@gmail.com', // sender address
             to: email, // list of receivers
             subject: "Your Atmos.com Activation Code", // Subject line
             html: htmlVersion
@@ -27,10 +27,10 @@ const mailer = {
 
     sendRecoveryMailTo: async function (email, token) {
         await transporter.sendMail({
-            from: 'domenico.marabello16@gmail.com', // sender address
+            from: 'atmosweather.eu@gmail.com', // sender address
             to: email, // list of receivers
             subject: "Your Atmos.com Recovery Token", // Subject line
-            text: "Here is your recovery token: " + "http://localhost:5000/password-reset/" + token
+            text: "Here is your recovery token: " + "http://atmosweather.eu/password-reset/" + token
         });
     }
 }

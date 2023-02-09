@@ -11,6 +11,9 @@ var emailActivationRouter = require('./routes/email_activation');
 var passwordRecoveryRouter = require('./routes/password_recovery');
 var passwordResetRouter = require('./routes/reset_password');
 var recoverRouter = require('./routes/recover');
+var saveCityRouter = require('./routes/save_city');
+var deleteCityRouter = require('./routes/delete_city');
+var logoutRouter = require('./routes/logout');
 
 require('dotenv').config()
 
@@ -28,10 +31,10 @@ app.use(express.urlencoded({
 
 app.use(session({
     secret: process.env.SESSION_SECRET,
-    resave: false,
+    resave: true,
     saveUninitialized: false,
     cookie: {
-        secure: true,
+        secure: false,
         maxAge: 3_600_000
     },
 }));
@@ -44,10 +47,13 @@ app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/login', loginRouter);
 app.use('/signup', signupRouter);
-app.use('/activate', emailActivationRouter);
+app.use('/activate/', emailActivationRouter);
 app.use('/password-recovery', passwordRecoveryRouter);
 app.use('/password-reset/', passwordResetRouter);
 app.use('/recover/', recoverRouter);
+app.use('/save-city', saveCityRouter);
+app.use('/delete-city', deleteCityRouter);
+app.use('/logout', logoutRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -71,18 +77,8 @@ console.log("\u001b[1;32mServer uptime: " + process.uptime() + " sec\u001b[0m");
 app.listen(process.env.PORT || 3000);
 
 function intervalFunc() {
-    console.log("\u001b[1;32mServer uptime: " + msToTime(process.uptime()) + " min\u001b[0m");
+    console.log("\u001b[1;32mServer uptime: " + Math.round(process.uptime()) + " sec\u001b[0m");
+
 }
 
-function msToTime(ms) {
-    let seconds = (ms / 1000).toFixed(1);
-    let minutes = (ms / (1000 * 60)).toFixed(1);
-    let hours = (ms / (1000 * 60 * 60)).toFixed(1);
-    let days = (ms / (1000 * 60 * 60 * 24)).toFixed(1);
-    if (seconds < 60) return seconds + " Sec";
-    else if (minutes < 60) return minutes + " Min";
-    else if (hours < 24) return hours + " Hrs";
-    else return days + " Days"
-}
-
-setInterval(intervalFunc, 300000);
+setInterval(intervalFunc, 60000);

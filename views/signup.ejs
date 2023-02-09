@@ -7,85 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="stylesheets/Common/common.css">
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-
-        [type=email] {
-            background-image: url('images/login/email.png');
-            background-position: calc(100% - 10px) center;
-            background-repeat: no-repeat;
-            background-size: 16px 16px;
-            border: 1px solid;
-        }
-
-        [type=password] {
-            background-image: url('images/login/lock.png');
-            background-position: calc(100% - 10px) center;
-            background-repeat: no-repeat;
-            background-size: 16px 16px;
-            border: 1px solid;
-        }
-
-        [type=password]:not(:placeholder-shown) {
-            background-image: none;
-        }
-
-        [type=email]:not(:placeholder-shown) {
-            background-image: none;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #1d3062;
-            font-family: Montserrat;
-        }
-
-        .log {
-            background-color: #3056BB;
-            transition: 0.3s;
-        }
-
-        .log:hover {
-            background-color: #1d3062;
-            transition: 0.3s;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .visible {
-            display: block;
-        }
-
-        input:focus {
-            outline: none;
-        }
-
-        .button-disabled {
-            background-color: #717171;
-            border: #3056BB;
-        }
-
-        .dot {
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block;
-            transition: background-color 0.6s ease;
-        }
-
-        .active {
-            background-color: #717171;
-        }
-    </style>
-
+    <link rel="stylesheet" href="stylesheets/Sign-Up/signup.css">
 </head>
 
 <body>
@@ -112,23 +34,19 @@
         </div>
     </div>
 
-    <div style="margin-top:130px; width:1100px;border-radius: 50px;display: flex;flex-direction: row;box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;flex-wrap: wrap;
-    ">
+    <div class="signup-form-container">
 
-        <div
-            style="width:50%;height:750px;background-color: #3056BB;border-radius: 50px 0 0 50px;display: flex;justify-content: center;align-items: center;flex-direction: column;">
+        <div class="slider">
             <img src="images/homepage/website_overview/astronaut.svg" style="padding:25px" id="img1">
             <img src="images/homepage/website_overview/rocket.svg" style="padding:25px" id="img2" class="hidden">
             <img src="images/homepage/website_overview/umbrella.svg" style="padding:25px" id="img3" class="hidden">
             <img src="images/homepage/website_overview/notification.svg" style="padding:25px" id="img4" class="hidden">
         </div>
 
-        <div
-            style="width:50%;height:750px;border-radius: 0px 50px 50px 0;display: flex;flex-direction: column;align-items: center;background-color: white;">
-            <div style="padding-top: 70px;text-align: center;width:100%;">
-                <div style="width: 100%;display: flex;align-items: center;justify-content: center;">
-                    <div
-                        style="border-radius: 50%; height:90px;width:90px;  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);display: flex;align-items: center;justify-content: center;overflow: hidden;">
+        <div class="signup-part">
+            <div class="container">
+                <div class="icon-section">
+                    <div class="icon-container">
                         <div class="wrapper">
                             <img src="images/homepage/icons/wind.png" style="width: 70px;height:70px;">
                         </div>
@@ -136,44 +54,43 @@
                 </div>
                 <div style="line-height: 10px;">
 
-                    <p style="font-size: 34px; font-family: Montserrat;"> Sign up</p>
-                    <p style="font-size: 18px; font-family: Montserrat;color:grey"> Register to save your favourite
+                    <p class="signup-form-title"> Sign up</p>
+                    <p class="signup-form-subtitle"> Register to save your favourite
                         cities,</p>
-                    <p style="font-size: 18px; font-family: Montserrat;color:grey"> get weather alerts and more!
+                    <p class="signup-form-subtitle"> get weather alerts and more!
                     </p>
                 </div>
                 <form action="/signup" method="POST" id="signUpForm">
                     <div style="display: inline-block">
-                        <input name="email" type="email" id="email"
-                            style="border-radius: 6px;font-family: Montserrat;background-color: #FAFAFD;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left: 10px;"
-                            placeholder="Email" onkeyup="checkEmail(this.value)"><br>
-                        <input type="password" name="password" id="password"
-                            style="border-radius: 6px;background-color: #FAFAFD;font-family: Montserrat;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left:10px;"
-                            placeholder="Password"
+                        <input name="email" type="email" id="email" class="signup-input" placeholder="Email"
+                            onkeyup="checkEmail(this.value)"><br>
+                        <input type="password" name="password" id="password" class="signup-input" placeholder="Password"
                             onkeyup="checkPassword(this.value), isEqualTo(document.getElementById('repeatPassword').value)"><br>
-                        <div style="display: flex;flex-direction: row;position: absolute;">
-                            <p style="display:none;font-size: 11px;margin-top: 3px;margin-left:1px;padding: 0;color:red"
-                                id="pswStatus">
+                        <div class="status-message-container">
+                            <p class="status-message" id="pswStatus">
                                 Password is weak. Please improve it. </p>
                         </div>
                     </div>
-                    <input type="password" name="pswCheck" id="repeatPassword"
-                        style="border-radius: 6px;background-color: #FAFAFD;font-family: Montserrat;height:35px; width:350px;border: 0.2px solid #E0E4F2;margin-top: 30px;padding-left:10px;"
+                    <input type="password" name="pswCheck" id="repeatPassword" class="signup-input" ;
                         placeholder="Repeat Password" onkeyup="isEqualTo(this.value)"><br>
             </div>
-            <button class="log" id="signUpButton"
-                style="width:350px;height:40px;color:white;border-radius:6px;font-size:18px;border:none;margin-top: 50px;font-family: Montserrat;">
+            <button class="log signup-button" id="signUpButton">
                 Sign up
             </button>
 
             <% if (success=="ok" ){ %>
-                <p style="margin-top: 30px;color: green;"> Within 10 minutes, activate your account by clicking
+                <p style="margin-top: 30px;color: green;padding-left:50px;padding-right: 50px;"> Within 10 minutes,
+                    activate your account by
+                    clicking
                     the link you received in your email. </p>
                 <% }else if (success=="failed" ){ %>
-                    <p style="margin-top: 30px;color: orange;"> You have an account already. Please login or
+                    <p style="margin-top: 30px;color: orange;padding-left:50px;padding-right: 50px;"> You already have
+                        an
+                        account. Please login or
                         activate your email. </p>
                     <%}else if (success=="error" ){%>
-                        <p style="margin-top: 30px;color: red;"> Something went wrong. Please try again. </p>
+                        <p style="margin-top: 30px;color: red;padding-left:50px;padding-right: 50px;"> Something went
+                            wrong. Please try again. </p>
                         <% }%>
                             </form>
         </div>
@@ -181,34 +98,8 @@
 
 
     </div>
-    <script>
-        setInterval(switchImages, 2850); // 3000 milliseconds = 3 seconds
-
-        function switchImages() {
-            //var currentDot = document.querySelector(".active");
-            //var nextDot = currentDot.nextElementSibling;
-
-            var currentImage = document.querySelector("img:not(.hidden):not(.logo)");
-
-            var nextImage = currentImage.nextElementSibling;
-
-            //if (!nextDot) {
-            //    nextDot = document.getElementById("firstDot");
-            //}
-            if (!nextImage) {
-                nextImage = document.getElementById("img1");
-            }
-
-            //currentDot.classList.remove("active");
-            //nextDot.classList.add("active");
-
-            currentImage.classList.add("hidden");
-            nextImage.classList.remove("hidden");
-        }
-
-
-    </script>
     <script src="js/password_checker.js"></script>
+    <script src="js/signup_slider.js"></script>
 
 </body>
 

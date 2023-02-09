@@ -21,7 +21,7 @@ div.main-research {
     padding-top: 120px;
 }
 
-div.main-research>p {
+div.main-research>p.title {
     color: white;
     font-family: 'Montserrat', sans-serif;
     font-size: 48px;
@@ -121,7 +121,7 @@ p.website-overview-card>span.title {
 
 p.website-overview-card>span.description {
     font-size: 21.5px;
-    color: grey;
+    color: rgb(70, 70, 70);
     font-family: 'Montserrat', sans-serif;
     text-align: justify;
 }
@@ -218,62 +218,29 @@ div.our-fake-partners>img.fake-partner {
     width: auto;
 }
 
-div.footer>div.inside-container {
-    display: flex;
-    flex-direction: column;
-    width: 1200px;
-    text-align: center;
-    margin-top: 100px;
+img.notification-image {
+    float: right;
+    width: 700px;
+    height: auto;
 }
 
-div.footer>div.inside-container>div>div.social-container {
-    flex-direction: column;
-    justify-content: flex-start;
-    width: 400px
+img.umbrella-image {
+    float: right;
+    width: 700px;
+    height: auto;
 }
 
-div.social-container>div.social-icons-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding-left: 60px;
-    padding-right: 60px;
+p.city-not-found {
+    font-size: 20px;
+    color: white;
+    font-family: Montserrat;
 }
 
-div.social-container>div.social-icons-container>img.social-icon {
-    height: 30px;
-    width: 30px;
-}
-
-div>p.footer-column-title {
-    font-family: montserrat;
-    color: #d3deff;
-    font-size: 18px;
-    margin-top: 4px;
-}
-
-div>p.footer-clickable {
-    font-family: montserrat;
-    font-size: 13px;
-}
-
-div.social-container>p.weather-solutions-title {
-    font-family: Fredoka one;
-    font-size: 40px;
-    margin: 0 0 20px 0;
-}
-
-div.footer-bottom-container {
-    margin-top: 30px;
-    width: 100%;
-    border-top: 1px solid white;
+.research-form {
     display: flex;
     flex-direction: row;
-    padding-top: 40px;
-    justify-content: space-between;
-    align-items: center;
+    align-items: center
 }
-
 
 /* ANIMATIONS AND KEYFRAMES CSS */
 
@@ -312,16 +279,20 @@ div.footer-bottom-container {
 }
 
 @keyframes animate {
+
     0%,
     100% {
         transform: translateY(2px)
     }
+
     25% {
         transform: translateX(-1px)
     }
+
     50% {
         transform: translateY(-2px)
     }
+
     75% {
         transform: translateX(1px)
     }
@@ -331,6 +302,7 @@ div.footer-bottom-container {
     0% {
         transform: translate3d(-90px, 0, 0);
     }
+
     100% {
         transform: translate3d(85px, 0, 0);
     }
@@ -344,9 +316,11 @@ div.footer-bottom-container {
         height: 40px;
         min-height: 40px;
     }
+
     .content {
         height: 30vh;
     }
+
     h1 {
         font-size: 24px;
     }

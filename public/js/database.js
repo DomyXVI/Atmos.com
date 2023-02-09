@@ -61,6 +61,16 @@ const dbUtils = {
 
     deleteIf: async function (collection, condition) {
         await client.db("Atmos-com").collection(collection).deleteOne(condition);
+    },
+
+    saveCity: async function (email, city) {
+        let dbUser = await this.findQuery("email", email);
+        await client.db("Atmos-com").collection("Users").updateOne(dbUser, { $addToSet: { savedCities: city } });
+    },
+
+    deleteCity: async function (email, city) {
+        let dbUser = await this.findQuery("email", email);
+        await client.db("Atmos-com").collection("Users").updateOne(dbUser, { $pull: { savedCities: city } });
     }
 
 }

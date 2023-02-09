@@ -7,16 +7,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Atmos Activation Mail</title>
     <link rel="stylesheet" href="stylesheets/Common/common.css">
+    <style>
+        .email-container {
+            border-radius: 25px;
+            height: 500px;
+            width: 500px;
+            background-color: #1d3062;
+            margin-top: 150px;
+            text-align: center;
+        }
 
+        .email-title {
+            color: white;
+            font-size: 25px;
+            font-family: Arial;
+            text-align: center;
+        }
+
+        .verify-button {
+            color: #4d4dff;
+            font-size: 20px;
+            border-radius: 5px;
+            height: 50px;
+            width: 150px;
+            cursor: pointer
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 
-<body style="display:flex;align-items:center ;justify-content: center;">
-    <div
-        style="border-radius:25px;height:500px;width:500px;background-color:#1d3062;margin-top:150px;text-align: center;">
-        <p style="color:white;font-size: 25px;font-family: Arial;text-align: center;"> Your Atmos.com Verification Email
+<body>
+    <div class="email-container">
+        <p class="email-title"> Your Atmos.com Verification Email
         </p>
-        <form method="POST" action="http://localhost:5000/activate/confirm?token=<%= token %>" target="_self">
-            <button style="color:#4d4dff;font-size:20px;border-radius: 5px;height:50px;width:150px;cursor:pointer">
+        <form method="POST" action="http://atmosweather.eu/activate/<%= token %>" target="_self">
+            <button class="verify-button">
                 Verify</button>
         </form>
     </div>

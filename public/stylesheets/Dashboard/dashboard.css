@@ -3,7 +3,7 @@
     width: 920px;
     background-color: white;
     border-radius: 25px;
-    margin-top: 150px;
+    margin-top: 80px;
     margin-left: 150px;
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
     position: relative;
@@ -199,4 +199,213 @@ div.daily-overview-card>div.daily-description-container>p.daily-description {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.search-box-container {
+    margin-top: 140px;
+    padding-left: 150px;
+    width: 100%;
+    background-color: #0099FF;
+    height: 100px;
+    display: flex;
+    align-items: center;
+}
+
+div.search-box-container>input.location-input {
+    border-radius: 25px;
+    height: 35px;
+    border: none;
+    padding-left: 10px;
+    width: 300px
+}
+
+.search-button {
+    height: 35px;
+    border-radius: 25px;
+    border: none;
+    font-family: Montserrat;
+    background-color: #1d3062;
+    color: white;
+    padding: 10px;
+    margin-left: 15px;
+}
+
+
+.weather-first-section {
+    width: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alert-logo {
+    width: 50px;
+    height: 50px;
+    margin-left: 20px;
+    padding: 0;
+    margin-right: auto;
+}
+
+.user-city-search {
+    padding-right: 20px;
+    font-family: Montserrat;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.weather-stats-icon {
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+}
+
+.map-container {
+    margin-left: 150px;
+    margin-top: 100px
+}
+
+.map-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 150px;
+}
+
+
+.chart-wrapper {
+    display: flex;
+    flex-direction: row;
+    margin-top: 100px;
+}
+
+div.saved-cities-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 70%;
+    margin-top: 100px;
+    align-items: center;
+    margin-left: 150px;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    gap: 30px;
+}
+
+
+div.saved-cities-container>div.card {
+    display: flex;
+    background-color: white;
+    height: 200px;
+    min-width: 420px;
+    border-radius: 25px;
+    font-family: Montserrat;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+div.first-section {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-shrink: 0;
+}
+
+p.location-info-container {
+    margin-left: 20px;
+    font-size: 20px;
+    line-height: 20px;
+}
+
+div.alarm-icon-container {
+    display: flex;
+    align-items: baseline;
+    margin-right: auto;
+    padding: 0;
+}
+
+
+img.alarm {
+    width: 22px;
+    height: 22px;
+    margin-left: 10px;
+    padding: 0;
+}
+
+img.delete-button-img {
+    height: 15px;
+    width: 15px;
+    margin-right: 20px;
+}
+
+.temp-icon-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+p.temp {
+    margin-left: 20px;
+    font-size: 45px;
+    line-height: 10px;
+    line-height: 0px;
+}
+
+div.stats-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+div.stats {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: auto;
+}
+
+div.alert-container {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    font-family: Montserrat;
+    background-color: #0099FF;
+    border-radius: 25px;
+    margin-left: 150px;
+    margin-top: 70px
+}
+
+div.alert-container>p.title {
+    color: black;
+    text-align: center;
+    background-color: white;
+    height: 100%;
+    margin: 0;
+    border-radius: 25px 25px 0 0;
+    height: 35px;
+    line-height: 35px;
+}
+
+p.conditions-description {
+    color: white;
+    padding-left: 25px;
+    padding-right: 25px;
+    color: white;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.save-city-btn {
+    font-family: Montserrat;
+    background-color: #1d3062;
+    color: white;
+    border-radius: 25px;
+    cursor: pointer;
+    padding: 7px;
 }

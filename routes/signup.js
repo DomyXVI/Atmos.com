@@ -14,8 +14,6 @@ const {
 } = require("../public/js/email_sender.js");
 
 
-dbUtils.connectToDabase();
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
     res.render('signup', {
@@ -33,6 +31,7 @@ router.post('/', async function (req, res, next) {
             email: email,
             password: crypto.encrypt(password),
             token: crypto.getToken(16),
+            savedCities: [],
             emailConfirmed: false,
             tokenExpiration: Date.now() + 10 * 60 * 1000
         }

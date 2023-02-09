@@ -5,8 +5,8 @@ const {
     dbUtils
 } = require("../public/js/database.js");
 /* GET home page. */
-router.post('/confirm', async function (req, res) {
-    let token = req.query.token;
+router.post('/:token', async function (req, res) {
+    let token = req.params.token;
     let user = await dbUtils.findQuery("token", token);
     if (user && user.emailConfirmed != true && user.tokenExpiration > Date.now()) {
         await dbUtils.updateUser(user, "emailConfirmed", true);

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Author: Domenico Marabello for UNIMI">
     <title>Atmos.com | Home</title>
     <link rel="stylesheet" href="stylesheets/Index/index.css">
     <link rel="stylesheet" href="stylesheets/Common/common.css">
@@ -18,7 +19,7 @@
 
             <div class="logo-container">
                 <a href="/">
-                    <img class="logo" src="images/homepage/icons/logo.png">
+                    <img alt="logo" class="logo" src="images/homepage/icons/logo.png">
                 </a>
             </div>
 
@@ -29,22 +30,31 @@
                 <button class="navbar-item" href="/">Test</button>
             </div>
 
-            <div class="login-signup-container" id="loginSignupForm">
-                <form>
-                    <button class="login" formaction="/login" value="login">login</button>
-                    <button class="sign-up" formaction="/signup" value="signup">sign up</button>
-                </form>
-            </div>
+            <% if (!user) { %>
+                <div class="login-signup-container" id="loginSignupForm">
+                    <form>
+                        <button formaction="/login" class="login">login</button>
+                        <button formaction="/signup" class="sign-up">sign up</button>
+                    </form>
+                </div>
+                <% }else{ %>
+                    <div class="profile-container">
+                        <img alt="user icon" src="images/dashboard/user.png" class="profile-picture">
+                        <p>
+                            <%=user.email%>
+                        </p>
+                    </div>
+                    <%}%>
         </div>
 
         <div class="main-research">
-            <p>Weather info. Just a click away.<br>
+            <p class="title">Weather info. Just a click away.<br>
                 <span>
                     Atmos is a powerful tool that allows you to get weather data on any city in the world.
                 </span>
             </p>
             <div>
-                <form action="/dashboard" method="POST" style="display: flex;flex-direction: row;align-items: center">
+                <form action="/dashboard" method="POST" class="research-form">
                     <input class="forecast-input" placeholder="Rome, IT" id="search_term" name="location"
                         onfocus="this.style.border = 'none'" autocomplete="off">
                     <p id="city_name" style="font-size: 35px;"></p>
@@ -54,14 +64,16 @@
                     </button>
                     <button onclick="geolocateUser(), hideStatusMessages()" type="button" id="geolocateUserButton"
                         class="city-forecast-button" style="width:60px">
-                        <img src="images/homepage/icons/location.png" style="height:25px;width:25px">
+                        <img alt="location icon" src="images/homepage/icons/location.png"
+                            style="height:25px;width:25px">
                     </button>
                 </form>
 
-                <img class="buffering-rocket-icon" src="images/homepage/icons/rocket.svg" id="rocket" type="submit">
+                <img alt="rocket icon" class="buffering-rocket-icon" src="images/homepage/icons/rocket.svg" id="rocket"
+                    type="submit">
             </div>
             <% if(cityNotFound){ %>
-                <p style="font-size: 20px;color:white" id="cityNotFound"> Oops! Lost in space 🚀 - try locations from
+                <p class="city-not-found" id="cityNotFound"> Oops! Lost in space 🚀 - try locations from
                     Earth 🌏! </p>
                 <% } %>
         </div>
@@ -84,12 +96,12 @@
                 Sign up to save your favorite cities, receive personalized emails, and more
             </span>
         </p>
-        <img src="images/homepage/website_overview/umbrella.svg" style="float:right; width: 700px;height:auto;">
+        <img alt="umbrella" src="images/homepage/website_overview/umbrella.svg" class="umbrella-image">
     </div>
 
     <div class="overview-card second">
 
-        <img src="images/homepage/website_overview//exploration.svg" class="overview-image-mountain">
+        <img alt="exploration" src="images/homepage/website_overview//exploration.svg" class="overview-image-mountain">
 
         <p class="website-overview-card">
             <span class="number-highlight">02.</span>
@@ -122,7 +134,7 @@
             </span>
         </p>
 
-        <img src="images/homepage/website_overview//notification.svg" style="float:right; width:700px;height:auto;">
+        <img alt="notification" src="images/homepage/website_overview//notification.svg" class="notification-image">
 
     </div>
 
@@ -158,7 +170,7 @@
         <div class="why-card-row">
             <div class="why-card">
                 <div class="why-card-logo-container">
-                    <img src="images/homepage/icons/fuse-box.png" class="why-card-logo">
+                    <img alt="fuse box" src="images/homepage/icons/fuse-box.png" class="why-card-logo">
                 </div>
                 <p class="why-card-description">
                     <span class="why-card-title">Powerful</span><br><br> This website's API calls, database fetching and
@@ -168,7 +180,7 @@
             </div>
             <div class="why-card">
                 <div class="why-card-logo-container">
-                    <img src="images/homepage/icons/optimization.png" class="why-card-logo">
+                    <img alt="optimization box" src="images/homepage/icons/optimization.png" class="why-card-logo">
                 </div>
                 <p class="why-card-description">
                     <span class="why-card-title">Totally Optimized</span><br><br> This website's API calls, database
@@ -178,7 +190,7 @@
             </div>
             <div class="why-card">
                 <div class="why-card-logo-container">
-                    <img src="images/homepage/icons/support.png" class="why-card-logo">
+                    <img alt="support box" src="images/homepage/icons/support.png" class="why-card-logo">
                 </div>
                 <p class="why-card-description">
                     <span class="why-card-title">Worldwide Support</span><br><br> Having trouble using our website? Fill
@@ -189,48 +201,53 @@
     </div>
 
     <div class="our-fake-partners">
-        <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102301/google%402x.png">
+        <img alt="partner" class="fake-partner"
+            src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102301/google%402x.png">
 
-        <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102302/techCrunch%402x.png">
+        <img alt="partner" class="fake-partner"
+            src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102302/techCrunch%402x.png">
 
-        <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102302/huffpost%402x.png"
-            style="height:30px">
-        <img class="fake-partner" src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102258/Forbes%402x.png">
+        <img alt="partner" class="fake-partner"
+            src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102302/huffpost%402x.png" style="height:30px">
+        <img alt="partner" class="fake-partner"
+            src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102258/Forbes%402x.png">
 
-        <img class="fake-partner"
+        <img alt="partner" class="fake-partner"
             src="https://cdn.logojoy.com/wp-content/uploads/2019/02/20102300/globe-and-mail%402x-350x37.png"
             style="height:30px;">
     </div>
-    <div style="height:500px">
 
-    </div>
     <div class=" footer ">
         <div class="inside-container ">
             <div style="display:flex;flex-direction: row; ">
                 <div class="social-container ">
                     <p class="weather-solutions-title ">WEATHER SOLUTIONS</p>
                     <div class="social-icons-container ">
-                        <img src="images/homepage/icons/Social_icons/instagram.svg " class="social-icon ">
-                        <img src="images/homepage/icons/Social_icons/twitter.svg " class="social-icon ">
-                        <img src="images/homepage/icons/Social_icons/linkedin.svg " class="social-icon ">
-                        <img src="images/homepage/icons/Social_icons/youtube.svg " style="height:35px;width:35px; ">
+                        <img alt="instagram icon" src="images/homepage/icons/Social_icons/instagram.svg "
+                            class="social-icon ">
+                        <img alt="twitter icon" src="images/homepage/icons/Social_icons/twitter.svg "
+                            class="social-icon ">
+                        <img alt="linkedin icon" src="images/homepage/icons/Social_icons/linkedin.svg "
+                            class="social-icon ">
+                        <img alt="youtube icon" src="images/homepage/icons/Social_icons/youtube.svg "
+                            style="height:35px;width:35px; ">
 
                     </div>
                 </div>
-                <div style="margin-left:160px;text-align: left; ">
+                <div class="footer-column">
                     <p class="footer-column-title "> Product </p>
                     <p class="footer-clickable "> Use guide </p>
                     <p class="footer-clickable "> Status </p>
                     <p class="footer-clickable "> Technologies </p>
                 </div>
-                <div style="margin-left:120px;text-align: left; ">
+                <div class="footer-column" style="margin-left:120px;">
                     <p class="footer-column-title "> Company </p>
                     <p class="footer-clickable "> About </p>
                     <p class="footer-clickable "> News </p>
                     <p class="footer-clickable "> Branding </p>
                     <p class="footer-clickable "> Developers </p>
                 </div>
-                <div style="margin-left:120px;text-align: left; ">
+                <div class="footer-column" style="margin-left:120px;">
                     <p class="footer-column-title "> Policies </p>
                     <p class="footer-clickable "> Terms </p>
                     <p class="footer-clickable "> License </p>
@@ -243,11 +260,16 @@
             </div>
             <div class="footer-bottom-container ">
                 <div class="logo-container ">
-                    <img class="logo " src="images/homepage/icons/logo.png " style="height:45px;width:auto; ">
+                    <img alt="logo" class="logo " src="images/homepage/icons/logo.png "
+                        style="height:45px;width:auto; ">
                 </div>
-                <div class="login-signup-container " style="margin-right: 15px;text-align: right; ">
-                    <button class="sign-up ">sign up</button>
-                </div>
+                <%if(user){%>
+                    <form method="POST">
+                        <div class="login-signup-container " class="logout-button">
+                            <button formaction="/logout" class="sign-up">Log out</button>
+                        </div>
+                    </form>
+                    <%}%>
             </div>
         </div>
     </div>

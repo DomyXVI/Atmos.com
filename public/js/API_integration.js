@@ -4,19 +4,21 @@ const {
 } = require("./cache.js");
 
 const appId = process.env.API_KEY;
+
 let data = {};
 let locationInfo;
-
 /**
  * It fetches the weather data of a city and logs it to the console
  * @param city - The name of the city you want to get the weather data of.
  */
 
-const getInfo = async(city) => {
+const getInfo = async (city) => {
+
+    data = {}
+    locationInfo = "";
     console.log(city);
     const geocodingUrl = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=1&appid=" + appId;
     const geoCodingInfo = await fetch(geocodingUrl);
-    console.log(geoCodingInfo);
     if (geoCodingInfo.ok) {
         locationInfo = await geoCodingInfo.json();
         if (locationInfo.length < 1) return null;
@@ -28,7 +30,7 @@ const getInfo = async(city) => {
     return null;
 }
 
-const getWeatherData = async(lat, lon) => {
+const getWeatherData = async (lat, lon) => {
     if (cache.has(locationInfo[0].name)) {
         console.log("\x1b[32mCACHE HIT\x1b[0m -> " + locationInfo[0].name + ", " + locationInfo[0].country);
         data["weather"] = cache.getKey(locationInfo[0].name).weather;
